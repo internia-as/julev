@@ -16,6 +16,22 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: linear-gradient(
+    90deg,
+    rgba(233, 233, 233, 1) 0%,
+    rgba(255, 255, 255, 1) 32%,
+    rgba(255, 255, 255, 1) 65%,
+    rgba(233, 233, 233, 1) 100%
+  );
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero {
+  background: linear-gradient(
+    90deg,
+    rgba(215, 215, 215, 1) 0%,
+    rgba(255, 255, 255, 1) 32%,
+    rgba(255, 255, 255, 1) 65%,
+    rgba(215, 215, 215, 1) 100%
+  );
 }
