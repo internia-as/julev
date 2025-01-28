@@ -13,7 +13,7 @@ const SearchField = () => {
   };
 
   return (
-    <div className="hero flex flex-col space-y-10 shadow-md justify-center w-full items-center h-1/5 xl:h-1/4">
+    <div className="hero flex flex-col space-y-10 border-gray-200 border-b justify-center w-full items-center min-h-80 h-full">
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}

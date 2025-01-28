@@ -1,6 +1,6 @@
 // app/page.js
 import SearchField from "@/components/root/SearchField"; // Client Component
-import SearchResult from "@/components/root/SearchResult"; // Server Component
+import Results from "@/components/root/local/Results"; // Server Component
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ q: string }> }) {
   const params = await searchParams;
@@ -9,7 +9,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ q
   return (
     <div className="h-full flex flex-col items-center space-y-1">
       <SearchField />
-      <SearchResult query={query} />
+      <Results query={query} />
     </div>
   );
 }
