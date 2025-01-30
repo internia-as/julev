@@ -4,7 +4,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <>
-      <ul className="flex h-14 fixed justify-center items-center font-semibold space-x-10 p-4 bg-slate-800 text-white w-full">
+      <ul className="flex h-14 fixed justify-center items-center font-semibold space-x-10 p-4 bg-slate-800 text-white w-full z-20">
         <Link href="/">Search</Link>
         <Link href="/statistics">Statistics</Link>
         <Link href="/translate">Translate</Link>

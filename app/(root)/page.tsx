@@ -8,7 +8,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ q
 
   return (
     <div className="h-full flex flex-col items-center space-y-1">
-      <SearchField />
+      <SearchField query={query} />
       <Results query={query} />
     </div>
   );
