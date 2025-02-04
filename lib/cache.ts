@@ -1,14 +1,14 @@
 // cache.ts
+import { LocalTranslations } from "@/types/localTranslations";
 import { prisma } from "./prisma";
 
-let cachedData: any | null = null;
+let cachedData: LocalTranslations[] | null = null;
 
-const fetchData = async () => {
-  if (!cachedData) {
-    console.log("Fetching data from database...");
-    cachedData = await prisma.smj_translations.findMany();
-  }
+const fetchLocalTranslations = async (): Promise<LocalTranslations[]> => {
+  if (!cachedData) cachedData = await prisma.smj_translations.findMany();
+  if (!cachedData)
+    throw new Error("Failed to fetch local translations from database");
   return cachedData;
 };
 
-export default fetchData;
+export default fetchLocalTranslations;

@@ -1,8 +1,11 @@
 // utils.ts
-import fetchData from "./cache";
+import { LocalTranslations } from "@/types/localTranslations";
+import fetchLocalTranslations from "./cache";
 
-export const getLocalResults = async (query: string) => {
-  const data = await fetchData();
+export const getLocalResults = async (
+  query: string
+): Promise<LocalTranslations[]> => {
+  const data = await fetchLocalTranslations();
   if (!query.trim()) return [];
 
   const q = query.toLowerCase();
@@ -12,10 +15,10 @@ export const getLocalResults = async (query: string) => {
   return filteredData;
 };
 
-const filterData = (data: any[], q: string) => {
+const filterData = (data: LocalTranslations[], q: string) => {
   return data
-    .filter((item: any) => item.fra || item.til) // Ensure valid data
-    .sort((a: any, b: any) => {
+    .filter((item: LocalTranslations) => item.fra || item.til) // Ensure valid data
+    .sort((a: LocalTranslations, b: LocalTranslations) => {
       const fraA = a.fra?.toLowerCase() || "";
       const fraB = b.fra?.toLowerCase() || "";
       const tilA = a.til?.toLowerCase() || "";
@@ -34,7 +37,7 @@ const filterData = (data: any[], q: string) => {
 
       return priorityA - priorityB; // Sort by priority
     })
-    .filter((item: any) => {
+    .filter((item: LocalTranslations) => {
       // Keep only items that match at least one rule
       const fra = item.fra?.toLowerCase() || "";
       const til = item.til?.toLowerCase() || "";

@@ -82,11 +82,6 @@ model smj_translations {
   oversatt_fra  String? @db.Text
   oversatt_til  String? @db.Text
   kredittering  String? @db.Text
-  publisert     Int?
-  kildeId       Int?
-  brukerforslag Int?
-  brukerepost   String? @db.Text
-  behandlingId  Int?
 }
 
 model statistics {

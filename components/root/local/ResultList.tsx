@@ -11,7 +11,7 @@ const ResultList = (props: Props) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
-      className="overflow-y-auto flex flex-col w-2/3 items-center mt-48"
+      className="flex flex-col items-center mt-48"
     >
       {props.results.map((result) => (
         <ResultItem key={result.id} result={result} />

@@ -11,7 +11,7 @@ export default async function Page({
   const query = params.q || "";
 
   return (
-    <div className="flex  flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <SearchField />
       <Results query={query} />
     </div>
