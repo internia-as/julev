@@ -8,11 +8,9 @@ const SearchField = () => {
   const queryParam = searchParams?.get("q") || "";
   const [query, setQuery] = useState(queryParam);
   const [isSearching, setIsSearching] = useState(!!queryParam);
-  const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    setHasMounted(true); // Ensures animations don't trigger on first render
     setIsSearching(!!queryParam);
   }, [queryParam]);
 

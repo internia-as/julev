@@ -9,10 +9,6 @@ const Results = async (props: Props) => {
   const res = await getLocalResults(props.query);
 
   if (props.query === "") return <></>;
-
-  if (res.length === 0) {
-    return <p>No results found</p>;
-  }
   return <ResultList results={res} />;
 };
 
