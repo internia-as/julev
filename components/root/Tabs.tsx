@@ -42,18 +42,18 @@ const Tabs = (props: Props) => {
               aria-current={tab.active ? "page" : undefined}
               onClick={() => props.updateTabs(tab)}
               className={classNames(
-                tab.active ? "text-gray-900" : "text-gray-500 hover:text-gray-700",
+                tab.active ? "text-gray-900" : "text-gray-500 hover:text-gray-100",
                 tabIdx === 0 ? "rounded-l-lg" : "",
                 tabIdx === props.tabs.length - 1 ? "rounded-r-lg" : "",
-                "group relative min-w-0 flex-1 overflow-hidden bg-slate-100 font-bold px-4 py-4 text-center cursor-pointer hover:bg-slate-200 focus:z-10"
+                "group relative min-w-0 flex-1 overflow-hidden bg-slate-600 text-white font-bold px-4 py-4 text-center cursor-pointer hover:bg-slate-700 focus:z-10"
               )}
             >
               <span>{tab.name}</span>
               <span
                 aria-hidden="true"
                 className={classNames(
-                  tab.active ? "bg-slate-800" : "bg-transparent",
-                  "absolute inset-x-0 bottom-0 h-0.5"
+                  tab.active ? "bg-indigo-500" : "bg-transparent",
+                  "absolute inset-x-0 bottom-0 h-1"
                 )}
               />
             </div>

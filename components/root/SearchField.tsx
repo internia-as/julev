@@ -64,7 +64,7 @@ const SearchField = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
-            className="rounded-xl  bg-white w-full px-4 md:w-2/3 2xl:w-1/2 py-3.5 text-base outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600"
+            className="rounded-xl  bg-white w-full h-16 text-lg px-4 md:w-2/3 2xl:w-1/2 py-3.5 text-base outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600"
             placeholder="Søk i julevbágo..."
           />
         </form>
