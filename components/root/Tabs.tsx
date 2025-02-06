@@ -13,7 +13,7 @@ function classNames(...classes: any) {
 
 const Tabs = (props: Props) => {
   return (
-    <div>
+    <div className="w-full">
       <div className="grid grid-cols-1 sm:hidden">
         {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
         <select
@@ -31,34 +31,32 @@ const Tabs = (props: Props) => {
           className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end fill-gray-500"
         />
       </div>
-      <div className="hidden sm:block">
+      <div className="hidden sm:flex justify-center w-full">
         <nav
           aria-label="Tabs"
-          className="isolate flex divide-x divide-gray-200 rounded-lg shadow"
+          className="isolate w-full md:w-2/3 2xl:w-1/2 flex divide-x divide-gray-200 rounded-lg shadow"
         >
           {props.tabs.map((tab, tabIdx) => (
-            <a
+            <div
               key={tab.name}
               aria-current={tab.active ? "page" : undefined}
               onClick={() => props.updateTabs(tab)}
               className={classNames(
-                tab.active
-                  ? "text-gray-900"
-                  : "text-gray-500 hover:text-gray-700",
+                tab.active ? "text-gray-900" : "text-gray-500 hover:text-gray-700",
                 tabIdx === 0 ? "rounded-l-lg" : "",
                 tabIdx === props.tabs.length - 1 ? "rounded-r-lg" : "",
-                "group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
+                "group relative min-w-0 flex-1 overflow-hidden bg-slate-100 font-bold px-4 py-4 text-center cursor-pointer hover:bg-slate-200 focus:z-10"
               )}
             >
               <span>{tab.name}</span>
               <span
                 aria-hidden="true"
                 className={classNames(
-                  tab.active ? "bg-indigo-500" : "bg-transparent",
+                  tab.active ? "bg-slate-800" : "bg-transparent",
                   "absolute inset-x-0 bottom-0 h-0.5"
                 )}
               />
-            </a>
+            </div>
           ))}
         </nav>
       </div>
