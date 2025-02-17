@@ -1,4 +1,4 @@
-import { getLocalResults } from "@/lib/utils";
+import { getLocalResults } from "@/lib/localSearch";
 import ResultList from "./ResultList";
 
 interface Props {
@@ -9,7 +9,7 @@ const Results = async (props: Props) => {
   const res = await getLocalResults(props.query);
 
   if (props.query === "") return <></>;
-  return <ResultList results={res} />;
+  return <ResultList results={res} query={props.query} />;
 };
 
 export default Results;
