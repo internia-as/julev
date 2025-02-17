@@ -8,7 +8,7 @@ datasource db {
 }
 
 model error_submits {
-  id          BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  id          Int    @id @default(autoincrement()) @db.UnsignedInt
   from        String    @db.LongText
   to          String    @db.LongText
   description String    @db.VarChar(255)
@@ -17,7 +17,7 @@ model error_submits {
 }
 
 model failed_jobs {
-  id         BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  id         Int   @id @default(autoincrement()) @db.UnsignedInt
   uuid       String   @unique(map: "failed_jobs_uuid_unique") @db.VarChar(255)
   connection String   @db.Text
   queue      String   @db.Text
@@ -27,7 +27,7 @@ model failed_jobs {
 }
 
 model jobs {
-  id           BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+  id           Int @id @default(autoincrement()) @db.UnsignedInt
   queue        String @db.VarChar(255)
   payload      String @db.LongText
   attempts     Int    @db.UnsignedTinyInt
@@ -45,7 +45,7 @@ model migrations {
 }
 
 model new_words {
-  id          BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  id          Int    @id @default(autoincrement()) @db.UnsignedInt
   norwegian   String    @db.VarChar(255)
   sami        String    @db.VarChar(255)
   description String?   @db.VarChar(255)
@@ -61,9 +61,9 @@ model password_reset_tokens {
 }
 
 model personal_access_tokens {
-  id             BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  id             Int    @id @default(autoincrement()) @db.UnsignedInt
   tokenable_type String    @db.VarChar(255)
-  tokenable_id   BigInt    @db.UnsignedBigInt
+  tokenable_id   Int    @db.UnsignedInt
   name           String    @db.VarChar(255)
   token          String    @unique(map: "personal_access_tokens_token_unique") @db.VarChar(64)
   abilities      String?   @db.Text
@@ -76,7 +76,7 @@ model personal_access_tokens {
 }
 
 model smj_translations {
-  id            BigInt  @unique(map: "smj_translations_id_idx") @default(autoincrement()) @db.UnsignedBigInt
+  id            Int  @unique(map: "smj_translations_id_idx") @default(autoincrement()) @db.UnsignedInt
   fra           String? @db.Text
   til           String? @db.Text
   oversatt_fra  String? @db.Text
@@ -85,13 +85,13 @@ model smj_translations {
 }
 
 model statistics {
-  id       BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  id       Int   @id @default(autoincrement()) @db.UnsignedInt
   date     DateTime @db.Date
   searches Int      @default(0)
 }
 
 model users {
-  id                BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  id                Int    @id @default(autoincrement()) @db.UnsignedInt
   name              String    @db.VarChar(255)
   email             String    @unique(map: "users_email_unique") @db.VarChar(255)
   email_verified_at DateTime? @db.Timestamp(0)

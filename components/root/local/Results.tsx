@@ -1,15 +1,30 @@
-import { getLocalResults } from "@/lib/localSearch";
+"use client";
 import ResultList from "./ResultList";
+import { useEffect, useState } from "react";
 
 interface Props {
   query: string;
 }
 
-const Results = async (props: Props) => {
-  const res = await getLocalResults(props.query);
+const Results = (props: Props) => {
+  // const results = await getLocalResults(props.query); // This is not allowed in the browser
+  const [results, setResults] = useState([]);
+
+  // Fetch results from the API
+  const fetchResults = async () => {
+    fetch(`/api/localSearch?q=${props.query}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setResults(data);
+      });
+  };
+
+  useEffect(() => {
+    if (props.query) fetchResults();
+  }, [props.query]);
 
   if (props.query === "") return <></>;
-  return <ResultList results={res} query={props.query} />;
+  return <ResultList results={results} query={props.query} />;
 };
 
 export default Results;

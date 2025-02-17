@@ -1,13 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 import ResultItem from "./ResultItem";
+import { LocalTranslations } from "@/types/localTranslations";
 
 interface Props {
-  results: any[];
+  results: LocalTranslations[];
   query: string;
 }
 
 const ResultList = (props: Props) => {
+  if (props.results.length === 0) return <></>;
   return (
     <motion.ul
       initial={{ opacity: 0 }}
