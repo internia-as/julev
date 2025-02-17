@@ -1,10 +1,8 @@
-// utils.ts
+// localSearch.ts
 import { LocalTranslations } from "@/types/localTranslations";
 import fetchLocalTranslations from "./cache";
 
-export const getLocalResults = async (
-  query: string
-): Promise<LocalTranslations[]> => {
+export const getLocalResults = async (query: string): Promise<LocalTranslations[]> => {
   const data = await fetchLocalTranslations();
   if (!query.trim()) return [];
 
@@ -42,13 +40,6 @@ const filterData = (data: LocalTranslations[], q: string) => {
       const fra = item.fra?.toLowerCase() || "";
       const til = item.til?.toLowerCase() || "";
 
-      return (
-        fra === q ||
-        fra.startsWith(q) ||
-        fra.includes(q) ||
-        til === q ||
-        til.startsWith(q) ||
-        til.includes(q)
-      );
+      return fra === q || fra.startsWith(q) || fra.includes(q) || til === q || til.startsWith(q) || til.includes(q);
     });
 };

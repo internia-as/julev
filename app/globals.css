@@ -35,3 +35,8 @@ body {
     rgba(215, 215, 215, 1) 100%
   );
 }
+
+.jf-link {
+  color: #0000ee;
+  text-decoration: underline;
+}
