@@ -1,14 +1,14 @@
 export interface GlobalState {
   lang: string;
   dictionaries: Dictionary[];
-  dictMenuOpen: boolean;
+  mode: string;
 }
 
 export interface GlobalStateContextType {
   lang: string;
   dictionaries: Dictionary[];
-  dictMenuOpen: boolean;
+  mode: string;
   setLang: (lang: string) => void;
   setDictionaries: (dictionaries: Dictionary[]) => void;
-  setDictMenuOpen: (isOpen: boolean) => void;
+  setMode: (newMode: string) => void;
 }

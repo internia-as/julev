@@ -4,4 +4,5 @@ export interface Dictionary {
   value: string;
   short: string;
   selected: boolean;
+  type: string;
 }
