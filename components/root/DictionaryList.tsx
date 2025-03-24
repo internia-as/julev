@@ -17,30 +17,35 @@ const DictionaryList = () => {
   }, [state.mode]);
 
   const handleToggle = (dict: Dictionary) => {
-    console.log(dict);
+    dict.selected = !dict.selected;
+    const newItems = state.dictionaries.map((item) => {
+      return item.short === dict.short ? dict : item;
+    });
+    state.setDictionaries(newItems);
   };
 
   return (
     <List dense className="max-h-96 overflow-y-auto">
-      {items.map((dict) => {
-        return (
-          <ListItem
-            key={dict.short}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                onChange={() => handleToggle(dict)}
-                checked={dict.selected}
-              />
-            }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemText primary={dict.title} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
+      {state.dictionaries.map(
+        (dict) =>
+          dict.type === state.mode && (
+            <ListItem
+              key={dict.short}
+              secondaryAction={
+                <Checkbox
+                  edge="end"
+                  onChange={() => handleToggle(dict)}
+                  checked={dict.selected}
+                />
+              }
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemText primary={dict.title} />
+              </ListItemButton>
+            </ListItem>
+          )
+      )}
     </List>
   );
 };
