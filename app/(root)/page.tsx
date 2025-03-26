@@ -1,5 +1,6 @@
 import SearchField from "@/components/root/SearchField"; // Client Component
-import Results from "@/components/root/local/Results"; // Server Component
+import LocalResults from "@/components/root/LocalResults"; // Server Component
+import DivvunResults from "@/components/root/DivvunResults";
 
 export default async function Page({
   searchParams,
@@ -12,7 +13,8 @@ export default async function Page({
   return (
     <div className="flex flex-col items-center w-full">
       <SearchField />
-      <Results query={query} />
+      <LocalResults query={query} />
+      <DivvunResults query={query} />
     </div>
   );
 }

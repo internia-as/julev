@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import ResultItem from "./ResultItem";
+import LocalResultItem from "./LocalResultItem";
 import { LocalTranslations } from "@/types/localTranslations";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   query: string;
 }
 
-const ResultList = (props: Props) => {
+const LocalResultList = (props: Props) => {
   if (props.results.length === 0) return <></>;
   return (
     <motion.ul
@@ -19,10 +19,10 @@ const ResultList = (props: Props) => {
       className="flex flex-col items-center w-full md:w-2/3 2xl:w-1/2"
     >
       {props.results.map((result) => (
-        <ResultItem key={result.id} result={result} query={props.query} />
+        <LocalResultItem key={result.id} result={result} query={props.query} />
       ))}
     </motion.ul>
   );
 };
 
-export default ResultList;
+export default LocalResultList;

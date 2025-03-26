@@ -12,7 +12,7 @@ const SearchField = () => {
   const queryParam = searchParams?.get("q") || "";
   const [query, setQuery] = useState(queryParam);
   const [isSearching, setIsSearching] = useState(!!queryParam);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

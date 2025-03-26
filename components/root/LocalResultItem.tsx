@@ -7,7 +7,7 @@ interface Props {
   query: string;
 }
 
-const ResultItem = (props: Props) => {
+const LocalResultItem = (props: Props) => {
   const { query, result } = props;
   let { fra, til } = result;
 
@@ -31,11 +31,19 @@ const ResultItem = (props: Props) => {
             "linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(255,255,255,1) 50%, rgba(222,222,222,1) 100%)",
         }}
       >
-        <h3 className="px-4 py-5 font-bold sm:px-6" dangerouslySetInnerHTML={{ __html: fra }} />
-        <p className=" px-4 py-5 sm:p-6" dangerouslySetInnerHTML={{ __html: til }} />
+        <div className="flex justify-between px-4 py-5 font-bold sm:px-6">
+          <h3 className="" dangerouslySetInnerHTML={{ __html: fra }} />
+          <p className="font-normal text-sm text-indigo-700">
+            {props.result.kredittering}
+          </p>
+        </div>
+        <p
+          className=" px-4 py-5 sm:p-6"
+          dangerouslySetInnerHTML={{ __html: til }}
+        />
       </li>
     </div>
   );
 };
 
-export default ResultItem;
+export default LocalResultItem;

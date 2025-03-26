@@ -10,11 +10,6 @@ import { Dictionary } from "@/types/dictionaries";
 
 const DictionaryList = () => {
   const state = useGlobalState();
-  const [items, setItems] = useState<Dictionary[]>([]);
-
-  useEffect(() => {
-    setItems(dictionaries.filter((dict) => dict.type === state.mode));
-  }, [state.mode]);
 
   const handleToggle = (dict: Dictionary) => {
     dict.selected = !dict.selected;
@@ -30,14 +25,9 @@ const DictionaryList = () => {
         (dict) =>
           dict.type === state.mode && (
             <ListItem
+              onClick={() => handleToggle(dict)}
               key={dict.short}
-              secondaryAction={
-                <Checkbox
-                  edge="end"
-                  onChange={() => handleToggle(dict)}
-                  checked={dict.selected}
-                />
-              }
+              secondaryAction={<Checkbox edge="end" checked={dict.selected} />}
               disablePadding
             >
               <ListItemButton>

@@ -32,7 +32,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
       setState((prevState) => ({ ...prevState, lang }));
     }
 
-    // get dictionaries from local storage
+    // get dictionaries from local storage or use default
     const dicts = localStorage.getItem("dictionaries");
     if (dicts) {
       setState((prevState) => ({
@@ -48,14 +48,12 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   }, []);
 
   useEffect(() => {
-    console.log("HELLO WORLD");
     // Cache lang in local storage
     localStorage.setItem("lang", state.lang);
   }, [state.lang]);
 
   useEffect(() => {
     // Cache dictionaries in local storage
-    console.log("HELLO WORLD");
     localStorage.setItem("dictionaries", JSON.stringify(state.dictionaries));
   }, [state.dictionaries]);
 
@@ -63,8 +61,6 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     setState((prevState) => ({ ...prevState, lang }));
   const setDictionaries = (dictionaries: Dictionary[]) =>
     setState((prevState) => ({ ...prevState, dictionaries }));
-  const setDictMenuOpen = (isOpen: boolean) =>
-    setState((prevState) => ({ ...prevState, dictMenuOpen: isOpen }));
   const setMode = (newMode: string) =>
     setState((prevState) => ({ ...prevState, mode: newMode }));
 
