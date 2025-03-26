@@ -40,16 +40,6 @@ const SearchField = () => {
             Julevbágo samler digitale samiske språkressurser på en plass
           </h2>
         </div>
-        {isSearching && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-full"
-          >
-            <FullWidthTabs />
-          </motion.div>
-        )}
         <form
           onSubmit={handleSubmit}
           className="flex px-4 sm:px-0  justify-center w-full"
