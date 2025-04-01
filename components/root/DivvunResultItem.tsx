@@ -13,30 +13,36 @@ interface Props {
 }
 
 const DivvunResultItem = (props: Props) => {
-  const [item, setItem] = React.useState("");
-  const [expanded, setExpanded] = React.useState(false);
+  const [data, setData] = React.useState("");
 
-  useEffect(() => {
-    console.log("Item changed", props.item);
-  }, [props.item]);
+  const handleClick = async (e) => {
+    const res = await fetch("/api/divvunLookup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: props.item,
+      }),
+    });
+    const data = await res.json();
+    setData(data);
+    console.log(data);
+    console.log(props.item);
+  };
 
   return (
-    <Accordion
-      sx={{
-        background: "linear-gradient(to right, #ebf8ff, #ffffff, #ebf8ff)",
-      }}
-      expanded={expanded}
-      onClick={() => setExpanded(true)}
-    >
+    <Accordion onChange={handleClick}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls="panel1-content"
+        id="panel1-header"
       >
-        <Typography>{props.item}</Typography>
+        <Typography component="span">{props.item}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>{props.item}</Typography>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+        malesuada lacus ex, sit amet blandit leo lobortis eget.
       </AccordionDetails>
     </Accordion>
   );

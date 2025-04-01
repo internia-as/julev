@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import FullWidthTabs from "./FullWidthTabs";
 import { IconButton, Input, InputAdornment } from "@mui/material";
 import TranslateIcon from "@mui/icons-material/Translate";
 import DictionaryMenu from "./DictionaryMenu";
@@ -32,7 +31,7 @@ const SearchField = () => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="flex flex-col items-center w-full"
       >
-        <div className="flex flex-col space-y-5 py-5 px-2 sm:px-0">
+        <div className="flex text-black flex-col space-y-5 py-5 px-2 sm:px-0">
           <h1 className="text-5xl text-center font-bold uppercase">
             Julevbágo
           </h1>
