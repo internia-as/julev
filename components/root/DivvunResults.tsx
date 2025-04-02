@@ -18,7 +18,7 @@ const DivvunResults = (props: Props) => {
 
   const fetchResults = async () => {
     setLoading(true);
-    const res = await fetch(`/api/divvunSearch`, {
+    const res = await fetch(`/api/divvun/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
