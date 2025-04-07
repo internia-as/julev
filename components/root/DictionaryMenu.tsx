@@ -1,7 +1,6 @@
 "use client";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { useGlobalState } from "../GlobalContext";
-import { useState } from "react";
 import DictionaryList from "./DictionaryList";
 import { Button, DialogTitle } from "@mui/material";
 

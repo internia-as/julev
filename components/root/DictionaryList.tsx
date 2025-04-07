@@ -1,5 +1,4 @@
-import dictionaries from "@/lib/dictionaries";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGlobalState } from "../GlobalContext";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -29,6 +28,7 @@ const DictionaryList = () => {
               key={dict.short}
               secondaryAction={<Checkbox edge="end" checked={dict.selected} />}
               disablePadding
+              className="text-black"
             >
               <ListItemButton>
                 <ListItemText primary={dict.title} />

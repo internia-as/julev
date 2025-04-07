@@ -24,7 +24,9 @@ const DivvunResults = (props: Props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        operationName: "allLemmas",
         query: props.query,
+        searchMode: "start",
         wantedDicts: state.dictionaries.map((d) => d.short),
         langs: [
           "sma",
@@ -42,7 +44,9 @@ const DivvunResults = (props: Props) => {
         ],
       }),
     });
+    console.log("Response from Divvun API:", res);
     const data = await res.json();
+    console.log("Data from Divvun API:", data);
     setResults(data);
     setLoading(false);
   };

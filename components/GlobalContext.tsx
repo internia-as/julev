@@ -22,7 +22,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
     lang: "nob",
     dictionaries: [],
-    mode: "julev",
+    mode: "divvun",
   });
 
   useEffect(() => {

@@ -20,7 +20,7 @@ const DivvunResultList = (props: Props) => {
       className="flex flex-col items-center w-full md:w-2/3 2xl:w-1/2"
     >
       {props.results.stems.map((result) => (
-        <DivvunResultItem item={result} />
+        <DivvunResultItem key={result} item={result} />
       ))}
     </motion.ul>
   );
