@@ -44,9 +44,7 @@ const DivvunResults = (props: Props) => {
         ],
       }),
     });
-    console.log("Response from Divvun API:", res);
     const data = await res.json();
-    console.log("Data from Divvun API:", data);
     setResults(data);
     setLoading(false);
   };

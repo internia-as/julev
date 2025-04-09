@@ -8,14 +8,16 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { query, wantedDicts, searchMode, langs, operationName } = req.body;
+    let data;
     switch (operationName) {
       case "allLemmas":
-        const data = await getAllLemmas(query, "start", langs, wantedDicts);
-        res.status(200).json(data);
+        data = await getAllLemmas(query, "start", langs, wantedDicts);
         break;
       case "termArticles":
-        getTermArticles(lemma, langs);
+        data = await getTermArticles(query, langs);
+        break;
     }
+    res.status(200).json(data);
   } else {
     res.status(405).json({ message: "Method Not Allowed" });
   }

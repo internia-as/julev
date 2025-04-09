@@ -16,24 +16,7 @@ export default async function getAllLemmas(
       targetLangs: srcLangs,
       wantedDicts,
     },
-    query: `query AllLemmas($inputValue: String!, $searchMode: String!, $srcLangs: [String]!, $targetLangs: [String]!, $wantedDicts: [String]!, $after: String) {
-        stemList(
-          first: 100
-          search: $inputValue
-          mode: $searchMode
-          srcLangs: $srcLangs
-          targetLangs: $targetLangs
-          wantedDicts: $wantedDicts
-          after: $after
-        ) {
-          totalCount
-          edges {
-            node {
-              stem
-            }
-          }
-        }
-      }`,
+    query: ALL_LEMMAS_QUERY,
   };
 
   const response = await fetch(URL, {
@@ -43,7 +26,6 @@ export default async function getAllLemmas(
     },
     body: JSON.stringify(payload),
   });
-  console.log("Response from Divvun API:", response);
 
   const data = await response.json();
   const stems = data.data.stemList.edges.map((edge: any) => edge.node.stem);
