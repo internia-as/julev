@@ -54,17 +54,21 @@ const DivvunTermArticle = (props: Props) => {
   return (
     <Table>
       <TableHead>
-        <TableCell>{data[0]?.name}</TableCell>
+        <TableRow>
+          <TableCell>
+            <p className="text-gray-800 font-bold">{data[0]?.name}</p>´
+          </TableCell>
+        </TableRow>
       </TableHead>
       <TableBody>
         {data.map((item: any, index: number) => (
-          <TableRow>
+          <TableRow key={index}>
             <TableCell>{getLang(item.terms[0].expression.language)}</TableCell>
-            {item.terms.map((term: any, index: number) => (
-              <TableRow>
-                <TableCell>{term.expression.lemma}</TableCell>
-              </TableRow>
-            ))}
+            <div className="flex flex-col">
+              {item.terms.map((term: any, index: number) => (
+                <TableCell key={index}>{term.expression.lemma}</TableCell>
+              ))}
+            </div>
           </TableRow>
         ))}
       </TableBody>

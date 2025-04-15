@@ -11,7 +11,9 @@ const SearchField = () => {
   const queryParam = searchParams?.get("q") || "";
   const [query, setQuery] = useState(queryParam);
   const [isSearching, setIsSearching] = useState(!!queryParam);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [dictMenuOpen, setDictMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -52,7 +54,10 @@ const SearchField = () => {
               className="  bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setMenuOpen(true)}>
+                  <IconButton onClick={() => setDictMenuOpen(true)}>
+                    <TranslateIcon color="primary" />
+                  </IconButton>
+                  <IconButton onClick={() => setLangMenuOpen(true)}>
                     <TranslateIcon color="primary" />
                   </IconButton>
                 </InputAdornment>
@@ -62,8 +67,8 @@ const SearchField = () => {
         </form>
       </motion.div>
       <DictionaryMenu
-        open={menuOpen}
-        setOpen={(open: boolean) => setMenuOpen(open)}
+        open={dictMenuOpen}
+        setOpen={(open: boolean) => setDictMenuOpen(open)}
       />
     </div>
   );
