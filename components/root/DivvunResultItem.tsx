@@ -1,15 +1,7 @@
 "use client";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  CircularProgress,
-  Typography,
-} from "@mui/material";
-import React, { useEffect } from "react";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import React from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useGlobalState } from "../GlobalContext";
 import DivvunTermArticle from "./DivvunTermArticle";
 
 interface Props {

@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
-import { Dictionary } from "@/types/dictionaries";
+import { Dictionary } from "@/types/dictionary";
 
 const DictionaryList = () => {
   const state = useGlobalState();
@@ -19,7 +19,7 @@ const DictionaryList = () => {
   };
 
   return (
-    <List dense className="max-h-96 overflow-y-auto">
+    <List dense className="overflow-y-auto">
       {state.dictionaries.map(
         (dict) =>
           dict.type === state.mode && (

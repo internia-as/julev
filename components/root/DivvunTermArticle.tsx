@@ -7,12 +7,14 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useEffect } from "react";
+import { useGlobalState } from "../GlobalContext";
 
 interface Props {
   item: string;
 }
 
 const DivvunTermArticle = (props: Props) => {
+  const state = useGlobalState();
   const [data, setData] = React.useState([] as any);
 
   const fetchData = async (item: string) => {
@@ -23,20 +25,7 @@ const DivvunTermArticle = (props: Props) => {
       },
       body: JSON.stringify({
         query: item,
-        langs: [
-          "sma",
-          "sme",
-          "smj",
-          "smn",
-          "sms",
-          "fin",
-          "nob",
-          "swe",
-          "lat",
-          "eng",
-          "nno",
-          "rus",
-        ],
+        langs: state.languages.filter((l) => l.selected).map((l) => l.short),
         operationName: "termArticles",
       }),
     });
@@ -64,11 +53,13 @@ const DivvunTermArticle = (props: Props) => {
         {data.map((item: any, index: number) => (
           <TableRow key={index}>
             <TableCell>{getLang(item.terms[0].expression.language)}</TableCell>
-            <div className="flex flex-col">
-              {item.terms.map((term: any, index: number) => (
-                <TableCell key={index}>{term.expression.lemma}</TableCell>
-              ))}
-            </div>
+            <TableCell>
+              <div className="flex flex-col">
+                {item.terms.map((term: any, index: number) => (
+                  <p key={index}>{term.expression.lemma}</p>
+                ))}
+              </div>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
+import { Button, Dialog, DialogTitle, IconButton, Slide } from "@mui/material";
 import { useGlobalState } from "../GlobalContext";
-import DictionaryList from "./DictionaryList";
-import { Button, DialogTitle, Dialog, Slide, IconButton } from "@mui/material";
+import TranslateIcon from "@mui/icons-material/Translate";
 import { TransitionProps } from "@mui/material/transitions";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import LanguageList from "./LanguageList";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -15,25 +15,25 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DictionaryMenu = () => {
+const LanguageMenu = () => {
   const state = useGlobalState();
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
       <IconButton onClick={() => setOpen(true)}>
-        <MenuBookIcon color="primary" />
+        <TranslateIcon color="primary" />
       </IconButton>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        aria-describedby="dictionary-list"
+        aria-describedby="language-list"
         TransitionComponent={Transition}
       >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Tilgjengelige ordbøker i {state.mode}
+          Tilgjengelige Språk
         </DialogTitle>
-        <DictionaryList />
+        <LanguageList />
         <Button
           className="justify-center w-full"
           onClick={() => setOpen(false)}
@@ -45,4 +45,4 @@ const DictionaryMenu = () => {
   );
 };
 
-export default DictionaryMenu;
+export default LanguageMenu;
