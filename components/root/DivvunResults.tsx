@@ -27,21 +27,10 @@ const DivvunResults = (props: Props) => {
         operationName: "allLemmas",
         query: props.query,
         searchMode: "start",
-        wantedDicts: state.dictionaries.map((d) => d.short),
-        langs: [
-          "sma",
-          "sme",
-          "smj",
-          "smn",
-          "sms",
-          "fin",
-          "nob",
-          "swe",
-          "lat",
-          "eng",
-          "nno",
-          "rus",
-        ],
+        wantedDicts: state.dictionaries
+          .filter((d) => d.selected)
+          .map((d) => d.short),
+        langs: state.languages.filter((l) => l.selected).map((l) => l.short),
       }),
     });
     const data = await res.json();

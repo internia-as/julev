@@ -1,6 +1,6 @@
 "use client";
 import { GlobalState, GlobalStateContextType } from "@/types/context";
-import { Dictionary } from "@/types/dictionaries";
+import { Dictionary } from "@/types/dictionary";
 import {
   createContext,
   useContext,
@@ -9,6 +9,7 @@ import {
   useEffect,
 } from "react";
 import dictionaries from "@/lib/dictionaries";
+import languages from "@/lib/languages";
 
 const GlobalStateContext = createContext<GlobalStateContextType | undefined>(
   undefined
@@ -22,6 +23,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
     lang: "nob",
     dictionaries: [],
+    languages: [],
     mode: "divvun",
   });
 
@@ -45,6 +47,19 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
         dictionaries: dictionaries,
       }));
     }
+
+    const langs = localStorage.getItem("languages");
+    if (langs) {
+      setState((prevState) => ({
+        ...prevState,
+        languages: JSON.parse(langs),
+      }));
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        languages: languages,
+      }));
+    }
   }, []);
 
   useEffect(() => {
@@ -57,16 +72,23 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     localStorage.setItem("dictionaries", JSON.stringify(state.dictionaries));
   }, [state.dictionaries]);
 
+  useEffect(() => {
+    // Cache languages in local storage
+    localStorage.setItem("languages", JSON.stringify(state.languages));
+  }, [state.languages]);
+
   const setLang = (lang: string) =>
     setState((prevState) => ({ ...prevState, lang }));
   const setDictionaries = (dictionaries: Dictionary[]) =>
     setState((prevState) => ({ ...prevState, dictionaries }));
+  const setLanguages = (languages: any[]) =>
+    setState((prevState) => ({ ...prevState, languages }));
   const setMode = (newMode: string) =>
     setState((prevState) => ({ ...prevState, mode: newMode }));
 
   return (
     <GlobalStateContext.Provider
-      value={{ ...state, setLang, setDictionaries, setMode }}
+      value={{ ...state, setLang, setDictionaries, setLanguages, setMode }}
     >
       {children}
     </GlobalStateContext.Provider>

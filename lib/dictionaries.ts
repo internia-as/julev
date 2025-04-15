@@ -1,4 +1,4 @@
-import { Dictionary } from "@/types/dictionaries";
+import { Dictionary } from "@/types/dictionary";
 
 const dictionaries: Dictionary[] = [
   {
