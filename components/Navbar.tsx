@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useGlobalState } from "./GlobalContext";
+import LanguageDropdown from "./LanguageDropdown";
 
 const Navbar = () => {
-  const state = useGlobalState();
   return (
     <>
       <div className="flex h-14 fixed justify-between items-center p-4 bg-slate-800 text-white w-full z-20">
@@ -16,7 +15,7 @@ const Navbar = () => {
           <Link href="/app">App</Link>
           <Link href="/about">About</Link>
         </ul>
-        <div>Språk</div>
+        <LanguageDropdown />
       </div>
     </>
   );
