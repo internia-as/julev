@@ -9,15 +9,13 @@ interface Props {
 
 const DivvunResults = (props: Props) => {
   const state = useGlobalState();
-  const [loading, setLoading] = React.useState(false);
   const [results, setResults] = React.useState();
 
   useEffect(() => {
     if (props.query) fetchResults();
-  }, [props.query]);
+  }, [props.query, state.languages, state.dictionaries]);
 
   const fetchResults = async () => {
-    setLoading(true);
     const res = await fetch(`/api/divvun/search`, {
       method: "POST",
       headers: {
@@ -35,7 +33,6 @@ const DivvunResults = (props: Props) => {
     });
     const data = await res.json();
     setResults(data);
-    setLoading(false);
   };
 
   if (props.query === "" || state.mode === "local") return <></>;

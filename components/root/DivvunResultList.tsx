@@ -25,5 +25,4 @@ const DivvunResultList = (props: Props) => {
     </motion.ul>
   );
 };
-
 export default DivvunResultList;
