@@ -3,16 +3,14 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IconButton, Input, InputAdornment } from "@mui/material";
-import TranslateIcon from "@mui/icons-material/Translate";
 import DictionaryMenu from "./DictionaryMenu";
+import LanguageMenu from "./LanguageMenu";
 
 const SearchField = () => {
   const searchParams = useSearchParams();
   const queryParam = searchParams?.get("q") || "";
   const [query, setQuery] = useState(queryParam);
   const [isSearching, setIsSearching] = useState(!!queryParam);
-  const [dictMenuOpen, setDictMenuOpen] = useState(false);
-  const [langMenuOpen, setLangMenuOpen] = useState(false);
 
   const router = useRouter();
 
@@ -54,22 +52,14 @@ const SearchField = () => {
               className="  bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setDictMenuOpen(true)}>
-                    <TranslateIcon color="primary" />
-                  </IconButton>
-                  <IconButton onClick={() => setLangMenuOpen(true)}>
-                    <TranslateIcon color="primary" />
-                  </IconButton>
+                  <DictionaryMenu />
+                  <LanguageMenu />
                 </InputAdornment>
               }
             />
           </div>
         </form>
       </motion.div>
-      <DictionaryMenu
-        open={dictMenuOpen}
-        setOpen={(open: boolean) => setDictMenuOpen(open)}
-      />
     </div>
   );
 
