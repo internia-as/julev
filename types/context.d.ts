@@ -1,4 +1,5 @@
 import { Language } from "./language";
+import { SupportedLanguages } from "./supportedLanguages";
 
 export interface GlobalState {
   lang: string;
@@ -8,7 +9,7 @@ export interface GlobalState {
 }
 
 export interface GlobalStateContextType {
-  lang: string;
+  lang: SupportedLanguages;
   dictionaries: Dictionary[];
   languages: Language[];
   mode: string;

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import { IconButton, Input, InputAdornment } from "@mui/material";
+import { Input, InputAdornment } from "@mui/material";
 import DictionaryMenu from "./DictionaryMenu";
 import LanguageMenu from "./LanguageMenu";
 
