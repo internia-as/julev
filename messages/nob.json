@@ -1,5 +1,19 @@
 {
-  "root": {
+  "navbar": {
+    "search": "Søk",
+    "statistics": "Statistikk",
+    "translate": "Oversett",
+    "app": "App",
+    "about": "Om oss",
+    "languages": {
+      "eng": "Engelsk",
+      "nob": "Norsk",
+      "sme": "Nordsamisk",
+      "smj": "Lulesamisk",
+      "sma": "Sørsamisk"
+    }
+  },
+  "search": {
     "header": "Julevbágo",
     "header_subtitle": "Julevbágo samler digitale samiske språkressurser på ett sted"
   }

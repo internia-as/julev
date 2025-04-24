@@ -1,23 +1,23 @@
-"use client";
 import Link from "next/link";
-import React from "react";
 import LanguageDropdown from "./LanguageDropdown";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
+  const t = useTranslations("navbar");
   return (
     <>
       <div className="flex h-14 fixed justify-between items-center p-4 bg-slate-800 text-white w-full z-20">
         <div className="w-32"></div>
         <ul className="font-semibold space-x-10">
           <Link href="/" locale="nob">
-            Search
+            {t("search")}
           </Link>
           <Link href="/statistics" locale="nob">
-            Statistics
+            {t("statistics")}
           </Link>
-          <Link href="/translate">Translate</Link>
-          <Link href="/app">App</Link>
-          <Link href="/about">About</Link>
+          <Link href="/translate">{t("translate")}</Link>
+          <Link href="/app">{t("app")}</Link>
+          <Link href="/about">{t("about")}</Link>
         </ul>
         <LanguageDropdown />
       </div>

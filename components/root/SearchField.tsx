@@ -11,7 +11,7 @@ const SearchField = () => {
   const state = useGlobalState();
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const t = useTranslations("root");
+  const t = useTranslations("search");
 
   return (
     <div>

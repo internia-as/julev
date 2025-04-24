@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   IconButton,
@@ -10,11 +11,13 @@ import LanguageIcon from "@mui/icons-material/Language";
 import CheckIcon from "@mui/icons-material/Check";
 import { Language } from "@/types/language";
 import languages from "@/lib/languages";
+import { useTranslations } from "next-intl";
 
 const LanguageDropdown = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("nob");
+  const t = useTranslations("navbar.languages");
 
   React.useEffect(() => {
     // Get language from cookie
@@ -66,7 +69,7 @@ const LanguageDropdown = () => {
                   alt={language.name}
                   sx={{ width: 24, height: 24, marginRight: 2 }}
                 />
-                <ListItemText>{language.name}</ListItemText>
+                <ListItemText>{t(language.short)}</ListItemText>
               </div>
               {selectedLanguage === language.short && (
                 <CheckIcon sx={{ marginLeft: "auto", color: "green" }} />
