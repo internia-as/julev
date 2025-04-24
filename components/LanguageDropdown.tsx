@@ -3,25 +3,27 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  ListItemIcon,
   ListItemText,
   Avatar,
 } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import CheckIcon from "@mui/icons-material/Check";
-import { useGlobalState } from "./GlobalContext";
 import { Language } from "@/types/language";
+import languages from "@/lib/languages";
 
 const LanguageDropdown = () => {
-  const state = useGlobalState();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("nob");
 
   React.useEffect(() => {
-    const language = localStorage.getItem("lang");
-    if (language) {
-      setSelectedLanguage(language);
+    // Get language from cookie
+    const lang = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("lang="))
+      ?.split("=")[1];
+    if (lang) {
+      setSelectedLanguage(lang);
     }
   }, []);
 
@@ -33,11 +35,10 @@ const LanguageDropdown = () => {
     setAnchorEl(null);
   };
 
-  const handleLanguageChange = (language: string) => {
-    setSelectedLanguage(language);
-    localStorage.setItem("lang", language);
-
-    handleClose();
+  const handleLanguageChange = async (language: string) => {
+    // Set language in cookie
+    document.cookie = `lang=${language}; path=/; max-age=31536000`; // 1 year
+    window.location.reload();
   };
 
   return (
@@ -49,9 +50,9 @@ const LanguageDropdown = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{ width: 360 }}
+        sx={{ minWidth: 360 }}
       >
-        {state.languages
+        {languages
           .filter((l: Language) => l.translated)
           .map((language) => (
             <MenuItem

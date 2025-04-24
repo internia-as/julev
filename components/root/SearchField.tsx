@@ -1,22 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Input, InputAdornment } from "@mui/material";
 import DictionaryMenu from "./DictionaryMenu";
 import LanguageMenu from "./LanguageMenu";
+import { useGlobalState } from "../GlobalContext";
+import { useTranslations } from "next-intl";
 
 const SearchField = () => {
-  const searchParams = useSearchParams();
-  const queryParam = searchParams?.get("q") || "";
-  const [query, setQuery] = useState(queryParam);
-  const [isSearching, setIsSearching] = useState(!!queryParam);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    setIsSearching(!!queryParam);
-  }, [queryParam]);
+  const state = useGlobalState();
+  const [query, setQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const t = useTranslations("root");
 
   return (
     <div>
@@ -33,10 +28,10 @@ const SearchField = () => {
       >
         <div className="flex text-black flex-col space-y-5 py-5 px-2 sm:px-0">
           <h1 className="text-5xl text-center font-bold uppercase">
-            Julevbágo
+            {t("header")}
           </h1>
           <h2 className="text-md  text-center font-semibold">
-            Julevbágo samler digitale samiske språkressurser på en plass
+            {t("header_subtitle")}
           </h2>
         </div>
         <form
@@ -65,7 +60,9 @@ const SearchField = () => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    router.push(`?q=${query}`);
+    if (query === "") return;
+    state.setQuery(query);
+    setIsSearching(true);
   }
 };
 

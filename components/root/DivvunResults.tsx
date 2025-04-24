@@ -3,17 +3,18 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../GlobalContext";
 import DivvunResultList from "./DivvunResultList";
 
-interface Props {
-  query: string;
-}
-
-const DivvunResults = (props: Props) => {
+const DivvunResults = () => {
   const state = useGlobalState();
   const [results, setResults] = React.useState();
 
   useEffect(() => {
-    if (props.query) fetchResults();
-  }, [props.query, state.languages, state.dictionaries]);
+    if (state.query) {
+      fetchResults();
+    } else {
+      console.log("No query");
+      setResults(undefined);
+    }
+  }, [state.query, state.languages, state.dictionaries]);
 
   const fetchResults = async () => {
     const res = await fetch(`/api/divvun/search`, {
@@ -23,7 +24,7 @@ const DivvunResults = (props: Props) => {
       },
       body: JSON.stringify({
         operationName: "allLemmas",
-        query: props.query,
+        query: state.query,
         searchMode: "start",
         wantedDicts: state.dictionaries
           .filter((d) => d.selected)
@@ -35,8 +36,8 @@ const DivvunResults = (props: Props) => {
     setResults(data);
   };
 
-  if (props.query === "" || state.mode === "local") return <></>;
-  return <DivvunResultList results={results} query={props.query} />;
+  if (state.query === "" || state.mode === "local") return <></>;
+  return <DivvunResultList results={results} query={state.query} />;
 };
 
 export default DivvunResults;

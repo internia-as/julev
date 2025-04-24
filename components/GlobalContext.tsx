@@ -21,7 +21,7 @@ interface GlobalStateProviderProps {
 
 export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
-    lang: "nob",
+    query: "",
     dictionaries: [],
     languages: [],
     mode: "divvun",
@@ -63,11 +63,6 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   }, []);
 
   useEffect(() => {
-    // Cache lang in local storage
-    localStorage.setItem("lang", state.lang);
-  }, [state.lang]);
-
-  useEffect(() => {
     // Cache dictionaries in local storage
     localStorage.setItem("dictionaries", JSON.stringify(state.dictionaries));
   }, [state.dictionaries]);
@@ -77,8 +72,8 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     localStorage.setItem("languages", JSON.stringify(state.languages));
   }, [state.languages]);
 
-  const setLang = (lang: string) =>
-    setState((prevState) => ({ ...prevState, lang }));
+  const setQuery = (query: string) =>
+    setState((prevState) => ({ ...prevState, query }));
   const setDictionaries = (dictionaries: Dictionary[]) =>
     setState((prevState) => ({ ...prevState, dictionaries }));
   const setLanguages = (languages: any[]) =>
@@ -88,7 +83,13 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
 
   return (
     <GlobalStateContext.Provider
-      value={{ ...state, setLang, setDictionaries, setLanguages, setMode }}
+      value={{
+        ...state,
+        setQuery,
+        setDictionaries,
+        setLanguages,
+        setMode,
+      }}
     >
       {children}
     </GlobalStateContext.Provider>
