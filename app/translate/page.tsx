@@ -1,16 +1,10 @@
 "use client";
 import FileTranslate from "@/components/translate/FileTranslate";
 import TextTranslate from "@/components/translate/TextTranslate";
-import TranslateSelect from "@/components/translate/TranslateSelect";
 import { Language } from "@/types/language";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import React from "react";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import LanguageSelect from "@/components/translate/LanguageSelect";
 
 const LanguagesFrom: Language[] = [
   {
@@ -74,28 +68,12 @@ const LanguagesTo: Language[] = [
   },
   {
     name: "Norsk",
-    short: "no",
+    short: "nob",
     selected: false,
     translated: true,
     flag: "/images/flags/nob.png",
   },
 ];
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      className="w-2/3"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
-    </div>
-  );
-}
 
 function a11yProps(index: number) {
   return {
@@ -113,7 +91,19 @@ const Translate = () => {
     setTab(newValue);
   };
 
-  const handleToggle = (language: Language) => {};
+  const handleLanguageChange = async (
+    language: Language,
+    setState: React.Dispatch<React.SetStateAction<Language[]>>,
+    languages: Language[]
+  ) => {
+    setState(
+      languages.map((l) =>
+        l.short === language.short
+          ? { ...language, selected: true }
+          : { ...l, selected: false }
+      )
+    );
+  };
 
   return (
     <div className="h-screen flex flex-col items-center mt-20">
@@ -128,24 +118,24 @@ const Translate = () => {
         <Tab label="Oversett nettside" disabled {...a11yProps(2)} />
       </Tabs>
 
-      <div className="flex justify-between">
-        <TranslateSelect
+      <div className="flex justify-between w-2/3 mb-4">
+        <LanguageSelect
           languages={languagesFrom}
-          toggleLanguage={handleToggle}
+          selectLanguage={(language) =>
+            handleLanguageChange(language, setLanguagesFrom, languagesFrom)
+          }
         />
-
-        <TranslateSelect
+        <LanguageSelect
           languages={languagesTo}
-          toggleLanguage={handleToggle}
+          selectLanguage={(language) =>
+            handleLanguageChange(language, setLanguagesTo, languagesTo)
+          }
         />
       </div>
-
-      <CustomTabPanel value={tab} index={0}>
-        <TextTranslate />
-      </CustomTabPanel>
-      <CustomTabPanel value={tab} index={1}>
-        <FileTranslate />
-      </CustomTabPanel>
+      <div className="w-2/3">
+        {tab === 0 && <TextTranslate />}
+        {tab === 1 && <FileTranslate />}
+      </div>
     </div>
   );
 };
