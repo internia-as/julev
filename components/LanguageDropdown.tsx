@@ -10,25 +10,17 @@ import {
 import LanguageIcon from "@mui/icons-material/Language";
 import CheckIcon from "@mui/icons-material/Check";
 import { Language } from "@/types/language";
-import languages from "@/lib/languages";
 import { useTranslations } from "next-intl";
 
-const LanguageDropdown = () => {
+interface Props {
+  languages: Language[];
+  toggleLanguage: (language: Language) => void;
+}
+
+const LanguageDropdown = (props: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [selectedLanguage, setSelectedLanguage] = React.useState<string>("nob");
   const t = useTranslations("navbar.languages");
-
-  React.useEffect(() => {
-    // Get language from cookie
-    const lang = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("lang="))
-      ?.split("=")[1];
-    if (lang) {
-      setSelectedLanguage(lang);
-    }
-  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -36,12 +28,6 @@ const LanguageDropdown = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleLanguageChange = async (language: string) => {
-    // Set language in cookie
-    document.cookie = `lang=${language}; path=/; max-age=31536000`; // 1 year
-    window.location.reload();
   };
 
   return (
@@ -55,12 +41,12 @@ const LanguageDropdown = () => {
         onClose={handleClose}
         sx={{ minWidth: 360 }}
       >
-        {languages
+        {props.languages
           .filter((l: Language) => l.translated)
           .map((language) => (
             <MenuItem
               key={language.short}
-              onClick={() => handleLanguageChange(language.short)}
+              onClick={() => props.toggleLanguage(language)}
               className="flex justify-between items-center space-x-8"
             >
               <div className="flex">
@@ -71,7 +57,7 @@ const LanguageDropdown = () => {
                 />
                 <ListItemText>{t(language.short)}</ListItemText>
               </div>
-              {selectedLanguage === language.short && (
+              {language.selected && (
                 <CheckIcon sx={{ marginLeft: "auto", color: "green" }} />
               )}
             </MenuItem>
