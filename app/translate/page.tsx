@@ -1,7 +1,6 @@
 "use client";
 import FileTranslate from "@/components/translate/FileTranslate";
 import TextTranslate from "@/components/translate/TextTranslate";
-import { Language } from "@/types/language";
 import { Tab, Tabs } from "@mui/material";
 import React from "react";
 import LanguageSelect from "@/components/translate/LanguageSelect";
@@ -19,20 +18,6 @@ const Translate = () => {
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
-  };
-
-  const handleLanguageChange = async (
-    language: Language,
-    setState: React.Dispatch<React.SetStateAction<Language[]>>,
-    languages: Language[]
-  ) => {
-    setState(
-      languages.map((l) =>
-        l.short === language.short
-          ? { ...language, selected: true }
-          : { ...l, selected: false }
-      )
-    );
   };
 
   return (

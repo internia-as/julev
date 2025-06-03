@@ -10,8 +10,14 @@ const Languages: Language[] = [
     flag: "/images/flags/sm.jpeg",
   },
   {
-    name: "Sørsamisk",
-    short: "sma",
+    name: "Sørsamisk (Kortformer)",
+    short: "sma_Mid",
+    translated: true,
+    flag: "/images/flags/sm.jpeg",
+  },
+  {
+    name: "Sørsamisk (Langformer)",
+    short: "sma_North",
     translated: true,
     flag: "/images/flags/sm.jpeg",
   },
@@ -50,6 +56,8 @@ const LanguageSelect = (props: Props) => {
   const [selectedTo, setSelectedTo] = React.useState<Language | null>(null);
 
   useEffect(() => {
+    // Current logic is that north sami is translatable to all languages,
+    // and all other languages are translatable to ONLY north sami.
     switch (selectedFrom?.short) {
       case "sme":
         setLangTo(
@@ -58,32 +66,12 @@ const LanguageSelect = (props: Props) => {
           )
         );
         break;
-      case "sma":
-        // Disable any but nordsamisk
-        setLangTo(
-          Languages.map((lang) =>
-            lang.short !== "sme" ? { ...lang, translated: false } : lang
-          )
-        );
-        break;
-      case "smj":
-        // Disable any but nordsamisk
-        setLangTo(
-          Languages.map((lang) =>
-            lang.short !== "sme" ? { ...lang, translated: false } : lang
-          )
-        );
-        break;
-      case "smn":
-        // Disable any but nordsamisk
-        setLangTo(
-          Languages.map((lang) =>
-            lang.short !== "sme" ? { ...lang, translated: false } : lang
-          )
-        );
-        break;
       default:
-        setLangTo(Languages);
+        setLangTo(
+          Languages.map((lang) =>
+            lang.short !== "sme" ? { ...lang, translated: false } : lang
+          )
+        );
     }
   }, [selectedFrom]);
 
