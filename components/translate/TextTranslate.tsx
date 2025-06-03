@@ -2,12 +2,17 @@
 import { TextField } from "@mui/material";
 import React from "react";
 
-const TextTranslate = () => {
+interface Props {
+  langPair: string;
+}
+
+const TextTranslate = (props: Props) => {
   const [textInput, setTextInput] = React.useState<string>("");
   const [translatedText, setTranslatedText] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const submit = () => {
+    console.log(props.langPair);
     // Fetch API call to translate the text
 
     setLoading(true);

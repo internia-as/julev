@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
 
-const FileTranslate = () => {
+interface Props {
+  langPair: string;
+}
+
+const FileTranslate = (props: Props) => {
   return <div>File</div>;
 };
 

@@ -6,75 +6,6 @@ import { Tab, Tabs } from "@mui/material";
 import React from "react";
 import LanguageSelect from "@/components/translate/LanguageSelect";
 
-const LanguagesFrom: Language[] = [
-  {
-    name: "Nordsamisk",
-    short: "sme",
-    selected: true,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Sørsamisk",
-    short: "sma",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Lulesamisk",
-    short: "smj",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Enaresamisk",
-    short: "smn",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-];
-
-const LanguagesTo: Language[] = [
-  {
-    name: "Nordsamisk",
-    short: "sme",
-    selected: true,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Sørsamisk",
-    short: "sma",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Lulesamisk",
-    short: "smj",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Enaresamisk",
-    short: "smn",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/sm.jpeg",
-  },
-  {
-    name: "Norsk",
-    short: "nob",
-    selected: false,
-    translated: true,
-    flag: "/images/flags/nob.png",
-  },
-];
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -84,8 +15,7 @@ function a11yProps(index: number) {
 
 const Translate = () => {
   const [tab, setTab] = React.useState(0);
-  const [languagesFrom, setLanguagesFrom] = React.useState(LanguagesFrom);
-  const [languagesTo, setLanguagesTo] = React.useState(LanguagesTo);
+  const [langPair, setLangPair] = React.useState<string>("");
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
@@ -106,7 +36,7 @@ const Translate = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center mt-20">
+    <div className="h-full flex flex-col items-center mt-20">
       <Tabs
         value={tab}
         onChange={handleChange}
@@ -119,22 +49,11 @@ const Translate = () => {
       </Tabs>
 
       <div className="flex justify-between w-2/3 mb-4">
-        <LanguageSelect
-          languages={languagesFrom}
-          selectLanguage={(language) =>
-            handleLanguageChange(language, setLanguagesFrom, languagesFrom)
-          }
-        />
-        <LanguageSelect
-          languages={languagesTo}
-          selectLanguage={(language) =>
-            handleLanguageChange(language, setLanguagesTo, languagesTo)
-          }
-        />
+        <LanguageSelect setLangPair={(pair) => setLangPair(pair)} />
       </div>
       <div className="w-2/3">
-        {tab === 0 && <TextTranslate />}
-        {tab === 1 && <FileTranslate />}
+        {tab === 0 && <TextTranslate langPair={langPair} />}
+        {tab === 1 && <FileTranslate langPair={langPair} />}
       </div>
     </div>
   );
