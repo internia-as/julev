@@ -1,8 +1,8 @@
 "use client";
 import { LangPair, TranslationRequest } from "@/types/requests";
-import { IconButton, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React from "react";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import TextToSpeech from "./TextToSpeech";
 
 interface Props {
   langFrom?: string;
@@ -78,21 +78,6 @@ const TextTranslate = (props: Props) => {
     }
   };
 
-  const fetchTextToSpeech = async (text: string, lang: string) => {
-    try {
-      const response = await fetch(`/api/speech?text=${text}&lang=${lang}`, {});
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.play();
-      }
-    } catch (error) {
-      console.error("Error fetching text-to-speech:", error);
-      setErrorMessage("Kunne ikke hente tale for teksten.");
-    }
-  };
-
   return (
     <>
       <div className="flex space-x-2 items-center justify-center">
@@ -117,22 +102,18 @@ const TextTranslate = (props: Props) => {
       )}
       <div className="flex w-full justify-between">
         {props.langFrom && (
-          <IconButton
-            onClick={() =>
-              fetchTextToSpeech(textInput, props.langFrom as string)
-            }
-          >
-            <VolumeUpIcon />
-          </IconButton>
+          <TextToSpeech
+            lang={props.langFrom}
+            text={textInput}
+            setErrorMessage={setErrorMessage}
+          />
         )}
         {props.langTo && (
-          <IconButton
-            onClick={() =>
-              fetchTextToSpeech(translatedText, props.langTo as string)
-            }
-          >
-            <VolumeUpIcon />
-          </IconButton>
+          <TextToSpeech
+            lang={props.langTo}
+            text={translatedText}
+            setErrorMessage={setErrorMessage}
+          />
         )}
       </div>
     </>

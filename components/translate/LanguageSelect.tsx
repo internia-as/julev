@@ -42,8 +42,8 @@ const Languages: Language[] = [
 ];
 
 interface Props {
-  setLangFrom: (lang: string) => void;
-  setLangTo: (lang: string) => void;
+  setLangFrom: React.Dispatch<React.SetStateAction<string>>;
+  setLangTo: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const LanguageSelect = (props: Props) => {
@@ -59,7 +59,6 @@ const LanguageSelect = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(selectedFrom);
     props.setLangFrom(selectedFrom?.short || "");
     // Current logic is that north sami is translatable to all languages,
     // and all other languages are translatable to ONLY north sami.

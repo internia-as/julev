@@ -35,10 +35,7 @@ const Translate = () => {
       </Tabs>
 
       <div className="flex justify-between w-2/3 mb-4">
-        <LanguageSelect
-          setLangFrom={(newLang) => setLangFrom(newLang)}
-          setLangTo={(newLang) => setLangTo(newLang)}
-        />
+        <LanguageSelect setLangFrom={setLangFrom} setLangTo={setLangTo} />
       </div>
       <div className="w-2/3">
         {tab === 0 && <TextTranslate langFrom={langFrom} langTo={langTo} />}

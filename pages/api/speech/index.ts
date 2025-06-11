@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const SPEECH_API_URL = process.env.TEXT_TO_SPEECH_URL;
 
-type Query = {
+type Body = {
   text: string;
   lang: string;
   voice: string;
@@ -12,10 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { text } = req.query as Query;
-
-  let lang = req.query.lang;
-  let voice = "";
+  let { text, lang, voice } = req.body as Body;
 
   switch (lang) {
     case "sme":
