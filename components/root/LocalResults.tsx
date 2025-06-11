@@ -4,11 +4,7 @@ import LocalResultList from "./LocalResultList";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 
-interface Props {
-  query: string;
-}
-
-const LocalResults = (props: Props) => {
+const LocalResults = () => {
   const [results, setResults] = useState([]);
   const state = useGlobalState();
   const [loading, setLoading] = useState(false);
@@ -16,17 +12,17 @@ const LocalResults = (props: Props) => {
   // Fetch results from the API
   const fetchResults = async () => {
     setLoading(true);
-    const res = await fetch(`/api/localSearch?q=${props.query}`);
+    const res = await fetch(`/api/localSearch?q=${state.query}`);
     const data = await res.json();
     setResults(data);
     setLoading(false);
   };
 
   useEffect(() => {
-    if (props.query) fetchResults();
-  }, [props.query]);
+    if (state.query) fetchResults();
+  }, [state.query]);
 
-  if (props.query === "" || state.mode === "divvun") return <></>;
+  if (state.query === "" || state.mode === "divvun") return <></>;
   if (loading)
     return (
       <>
@@ -34,7 +30,7 @@ const LocalResults = (props: Props) => {
         <CircularProgress />
       </>
     );
-  return <LocalResultList results={results} query={props.query} />;
+  return <LocalResultList results={results} query={state.query} />;
 };
 
 export default LocalResults;
