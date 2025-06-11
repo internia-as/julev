@@ -42,7 +42,8 @@ const Languages: Language[] = [
 ];
 
 interface Props {
-  setLangPair: (pair: string) => void;
+  setLangFrom: (lang: string) => void;
+  setLangTo: (lang: string) => void;
 }
 
 const LanguageSelect = (props: Props) => {
@@ -50,12 +51,16 @@ const LanguageSelect = (props: Props) => {
     Languages.filter((l) => l.short !== "nob")
   );
   const [langTo, setLangTo] = React.useState<Language[]>(Languages);
-  const [selectedFrom, setSelectedFrom] = React.useState<Language | null>(
-    Languages[0]
-  );
+  const [selectedFrom, setSelectedFrom] = React.useState<Language | null>(null);
   const [selectedTo, setSelectedTo] = React.useState<Language | null>(null);
 
   useEffect(() => {
+    setSelectedFrom(Languages[0]);
+  }, []);
+
+  useEffect(() => {
+    console.log(selectedFrom);
+    props.setLangFrom(selectedFrom?.short || "");
     // Current logic is that north sami is translatable to all languages,
     // and all other languages are translatable to ONLY north sami.
     switch (selectedFrom?.short) {
@@ -76,9 +81,7 @@ const LanguageSelect = (props: Props) => {
   }, [selectedFrom]);
 
   useEffect(() => {
-    if (selectedTo) {
-      props.setLangPair(selectedFrom?.short + "|" + selectedTo.short);
-    }
+    props.setLangTo(selectedTo?.short || "");
   }, [selectedTo]);
 
   const handleChange = (e: SelectChangeEvent<string>, setFunc: Function) => {

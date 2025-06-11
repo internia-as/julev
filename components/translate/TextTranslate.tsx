@@ -1,10 +1,12 @@
 "use client";
 import { LangPair, TranslationRequest } from "@/types/requests";
-import { TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import React from "react";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
 interface Props {
-  langPair: string;
+  langFrom?: string;
+  langTo?: string;
 }
 
 const TextTranslate = (props: Props) => {
@@ -14,13 +16,13 @@ const TextTranslate = (props: Props) => {
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   React.useEffect(() => {
-    if (props.langPair) {
+    if (props.langFrom && props.langTo) {
       setErrorMessage("");
     }
-  }, [props.langPair]);
+  }, [props.langFrom, props.langTo]);
 
   const validate = () => {
-    if (!props.langPair) {
+    if (!props.langTo) {
       setErrorMessage("Velg hvilket språk du ønsker å oversette til");
       return false;
     }
@@ -36,9 +38,9 @@ const TextTranslate = (props: Props) => {
     if (!validate()) return;
     try {
       setLoading(true);
-
+      const langPair = `${props.langFrom || "nob"}|${props.langTo}`;
       const body: TranslationRequest = {
-        langpair: props.langPair as LangPair,
+        langpair: langPair as LangPair,
         q: textInput,
         markUnknown: "yes",
         callBack: "text",
@@ -76,6 +78,21 @@ const TextTranslate = (props: Props) => {
     }
   };
 
+  const fetchTextToSpeech = async (text: string, lang: string) => {
+    try {
+      const response = await fetch(`/api/speech?text=${text}&lang=${lang}`, {});
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        audio.play();
+      }
+    } catch (error) {
+      console.error("Error fetching text-to-speech:", error);
+      setErrorMessage("Kunne ikke hente tale for teksten.");
+    }
+  };
+
   return (
     <>
       <div className="flex space-x-2 items-center justify-center">
@@ -98,6 +115,26 @@ const TextTranslate = (props: Props) => {
       {errorMessage && (
         <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
       )}
+      <div className="flex w-full justify-between">
+        {props.langFrom && (
+          <IconButton
+            onClick={() =>
+              fetchTextToSpeech(textInput, props.langFrom as string)
+            }
+          >
+            <VolumeUpIcon />
+          </IconButton>
+        )}
+        {props.langTo && (
+          <IconButton
+            onClick={() =>
+              fetchTextToSpeech(translatedText, props.langTo as string)
+            }
+          >
+            <VolumeUpIcon />
+          </IconButton>
+        )}
+      </div>
     </>
   );
 };

@@ -14,7 +14,8 @@ function a11yProps(index: number) {
 
 const Translate = () => {
   const [tab, setTab] = React.useState(0);
-  const [langPair, setLangPair] = React.useState<string>("");
+  const [langFrom, setLangFrom] = React.useState<string>("");
+  const [langTo, setLangTo] = React.useState<string>("sme");
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
@@ -29,16 +30,19 @@ const Translate = () => {
         className="mb-10"
       >
         <Tab label="Oversett tekst" {...a11yProps(0)} />
-        <Tab label="Oversett fil" {...a11yProps(1)} />
+        <Tab label="Oversett fil" disabled {...a11yProps(1)} />
         <Tab label="Oversett nettside" disabled {...a11yProps(2)} />
       </Tabs>
 
       <div className="flex justify-between w-2/3 mb-4">
-        <LanguageSelect setLangPair={(pair) => setLangPair(pair)} />
+        <LanguageSelect
+          setLangFrom={(newLang) => setLangFrom(newLang)}
+          setLangTo={(newLang) => setLangTo(newLang)}
+        />
       </div>
       <div className="w-2/3">
-        {tab === 0 && <TextTranslate langPair={langPair} />}
-        {tab === 1 && <FileTranslate langPair={langPair} />}
+        {tab === 0 && <TextTranslate langFrom={langFrom} langTo={langTo} />}
+        {tab === 1 && <FileTranslate langFrom={langFrom} langTo={langTo} />}
       </div>
     </div>
   );

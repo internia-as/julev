@@ -2,7 +2,8 @@
 import React from "react";
 
 interface Props {
-  langPair: string;
+  langFrom?: string;
+  langTo?: string;
 }
 
 const FileTranslate = (props: Props) => {
