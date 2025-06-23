@@ -7,9 +7,11 @@ import {
   useState,
   ReactNode,
   useEffect,
+  use,
 } from "react";
 import dictionaries from "@/lib/dictionaries";
 import languages from "@/lib/languages";
+import { useRouter } from "next/navigation";
 
 const GlobalStateContext = createContext<GlobalStateContextType | undefined>(
   undefined
@@ -24,7 +26,6 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     query: "",
     dictionaries: [],
     languages: [],
-    mode: "divvun",
   });
 
   useEffect(() => {
@@ -78,8 +79,6 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     setState((prevState) => ({ ...prevState, dictionaries }));
   const setLanguages = (languages: any[]) =>
     setState((prevState) => ({ ...prevState, languages }));
-  const setMode = (newMode: string) =>
-    setState((prevState) => ({ ...prevState, mode: newMode }));
 
   return (
     <GlobalStateContext.Provider
@@ -88,7 +87,6 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
         setQuery,
         setDictionaries,
         setLanguages,
-        setMode,
       }}
     >
       {children}

@@ -12,6 +12,9 @@ const Navbar = () => {
           <Link href="/" locale="nob">
             {t("search")}
           </Link>
+          <Link href="/divvun" locale="nob">
+            Divvun
+          </Link>
           <Link href="/statistics" locale="nob">
             {t("statistics")}
           </Link>

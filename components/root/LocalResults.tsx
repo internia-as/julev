@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 
 const LocalResults = () => {
-  const [results, setResults] = useState([]);
   const state = useGlobalState();
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Fetch results from the API
@@ -19,10 +19,14 @@ const LocalResults = () => {
   };
 
   useEffect(() => {
-    if (state.query) fetchResults();
+    if (state.query) {
+      fetchResults();
+    } else {
+      setResults([]);
+    }
   }, [state.query]);
 
-  if (state.query === "" || state.mode === "divvun") return <></>;
+  if (state.query === "") return <></>;
   if (loading)
     return (
       <>

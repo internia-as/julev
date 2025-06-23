@@ -36,7 +36,7 @@ const DivvunResults = () => {
     setResults(data);
   };
 
-  if (state.query === "" || state.mode === "local") return <></>;
+  if (state.query === "") return <></>;
   return <DivvunResultList results={results} query={state.query} />;
 };
 

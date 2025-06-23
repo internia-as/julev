@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useGlobalState } from "../GlobalContext";
 import DictionaryList from "./DictionaryList";
 import { Button, DialogTitle, Dialog, Slide, IconButton } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
@@ -16,7 +15,6 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const DictionaryMenu = () => {
-  const state = useGlobalState();
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -31,7 +29,7 @@ const DictionaryMenu = () => {
         TransitionComponent={Transition}
       >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Tilgjengelige ordbøker i {state.mode}
+          Tilgjengelige ordbøker
         </DialogTitle>
         <DictionaryList />
         <Button

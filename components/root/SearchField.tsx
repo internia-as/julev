@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Input, InputAdornment } from "@mui/material";
 import DictionaryMenu from "./DictionaryMenu";
@@ -12,6 +12,19 @@ const SearchField = () => {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const t = useTranslations("search");
+
+  const getAdornment = () => {
+    return (
+      <InputAdornment position="end">
+        <DictionaryMenu />
+        <LanguageMenu />
+      </InputAdornment>
+    );
+  };
+
+  useEffect(() => {
+    state.setQuery("");
+  }, []);
 
   return (
     <div>
@@ -45,12 +58,7 @@ const SearchField = () => {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Søk i julevbágo..."
               className="  bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
-              endAdornment={
-                <InputAdornment position="end">
-                  <DictionaryMenu />
-                  <LanguageMenu />
-                </InputAdornment>
-              }
+              endAdornment={getAdornment()}
             />
           </div>
         </form>

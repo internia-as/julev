@@ -49,7 +49,7 @@ const SupportedLanguages = [
 
 interface Props {
   text: string;
-  lang: string;
+  lang: string; // TODO: Fix enum
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
