@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { useGlobalState } from "../GlobalContext";
+import { useGlobalState } from "../../hooks/useGlobalState";
 
 interface Props {
   item: string;

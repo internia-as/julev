@@ -1,5 +1,5 @@
 "use client";
-import { useGlobalState } from "@/components/GlobalContext";
+import { useGlobalState } from "@/hooks/useGlobalState";
 import LocalResultList from "./LocalResultList";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";

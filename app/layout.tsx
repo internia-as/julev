@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { GlobalStateProvider } from "@/components/GlobalContext";
+import { GlobalStateProvider } from "@/hooks/useGlobalState";
 import { NextIntlClientProvider } from "next-intl";
+import { NotificationProvider } from "@/hooks/useNotification";
+import Notification from "@/components/Notification";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +34,13 @@ export default function RootLayout({
       >
         <div className="h-screen relative flex flex-col">
           <GlobalStateProvider>
-            <NextIntlClientProvider>
-              <Navbar />
-              <div className="mt-14">{children}</div>
-            </NextIntlClientProvider>
+            <NotificationProvider>
+              <NextIntlClientProvider>
+                <Navbar />
+                <Notification />
+                <div className="mt-14">{children}</div>
+              </NextIntlClientProvider>
+            </NotificationProvider>
           </GlobalStateProvider>
         </div>
       </body>

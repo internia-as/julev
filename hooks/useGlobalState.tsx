@@ -7,11 +7,9 @@ import {
   useState,
   ReactNode,
   useEffect,
-  use,
 } from "react";
 import dictionaries from "@/lib/dictionaries";
 import languages from "@/lib/languages";
-import { useRouter } from "next/navigation";
 
 const GlobalStateContext = createContext<GlobalStateContextType | undefined>(
   undefined
@@ -37,7 +35,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
 
     // get dictionaries from local storage or use default
     const dicts = localStorage.getItem("dictionaries");
-    if (dicts) {
+    if (dicts && dicts.length > 0) {
       setState((prevState) => ({
         ...prevState,
         dictionaries: JSON.parse(dicts),

@@ -2,22 +2,6 @@ import { Dictionary } from "@/types/dictionary";
 
 const dictionaries: Dictionary[] = [
   {
-    title: "Anders Kintel 2013",
-    lang: "smj",
-    value: "smj-nob",
-    short: "A. Kintel 2013",
-    selected: false,
-    type: "julev",
-  },
-  {
-    title: "Medisijnalasj báhkogirjje",
-    lang: "smj",
-    value: "smj-nob",
-    short: "Medisijnalasj báhkogirjje",
-    selected: false,
-    type: "julev",
-  },
-  {
     title: "Giellagáldus Flerspråklige Termer",
     lang: "smd",
     value: "smd-nob",

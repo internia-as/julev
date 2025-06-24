@@ -1,5 +1,5 @@
 import React from "react";
-import { useGlobalState } from "../GlobalContext";
+import { useGlobalState } from "../../hooks/useGlobalState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";

@@ -1,17 +1,18 @@
 "use client";
 import React, { useEffect } from "react";
-import { useGlobalState } from "../GlobalContext";
+import { useGlobalState } from "../../hooks/useGlobalState";
 import DivvunResultList from "./DivvunResultList";
+import { useNotification } from "@/hooks/useNotification";
 
 const DivvunResults = () => {
   const state = useGlobalState();
+  const notification = useNotification();
   const [results, setResults] = React.useState();
 
   useEffect(() => {
     if (state.query) {
       fetchResults();
     } else {
-      console.log("No query");
       setResults(undefined);
     }
   }, [state.query, state.languages, state.dictionaries]);

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button, Dialog, DialogTitle, IconButton, Slide } from "@mui/material";
-import { useGlobalState } from "../GlobalContext";
+import { useGlobalState } from "../../hooks/useGlobalState";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { TransitionProps } from "@mui/material/transitions";
 import LanguageList from "./LanguageList";
