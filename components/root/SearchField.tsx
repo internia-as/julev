@@ -6,20 +6,56 @@ import DictionaryMenu from "./DictionaryMenu";
 import LanguageMenu from "./LanguageMenu";
 import { useGlobalState } from "../GlobalContext";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
-const SearchField = () => {
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const SearchField = (props: Props) => {
+  const pathname = usePathname();
   const state = useGlobalState();
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const t = useTranslations("search");
 
   const getAdornment = () => {
+    if (pathname === "/divvun") {
+      return (
+        <InputAdornment position="end">
+          <DictionaryMenu />
+          <LanguageMenu />
+        </InputAdornment>
+      );
+    }
     return (
       <InputAdornment position="end">
-        <DictionaryMenu />
-        <LanguageMenu />
+        <button
+          type="button"
+          onClick={() => appendSpecialChars("á")}
+          className="hidden px-4 py-2 mx-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-full md:block hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+        >
+          á
+        </button>
+        <button
+          type="button"
+          onClick={() => appendSpecialChars("ŋ")}
+          className="px-4 py-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+        >
+          ŋ
+        </button>
       </InputAdornment>
     );
+  };
+
+  const appendSpecialChars = (char: string) => {
+    const position =
+      (document.getElementById("searchfield") as HTMLInputElement | null)
+        ?.selectionStart ?? 0;
+    const textBeforeCursorPosition = query.substring(0, position);
+    const textAfterCursorPosition = query.substring(position, query.length);
+    setQuery(textBeforeCursorPosition + char + textAfterCursorPosition);
   };
 
   useEffect(() => {
@@ -41,10 +77,10 @@ const SearchField = () => {
       >
         <div className="flex text-black flex-col space-y-5 py-5 px-2 sm:px-0">
           <h1 className="text-5xl text-center font-bold uppercase">
-            {t("header")}
+            {t(props.title)}
           </h1>
           <h2 className="text-md  text-center font-semibold">
-            {t("header_subtitle")}
+            {t(props.subtitle)}
           </h2>
         </div>
         <form
@@ -53,11 +89,11 @@ const SearchField = () => {
         >
           <div className="w-full flex justify-center relative">
             <Input
-              id="input-search"
+              id="searchfield"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Søk i julevbágo..."
-              className="  bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
+              className="bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={getAdornment()}
             />
           </div>

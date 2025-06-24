@@ -49,12 +49,7 @@ const LanguageDropdown = () => {
       <IconButton onClick={handleClick}>
         <LanguageIcon className="text-white" />
       </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        sx={{ minWidth: 360 }}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {languages
           .filter((l: Language) => l.translated)
           .map((language) => (

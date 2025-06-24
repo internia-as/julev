@@ -15,7 +15,9 @@
     }
   },
   "search": {
-    "header": "Julevbágo",
-    "header_subtitle": "Julevbágo collects digital Sámi language resources in one place"
+    "julev_title": "Julevbágo",
+    "julev_subtitle": "Julevbágo collects digital Sámi language resources in one place",
+    "divvun_title": "Divvun",
+    "divvun_subtitle": "Divvun provides tools for Sámi languages"
   }
 }

@@ -15,7 +15,9 @@
     }
   },
   "search": {
-    "header": "Julevbágo",
-    "header_subtitle": "Julevbágo samler digitale samiske språkressurser på ett sted"
+    "julev_title": "Julevbágo",
+    "julev_subtitle": "Julevbágo samler digitale samiske språkressurser på ett sted",
+    "divvun_title": "Divvun",
+    "divvun_subtitle": "Divvun tilbyr verktøy for samiske språk"
   }
 }

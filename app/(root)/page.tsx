@@ -4,7 +4,7 @@ import SearchField from "@/components/root/SearchField"; // Client Component
 export default function Page() {
   return (
     <div className="flex flex-col items-center w-full">
-      <SearchField />
+      <SearchField title="julev_title" subtitle="julev_subtitle" />
       <LocalResults />
     </div>
   );
