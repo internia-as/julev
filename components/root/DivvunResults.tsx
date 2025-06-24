@@ -10,12 +10,28 @@ const DivvunResults = () => {
   const [results, setResults] = React.useState();
 
   useEffect(() => {
+    validate();
     if (state.query) {
       fetchResults();
     } else {
       setResults(undefined);
     }
   }, [state.query, state.languages, state.dictionaries]);
+
+  const validate = () => {
+    if (state.languages.length === 0) {
+      notification.setOpen(true);
+      notification.setSeverity("warning");
+      notification.setMessage("Please select at least one language.");
+      return false;
+    }
+    if (state.dictionaries.filter((d) => d.selected).length === 0) {
+      notification.setOpen(true);
+      notification.setSeverity("warning");
+      notification.setMessage("Please select at least one dictionary.");
+      return false;
+    }
+  };
 
   const fetchResults = async () => {
     const res = await fetch(`/api/divvun/search`, {
