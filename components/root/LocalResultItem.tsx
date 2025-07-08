@@ -29,8 +29,28 @@ const LocalResultItem = (props: Props) => {
 
   const redirectToSikor = () => {
     // TODO: redirect to SIKOR
-    console.log("Redirecting to SIKOR with ID:", SIKOR_ULR);
+    let url = SIKOR_ULR + "/smj/#";
+    let word = fra.trim().split(", ")[0];
+    const params = new URLSearchParams({
+      corpus: [
+        "smj_bible_20211118",
+        "smj_ficti_20211118",
+        "smj_news_20211118",
+        "smj_laws_20211118",
+        "smj_admin_20211118",
+        "smj_science_20211118",
+        "smj_facta_20211118",
+      ].join(","),
+      cqp: "[]", // Empty brackets for the CQP query
+      search: `word|${word}`, // Represents "search by word"
+    });
+
+    url = `${url}?${params.toString()}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
   };
+
+  const wordIsSami = result.oversatt_fra.toLocaleLowerCase() == "samisk";
 
   return (
     <div className="w-full">
@@ -44,7 +64,7 @@ const LocalResultItem = (props: Props) => {
         <div className="flex justify-between px-4 py-5 font-bold sm:px-6">
           <div className="flex space-x-2 items-center">
             <h3 className="" dangerouslySetInnerHTML={{ __html: fra }} />
-            {result.oversatt_fra.toLocaleLowerCase() == "samisk" && (
+            {wordIsSami && (
               <TextToSpeech
                 text={fra}
                 lang={"smj"}
@@ -58,15 +78,17 @@ const LocalResultItem = (props: Props) => {
         </div>
         <div className="flex justify-between sm:px-6 pb-4">
           <p dangerouslySetInnerHTML={{ __html: til }} />
-          <IconButton>
-            <FormatAlignJustifyIcon
-              className="text-gray-500 hover:text-gray-700"
-              onClick={() => {
-                // Handle click event to show more details or perform an action
-                redirectToSikor();
-              }}
-            />
-          </IconButton>
+          {wordIsSami && (
+            <IconButton>
+              <FormatAlignJustifyIcon
+                className="text-gray-500 hover:text-gray-700"
+                onClick={() => {
+                  // Handle click event to show more details or perform an action
+                  redirectToSikor();
+                }}
+              />
+            </IconButton>
+          )}
         </div>
       </li>
     </div>
