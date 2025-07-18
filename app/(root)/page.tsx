@@ -1,5 +1,5 @@
 import LocalResults from "@/components/root/LocalResults";
-import SearchField from "@/components/root/SearchField"; // Client Component
+import SearchField from "@/components/SearchField"; // Client Component
 
 export default function Page() {
   return (

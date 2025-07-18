@@ -11,10 +11,16 @@ const Navbar = () => {
         <ul className="font-semibold space-x-10">
           <Link href="/">{t("search")}</Link>
           <Link href="/divvun">Divvun</Link>
-          <Link href="/statistics">{t("statistics")}</Link>
+          <Link className="opacity-50" href="/statistics">
+            {t("statistics")}
+          </Link>
           <Link href="/translate">{t("translate")}</Link>
-          <Link href="/app">{t("app")}</Link>
-          <Link href="/about">{t("about")}</Link>
+          <Link className="opacity-50" href="/app">
+            {t("app")}
+          </Link>
+          <Link className="opacity-50" href="/about">
+            {t("about")}
+          </Link>
         </ul>
         <LanguageDropdown />
       </div>

@@ -1,5 +1,6 @@
 import getLang from "@/lib/getLang";
 import {
+  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -11,13 +12,18 @@ import { useGlobalState } from "../../hooks/useGlobalState";
 
 interface Props {
   item: string;
+  expanded: string | false;
+  name: string;
 }
 
 const DivvunTermArticle = (props: Props) => {
   const state = useGlobalState();
   const [data, setData] = React.useState([] as any);
+  const [searching, setSearching] = React.useState(false);
 
   const fetchData = async (item: string) => {
+    if (props.expanded !== props.name) return;
+    setSearching(true);
     const res = await fetch("/api/divvun/search", {
       method: "POST",
       headers: {
@@ -31,14 +37,22 @@ const DivvunTermArticle = (props: Props) => {
     });
     const data = await res.json();
     setData(data.data.conceptList);
-    console.log(data.data.conceptList);
+    setSearching(false);
   };
 
   useEffect(() => {
     if (props.item) {
       fetchData(props.item);
     }
-  }, [props.item]);
+  }, [props.item, props.expanded]);
+
+  if (searching) {
+    return (
+      <div className="w-full py-5 flex justify-center">
+        <CircularProgress size={20} />
+      </div>
+    );
+  }
 
   return (
     <Table>

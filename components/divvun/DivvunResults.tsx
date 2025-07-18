@@ -8,10 +8,12 @@ const DivvunResults = () => {
   const state = useGlobalState();
   const notification = useNotification();
   const [results, setResults] = React.useState();
+  const [searching, setSearching] = React.useState(false);
 
   useEffect(() => {
-    validate();
+    if (!validate()) return;
     if (state.query) {
+      setSearching(true);
       fetchResults();
     } else {
       setResults(undefined);
@@ -19,18 +21,8 @@ const DivvunResults = () => {
   }, [state.query, state.languages, state.dictionaries]);
 
   const validate = () => {
-    if (state.languages.length === 0) {
-      notification.setOpen(true);
-      notification.setSeverity("warning");
-      notification.setMessage("Please select at least one language.");
-      return false;
-    }
-    if (state.dictionaries.filter((d) => d.selected).length === 0) {
-      notification.setOpen(true);
-      notification.setSeverity("warning");
-      notification.setMessage("Please select at least one dictionary.");
-      return false;
-    }
+    // TODO: Handle validation after cookies are read and dictionaries are loaded
+    return true;
   };
 
   const fetchResults = async () => {
@@ -51,10 +43,18 @@ const DivvunResults = () => {
     });
     const data = await res.json();
     setResults(data);
+    setSearching(false);
   };
 
   if (state.query === "") return <></>;
-  return <DivvunResultList results={results} query={state.query} />;
+  return (
+    <DivvunResultList
+      results={results}
+      query={state.query}
+      isSearching={searching}
+      setIsSearching={setSearching}
+    />
+  );
 };
 
 export default DivvunResults;

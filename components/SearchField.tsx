@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Input, InputAdornment } from "@mui/material";
-import DictionaryMenu from "./DictionaryMenu";
-import LanguageMenu from "./LanguageMenu";
-import { useGlobalState } from "../../hooks/useGlobalState";
+import DictionaryMenu from "./divvun/DictionaryMenu";
+import LanguageMenu from "./root/LanguageMenu";
+import { useGlobalState } from "../hooks/useGlobalState";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 

@@ -6,21 +6,22 @@ import DivvunTermArticle from "./DivvunTermArticle";
 
 interface Props {
   item: string;
+  name: string;
+  expanded: string | false;
+  setExpanded: React.Dispatch<React.SetStateAction<string | false>>;
 }
 
 const DivvunResultItem = (props: Props) => {
-  const [expanded, setExpanded] = React.useState(false);
-  const [item, setItem] = React.useState("");
-
-  const handleClick = async () => {
-    setExpanded(!expanded);
-    if (!expanded && !item) {
-      setItem(props.item);
-    }
+  const handleChange = () => {
+    props.setExpanded(props.expanded === props.name ? false : props.name);
   };
 
   return (
-    <Accordion expanded={expanded} className="w-full" onClick={handleClick}>
+    <Accordion
+      expanded={props.expanded === props.name}
+      onChange={handleChange}
+      className="w-full"
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1-content"
@@ -29,7 +30,11 @@ const DivvunResultItem = (props: Props) => {
         <p className="font-bold">{props.item}</p>
       </AccordionSummary>
       <AccordionDetails>
-        <DivvunTermArticle item={item} />
+        <DivvunTermArticle
+          expanded={props.expanded}
+          name={props.name}
+          item={props.item}
+        />
       </AccordionDetails>
     </Accordion>
   );

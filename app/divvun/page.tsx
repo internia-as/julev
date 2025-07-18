@@ -1,9 +1,9 @@
-import DivvunResults from "@/components/root/DivvunResults";
-import SearchField from "@/components/root/SearchField";
+import DivvunResults from "@/components/divvun/DivvunResults";
+import SearchField from "@/components/SearchField";
 
 const Divvun = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100">
+    <div className="flex flex-col items-center justify-center ">
       <SearchField title="divvun_title" subtitle="divvun_subtitle" />
       <DivvunResults />
     </div>
