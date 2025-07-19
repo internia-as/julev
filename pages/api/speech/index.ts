@@ -28,9 +28,14 @@ export default async function handler(
       lang = "sma";
       voice = "aanna";
       break;
+    case "sma": // Divvun short-term language code for South Sami
+      lang = "sma";
+      voice = "aanna";
+      break;
     case "smj":
       voice = "abmut";
       break;
+    default:
   }
 
   const url = SPEECH_API_URL + `${lang}/${voice}`;
@@ -50,6 +55,8 @@ export default async function handler(
       error: "Failed to fetch audio from external API",
       details: errorText,
     });
+  } else {
+    console.log("Audio fetched successfully from external API", response);
   }
 
   res.setHeader("Content-Type", "audio/wav");

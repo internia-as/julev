@@ -49,8 +49,9 @@ const SupportedLanguages = [
 
 interface Props {
   text: string;
-  lang: string; // TODO: Fix enum
+  lang: "sme" | "sma_North" | "sma_Mid" | "smj";
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+  size?: "small" | "medium" | "large";
 }
 
 const TextToSpeech = (props: Props) => {
@@ -82,7 +83,7 @@ const TextToSpeech = (props: Props) => {
     <IconButton
       onClick={() => fetchTextToSpeech(props.text, props.lang as string)}
     >
-      <VolumeUpIcon />
+      <VolumeUpIcon fontSize={props.size} />
     </IconButton>
   );
 };

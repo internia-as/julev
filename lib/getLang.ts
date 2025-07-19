@@ -1,3 +1,4 @@
+// Divvun short-term language name getter
 export default function getLang(lang: string) {
   const langMap: { [key: string]: string } = {
     sma: "Sørsamisk",
