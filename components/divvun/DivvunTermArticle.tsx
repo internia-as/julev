@@ -2,7 +2,6 @@ import getLang from "@/lib/getLang";
 import getLangImg from "@/lib/getLangImg";
 import {
   CircularProgress,
-  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -10,13 +9,11 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
-import InfoIcon from "@mui/icons-material/InfoOutline";
 import getPos from "@/lib/getPos";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import TextToSpeech from "../translate/TextToSpeech";
 import speachAvailable from "@/lib/speachAvailable";
-import PosDialog from "./PosDialog";
 import Sikor from "./Sikor";
+import ParadigmDialog from "./ParadigmDialog";
 
 interface Props {
   item: string;
@@ -86,7 +83,7 @@ const DivvunTermArticle = (props: Props) => {
           className="flex items-center"
         >
           <p className="text-gray-600">({getPos(term.expression.pos)})</p>
-          <PosDialog />
+          <ParadigmDialog />
           <Sikor />
         </div>
       ));

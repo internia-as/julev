@@ -1,12 +1,28 @@
 import { Dialog, DialogTitle, IconButton, Tooltip } from "@mui/material";
 import InfoIcon from "@mui/icons-material/InfoOutline";
-import React from "react";
+import React, { useEffect } from "react";
 
-interface Props {}
+interface Props {
+  lang: string;
+  word: string;
+  pos: string;
+}
 
-const PosDialog = (props: Props) => {
+const ParadigmDialog = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
+
+  useEffect(() => {
+    initFetch();
+  }, []);
+
+  const initFetch = async () => {
+    const res = await fetch(
+      `/api/divvun/paradigms?lang=${props.lang}&term=${props.word}&post=${props.pos}&type=init`
+    );
+    const data = await res.json();
+    console.log(data);
+  };
 
   return (
     <div>
@@ -24,4 +40,4 @@ const PosDialog = (props: Props) => {
   );
 };
 
-export default PosDialog;
+export default ParadigmDialog;
