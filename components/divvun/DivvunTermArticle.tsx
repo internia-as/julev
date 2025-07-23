@@ -43,7 +43,7 @@ const DivvunTermArticle = (props: Props) => {
       body: JSON.stringify({
         query: item,
         langs: state.languages.filter((l) => l.selected).map((l) => l.short),
-        operationName: "termArticles",
+        operationName: "TermArticles",
       }),
     });
     const data = await res.json();

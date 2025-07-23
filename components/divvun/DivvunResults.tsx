@@ -32,7 +32,7 @@ const DivvunResults = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        operationName: "allLemmas",
+        operationName: "AllLemmas",
         query: state.query,
         searchMode: "start",
         wantedDicts: state.dictionaries
