@@ -49,7 +49,7 @@ const DivvunTermArticle = (props: Props) => {
     const data = await res.json();
     setData(data.data.conceptList);
     setSearching(false);
-    console.log("Fetched data for item:", data);
+    // console.log("Fetched data for item:", data);
   };
 
   if (searching) {
@@ -83,7 +83,11 @@ const DivvunTermArticle = (props: Props) => {
           className="flex items-center"
         >
           <p className="text-gray-600">({getPos(term.expression.pos)})</p>
-          <ParadigmDialog />
+          <ParadigmDialog
+            lang={term.expression.language}
+            word={term.expression.lemma}
+            pos={term.expression.pos}
+          />
           <Sikor />
         </div>
       ));

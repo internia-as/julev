@@ -8,9 +8,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { lang, term, pos, type } = req.query;
+    const { lang, term, pos, type } = req.body;
 
-    let paradigmTemplates = getParadigmTemplates(lang as string, pos as string);
+    let paradigmTemplates = getParadigmTemplates(pos as string);
     if (type === "init") {
       paradigmTemplates = [paradigmTemplates[0]];
     }
@@ -23,9 +23,8 @@ export default async function handler(
       lang as string,
       paradigmTemplates
     );
-    const data = await fetchSatni(payload);
-    console.log(data);
 
+    const data = await fetchSatni(payload);
     res.status(200).json(data);
   } else {
     res.status(405).json({ message: "Method Not Allowed" });

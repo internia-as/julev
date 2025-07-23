@@ -10,24 +10,37 @@ interface Props {
 
 const ParadigmDialog = (props: Props) => {
   const [open, setOpen] = React.useState(false);
-  const [disabled, setDisabled] = React.useState(false);
+  const [disabled, setDisabled] = React.useState(true);
 
   useEffect(() => {
     initFetch();
   }, []);
 
   const initFetch = async () => {
-    const res = await fetch(
-      `/api/divvun/paradigms?lang=${props.lang}&term=${props.word}&post=${props.pos}&type=init`
-    );
+    // TODO: Fix double API calls
+    const res = await fetch(`/api/divvun/paradigms`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        lang: props.lang,
+        term: props.word,
+        pos: props.pos,
+        type: "init",
+      }),
+    });
     const data = await res.json();
-    console.log(data);
+    if (data.data?.generated && data.data.generated.length > 0) {
+      console.log(data.data);
+      setDisabled(false);
+    }
   };
 
   return (
     <div>
       <Tooltip title="Vis bøyningsmønster">
-        <IconButton>
+        <IconButton disabled={disabled} color="primary" size="small">
           <InfoIcon onClick={() => setOpen(true)} />
         </IconButton>
       </Tooltip>
