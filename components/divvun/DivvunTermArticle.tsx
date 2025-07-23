@@ -15,6 +15,8 @@ import getPos from "@/lib/getPos";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import TextToSpeech from "../translate/TextToSpeech";
 import speachAvailable from "@/lib/speachAvailable";
+import PosDialog from "./PosDialog";
+import Sikor from "./Sikor";
 
 interface Props {
   item: string;
@@ -53,16 +55,6 @@ const DivvunTermArticle = (props: Props) => {
     console.log("Fetched data for item:", data);
   };
 
-  const openDetails = () => {
-    console.log("TODO");
-    // TODO: Implement the logic to open details for the term
-  };
-
-  const redirectToSikor = () => {
-    console.log("TODO");
-    // TODO: Implement the logic to redirect to Sikor
-  };
-
   if (searching) {
     return (
       <div className="w-full py-5 flex justify-center">
@@ -94,12 +86,8 @@ const DivvunTermArticle = (props: Props) => {
           className="flex items-center"
         >
           <p className="text-gray-600">({getPos(term.expression.pos)})</p>
-          <IconButton color="primary" onClick={openDetails}>
-            <InfoIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={redirectToSikor}>
-            <FormatAlignJustifyIcon />
-          </IconButton>
+          <PosDialog />
+          <Sikor />
         </div>
       ));
 
