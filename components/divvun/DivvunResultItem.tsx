@@ -20,14 +20,15 @@ const DivvunResultItem = (props: Props) => {
     <Accordion
       expanded={props.expanded === props.name}
       onChange={handleChange}
-      className="w-full"
+      className="w-full border border-gray-300"
+      sx={{ backgroundColor: "#f0f0f0" }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        <p className="font-bold">{props.item}</p>
+        <p className="font-bold text-gray-700">{props.item}</p>
       </AccordionSummary>
       <AccordionDetails>
         <DivvunTermArticle

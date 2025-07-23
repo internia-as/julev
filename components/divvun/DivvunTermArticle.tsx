@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
 } from "@mui/material";
 import React, { useEffect } from "react";
@@ -126,41 +125,34 @@ const DivvunTermArticle = (props: Props) => {
   };
 
   return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell sx={{ padding: "0px" }}>
-            <p className="text-gray-800 font-bold">{data[0]?.name}</p>´
-          </TableCell>
-          <TableCell />
-          <TableCell />
+    <>
+      <div className="w-full text-sm font-semibold flex justify-between">
+        <p>Kilde: Giellagáldus flerspråklige termer</p>
+        <p>Kategori: {data[0]?.name}</p>
+      </div>
+      <Table>
+        <TableBody>
+          {data.map((item: any, index: number) => (
+            <TableRow key={index}>
+              <TableCell>
+                <div className="flex space-x-2 underline items-center">
+                  <img
+                    className="w-5 h-5 rounded-full"
+                    src={getLangImg(item.terms[0].expression.language)}
+                  />
+                  <p>{getLang(item.terms[0].expression.language)}</p>
+                </div>
+              </TableCell>
 
-          <TableCell />
-
-          <TableCell />
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map((item: any, index: number) => (
-          <TableRow key={index}>
-            <TableCell>
-              <div className="flex space-x-2 underline items-center">
-                <img
-                  className="w-5 h-5 rounded-full"
-                  src={getLangImg(item.terms[0].expression.language)}
-                />
-                <p>{getLang(item.terms[0].expression.language)}</p>
-              </div>
-            </TableCell>
-
-            {getLoopCells(item)}
-            <TableCell>
-              <p>{item.definition}</p>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+              {getLoopCells(item)}
+              <TableCell>
+                <p>{item.definition}</p>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 

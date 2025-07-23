@@ -1,6 +1,5 @@
 // Divvun short-term part of speach getter
 export default function getPos(pos: string) {
-  console.log(pos);
   const posMap: { [key: string]: string } = {
     v: "Verb",
     n: "Substantiv",

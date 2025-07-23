@@ -55,8 +55,6 @@ export default async function handler(
       error: "Failed to fetch audio from external API",
       details: errorText,
     });
-  } else {
-    console.log("Audio fetched successfully from external API", response);
   }
 
   res.setHeader("Content-Type", "audio/wav");
