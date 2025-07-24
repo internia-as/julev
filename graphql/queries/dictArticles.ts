@@ -1,4 +1,4 @@
-`query DictArticles($lemma: String!, $srcLangs: [String]!, $targetLangs: [String]!, $wantedDicts: [String]!) {
+export const DICT_ARTICLES_QUERY = `query DictArticles($lemma: String!, $srcLangs: [String]!, $targetLangs: [String]!, $wantedDicts: [String]!) {
   dictEntryList(
     exact: $lemma
     srcLangs: $srcLangs

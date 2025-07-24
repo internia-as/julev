@@ -29,7 +29,9 @@ const DivvunDictArticle = (props: Props) => {
       body: JSON.stringify({
         query: item,
         langs: state.languages.filter((l) => l.selected).map((l) => l.short),
-        dicts: state.dictionaries.filter((d) => d.selected).map((d) => d.short),
+        wantedDicts: state.dictionaries
+          .filter((d) => d.selected)
+          .map((d) => d.short),
         operationName: "DictArticles",
       }),
     });

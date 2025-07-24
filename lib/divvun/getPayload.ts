@@ -1,6 +1,7 @@
 import { ALL_LEMMAS_QUERY } from "@/graphql/queries/allLemmas";
 import { GENERATED_QUERY } from "@/graphql/queries/generated";
 import { TERM_ARTICLES_QUERY } from "@/graphql/queries/termArticles";
+import { DICT_ARTICLES_QUERY } from "@/graphql/queries/dictArticles";
 
 export default function getPayload(
   operationName: string,
@@ -31,14 +32,14 @@ export default function getPayload(
       };
     case "DictArticles":
       return {
-        operationName,
+        operationName: "DictArticles",
         variables: {
           lemma: term,
           srcLangs,
           targetLangs: srcLangs,
           wantedDicts,
         },
-        query: TERM_ARTICLES_QUERY,
+        query: DICT_ARTICLES_QUERY,
       };
     case "Generated":
       return {
