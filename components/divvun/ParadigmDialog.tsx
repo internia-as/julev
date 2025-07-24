@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/InfoOutline";
 import React, { useEffect } from "react";
+import { getColumn } from "@/lib/getColumn";
 
 interface Body {
   lang: string;
@@ -66,59 +67,31 @@ const ParadigmDialog = (props: Props) => {
   };
 
   const getTableHead = () => {
-    if (props.pos === "V") {
-      return (
-        <>
-          <TableCell />
-          <TableCell>Present</TableCell>
-          <TableCell>Perfectum</TableCell>
-        </>
-      );
+    if (props.pos === "N") {
+      return ["Sg", "Pl"];
     }
-  };
-
-  const getFirstColumn = (index: number) => {
     if (props.pos === "V") {
-      switch (index) {
-        case 0:
-          return "mun";
-        case 1:
-          return "don";
-        case 2:
-          return "son";
-        case 3:
-          return "moai";
-        case 4:
-          return "doai";
-        case 5:
-          return "soai";
-        case 6:
-          return "mii";
-        case 7:
-          return "dii";
-        case 8:
-          return "sii";
-        default:
-          return "";
-      }
+      return ["Present", "Perfectum"];
     }
-    return "";
+    if (props.pos === "A") {
+      return ["Positive", "Comparative", "Superlative"];
+    }
+    return [];
   };
-
   const getTableBody = () => {
     // Split paradigms into chunks of size 2
     const chunks = [];
     for (let i = 0; i < paradigms.length; i += 2) {
       chunks.push(paradigms.slice(i, i + 2));
     }
-
-    console.log(chunks);
-
     // Map through chunks and render rows
     return chunks.map((chunk: any, index: number) => (
       <TableRow key={index}>
         {/* Column 1: Index or other content */}
-        <TableCell>{getFirstColumn(index)}</TableCell>
+        <TableCell className="underline">
+          {" "}
+          {getColumn(index, props.pos, props.lang)}
+        </TableCell>
 
         {/* Column 2: Analyses for first paradigm in the chunk */}
         <TableCell>
@@ -156,7 +129,14 @@ const ParadigmDialog = (props: Props) => {
         <DialogContent>
           <Table>
             <TableHead>
-              <TableRow>{getTableHead()}</TableRow>
+              <TableRow>
+                <TableCell className="font-bold"></TableCell>
+                {getTableHead()?.map((head) => (
+                  <TableCell key={head}>
+                    <p className="text-black font-bold">{head}</p>
+                  </TableCell>
+                ))}
+              </TableRow>
             </TableHead>
             <TableBody>{getTableBody()}</TableBody>
           </Table>

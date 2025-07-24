@@ -49,7 +49,6 @@ const DivvunTermArticle = (props: Props) => {
     const data = await res.json();
     setData(data.data.conceptList);
     setSearching(false);
-    // console.log("Fetched data for item:", data);
   };
 
   if (searching) {
