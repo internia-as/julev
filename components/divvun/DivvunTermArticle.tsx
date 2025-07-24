@@ -115,13 +115,13 @@ const DivvunTermArticle = (props: Props) => {
     );
   };
 
-  if (dict.length === 0) {
+  if (dict.length === 0 || data.length === 0) {
     return <></>;
   }
 
   return (
-    <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
-      <div className="w-full text-sm font-semibold flex justify-between">
+    <div className="px-4 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
+      <div className="w-full text-xs font-semibold flex justify-between border-b border-gray-400 py-4">
         <p>Kilde: Giellagáldus flerspråklige termer</p>
         <p>Kategori: {data[0]?.name}</p>
       </div>

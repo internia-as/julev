@@ -29,11 +29,15 @@ export const DICT_ARTICLES_QUERY = `query DictArticles($lemma: String!, $srcLang
           }
         }
       }
+      restriction {
+        restriction
+      }
       exampleGroups {
         example
         translation
       }
     }
+    
   }
 }
 `;
