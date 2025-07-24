@@ -25,9 +25,12 @@ const DivvunTermArticle = (props: Props) => {
   const state = useGlobalState();
   const [data, setData] = React.useState([] as any);
   const [searching, setSearching] = React.useState(false);
+  const dict = state.dictionaries.filter(
+    (d) => d.short === "termwiki" && d.selected
+  );
 
   useEffect(() => {
-    if (props.item) {
+    if (props.item && dict.length > 0) {
       fetchData(props.item);
     }
   }, [props.item, props.expanded]);
@@ -112,8 +115,12 @@ const DivvunTermArticle = (props: Props) => {
     );
   };
 
+  if (dict.length === 0) {
+    return <></>;
+  }
+
   return (
-    <>
+    <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
       <div className="w-full text-sm font-semibold flex justify-between">
         <p>Kilde: Giellagáldus flerspråklige termer</p>
         <p>Kategori: {data[0]?.name}</p>
@@ -140,7 +147,7 @@ const DivvunTermArticle = (props: Props) => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 

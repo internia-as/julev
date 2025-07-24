@@ -28,6 +28,12 @@ export default async function handler(
     } else if (operationName === "TermArticles") {
       const payload = getPayload(operationName, query, langs);
       data = await fetchSatni(payload);
+    } else if (operationName === "DictArticles") {
+      const payload = getPayload(operationName, query, langs, wantedDicts);
+      data = await fetchSatni(payload);
+    } else {
+      res.status(400).json({ message: "Invalid operation name" });
+      return;
     }
 
     res.status(200).json(data);

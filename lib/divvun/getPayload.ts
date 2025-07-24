@@ -29,6 +29,17 @@ export default function getPayload(
         variables: { lemma: term, srcLangs, targetLangs: srcLangs },
         query: TERM_ARTICLES_QUERY,
       };
+    case "DictArticles":
+      return {
+        operationName,
+        variables: {
+          lemma: term,
+          srcLangs,
+          targetLangs: srcLangs,
+          wantedDicts,
+        },
+        query: TERM_ARTICLES_QUERY,
+      };
     case "Generated":
       return {
         operationName,
