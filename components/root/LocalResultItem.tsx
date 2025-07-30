@@ -4,6 +4,7 @@ import React from "react";
 import TextToSpeech from "../translate/TextToSpeech";
 import { IconButton } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import { SupportedTTSLanguages } from "@/types/divvun";
 
 const SIKOR_ULR = process.env.NEXT_PUBLIC_SIKOR_URL;
 
@@ -67,7 +68,7 @@ const LocalResultItem = (props: Props) => {
             {wordIsSami && (
               <TextToSpeech
                 text={fra}
-                lang={"smj"}
+                lang={SupportedTTSLanguages.SMJ}
                 setErrorMessage={() => {}}
               />
             )}

@@ -106,11 +106,7 @@ const MonthlySearchesChart: React.FC = () => {
     },
   };
 
-  return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
-      <Bar data={data} options={options} />
-    </div>
-  );
+  return <div style={{ width: "80%", margin: "0 auto" }}></div>;
 };
 
 export default MonthlySearchesChart;

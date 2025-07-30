@@ -3,10 +3,11 @@ import { LangPair, TranslationRequest } from "@/types/requests";
 import { TextField } from "@mui/material";
 import React from "react";
 import TextToSpeech from "./TextToSpeech";
+import { SupportedTTSLanguages } from "@/types/divvun";
 
 interface Props {
-  langFrom?: string;
-  langTo?: string;
+  langFrom: SupportedTTSLanguages;
+  langTo: SupportedTTSLanguages;
 }
 
 const TextTranslate = (props: Props) => {

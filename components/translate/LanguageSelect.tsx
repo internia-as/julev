@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import { Language } from "@/types/language";
+import { SupportedTTSLanguages } from "@/types/divvun";
 
 const Languages: Language[] = [
   {
@@ -42,8 +43,8 @@ const Languages: Language[] = [
 ];
 
 interface Props {
-  setLangFrom: React.Dispatch<React.SetStateAction<string>>;
-  setLangTo: React.Dispatch<React.SetStateAction<string>>;
+  setLangFrom: React.Dispatch<React.SetStateAction<SupportedTTSLanguages>>;
+  setLangTo: React.Dispatch<React.SetStateAction<SupportedTTSLanguages>>;
 }
 
 const LanguageSelect = (props: Props) => {
@@ -59,7 +60,9 @@ const LanguageSelect = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    props.setLangFrom(selectedFrom?.short || "");
+    if (selectedFrom) {
+      props.setLangFrom(selectedFrom.short as SupportedTTSLanguages);
+    }
     // Current logic is that north sami is translatable to all languages,
     // and all other languages are translatable to ONLY north sami.
     switch (selectedFrom?.short) {
@@ -80,7 +83,9 @@ const LanguageSelect = (props: Props) => {
   }, [selectedFrom]);
 
   useEffect(() => {
-    props.setLangTo(selectedTo?.short || "");
+    if (selectedTo) {
+      props.setLangTo(selectedTo.short as SupportedTTSLanguages);
+    }
   }, [selectedTo]);
 
   const handleChange = (e: SelectChangeEvent<string>, setFunc: Function) => {

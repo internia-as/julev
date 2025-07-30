@@ -5,7 +5,17 @@ import { prisma } from "./prisma";
 let cachedData: LocalTranslations[] | null = null;
 
 const fetchLocalTranslations = async (): Promise<LocalTranslations[]> => {
-  if (!cachedData) cachedData = await prisma.smj_translations.findMany();
+  if (!cachedData) {
+    const dbResults = await prisma.smj_translations.findMany();
+    cachedData = dbResults.map((row) => ({
+      id: row.id,
+      fra: row.fra ?? "",
+      til: row.til ?? "",
+      oversatt_fra: row.oversatt_fra ?? "",
+      oversatt_til: row.oversatt_til ?? "",
+      kredittering: row.kredittering ?? "",
+    }));
+  }
   if (!cachedData)
     throw new Error("Failed to fetch local translations from database");
   return cachedData;

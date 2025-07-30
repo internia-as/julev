@@ -49,7 +49,6 @@ const DivvunDictArticle = (props: Props) => {
     });
     const data = await res.json();
     setResults(data.data.dictEntryList);
-    console.log(data.data.dictEntryList);
     setSearching(false);
   };
 

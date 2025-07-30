@@ -4,6 +4,7 @@ import TextTranslate from "@/components/translate/TextTranslate";
 import { Tab, Tabs } from "@mui/material";
 import React from "react";
 import LanguageSelect from "@/components/translate/LanguageSelect";
+import { SupportedTTSLanguages } from "@/types/divvun";
 
 function a11yProps(index: number) {
   return {
@@ -14,8 +15,12 @@ function a11yProps(index: number) {
 
 const Translate = () => {
   const [tab, setTab] = React.useState(0);
-  const [langFrom, setLangFrom] = React.useState<string>("");
-  const [langTo, setLangTo] = React.useState<string>("sme");
+  const [langFrom, setLangFrom] = React.useState<SupportedTTSLanguages>(
+    SupportedTTSLanguages.SME
+  );
+  const [langTo, setLangTo] = React.useState<SupportedTTSLanguages>(
+    SupportedTTSLanguages.SME
+  );
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);

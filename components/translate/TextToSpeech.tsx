@@ -1,5 +1,6 @@
 import { IconButton } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import { SupportedTTSLanguages } from "@/types/divvun";
 
 const SupportedLanguages = [
   {
@@ -49,7 +50,7 @@ const SupportedLanguages = [
 
 interface Props {
   text: string;
-  lang: "sme" | "sma_North" | "sma_Mid" | "smj";
+  lang: SupportedTTSLanguages;
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
   size?: "small" | "medium" | "large";
 }
