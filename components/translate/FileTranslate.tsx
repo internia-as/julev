@@ -1,9 +1,10 @@
 "use client";
+import { SupportedTTSLanguages } from "@/types/divvun";
 import React from "react";
 
 interface Props {
-  langFrom?: string;
-  langTo?: string;
+  langFrom?: SupportedTTSLanguages;
+  langTo?: SupportedTTSLanguages | null;
 }
 
 const FileTranslate = (props: Props) => {

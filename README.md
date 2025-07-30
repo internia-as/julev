@@ -29,3 +29,10 @@ npx prisma db pull
 
 npx prisma generate
 ```
+
+# Running with Docker
+
+```bash
+docker build -t julev .
+docker run --env-file .env -p 3000:3000 julev
+```

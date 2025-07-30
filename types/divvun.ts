@@ -11,4 +11,6 @@ export enum SupportedTTSLanguages {
   SMA_North = "sma_North",
   SMA_Mid = "sma_Mid",
   SMJ = "smj",
+  SMN = "smn",
+  NOB = "nob",
 }

@@ -44,7 +44,7 @@ const Languages: Language[] = [
 
 interface Props {
   setLangFrom: React.Dispatch<React.SetStateAction<SupportedTTSLanguages>>;
-  setLangTo: React.Dispatch<React.SetStateAction<SupportedTTSLanguages>>;
+  setLangTo: React.Dispatch<React.SetStateAction<SupportedTTSLanguages | null>>;
 }
 
 const LanguageSelect = (props: Props) => {
@@ -83,7 +83,7 @@ const LanguageSelect = (props: Props) => {
   }, [selectedFrom]);
 
   useEffect(() => {
-    if (selectedTo) {
+    if (selectedTo !== null) {
       props.setLangTo(selectedTo.short as SupportedTTSLanguages);
     }
   }, [selectedTo]);

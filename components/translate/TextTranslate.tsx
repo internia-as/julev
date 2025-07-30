@@ -1,13 +1,13 @@
 "use client";
 import { LangPair, TranslationRequest } from "@/types/requests";
-import { TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import TextToSpeech from "./TextToSpeech";
 import { SupportedTTSLanguages } from "@/types/divvun";
 
 interface Props {
   langFrom: SupportedTTSLanguages;
-  langTo: SupportedTTSLanguages;
+  langTo: SupportedTTSLanguages | null;
 }
 
 const TextTranslate = (props: Props) => {
@@ -89,6 +89,22 @@ const TextTranslate = (props: Props) => {
           placeholder="Skriv inn teksten du vil oversette..."
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment
+                  sx={{ position: "absolute", top: 5, right: 0 }}
+                  position="start"
+                >
+                  <TextToSpeech
+                    lang={props.langFrom}
+                    text={textInput}
+                    setErrorMessage={setErrorMessage}
+                  />
+                </InputAdornment>
+              ),
+            },
+          }}
         />
         <TextField
           disabled
@@ -96,26 +112,35 @@ const TextTranslate = (props: Props) => {
           className="w-full"
           multiline
           value={translatedText}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment
+                  sx={{ position: "absolute", top: 5, right: 0 }}
+                  position="start"
+                >
+                  <TextToSpeech
+                    lang={props.langTo as SupportedTTSLanguages}
+                    text={translatedText}
+                    setErrorMessage={setErrorMessage}
+                  />
+                </InputAdornment>
+              ),
+            },
+          }}
         />
       </div>
       {errorMessage && (
         <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
       )}
-      <div className="flex w-full justify-between">
-        {props.langFrom && (
-          <TextToSpeech
-            lang={props.langFrom}
-            text={textInput}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
-        {props.langTo && (
-          <TextToSpeech
-            lang={props.langTo}
-            text={translatedText}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
+      <div className="flex w-full justify-center mt-4">
+        <Button
+          className="bg-blue-500  text-white px-4 py-2 w-1/3 rounded hover:bg-blue-600"
+          onClick={submit}
+          variant="contained"
+        >
+          {loading ? "Oversetter..." : "Oversett"}
+        </Button>
       </div>
     </>
   );

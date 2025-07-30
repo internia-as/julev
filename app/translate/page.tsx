@@ -6,37 +6,25 @@ import React from "react";
 import LanguageSelect from "@/components/translate/LanguageSelect";
 import { SupportedTTSLanguages } from "@/types/divvun";
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 const Translate = () => {
   const [tab, setTab] = React.useState(0);
   const [langFrom, setLangFrom] = React.useState<SupportedTTSLanguages>(
     SupportedTTSLanguages.SME
   );
-  const [langTo, setLangTo] = React.useState<SupportedTTSLanguages>(
-    SupportedTTSLanguages.SME
+  const [langTo, setLangTo] = React.useState<SupportedTTSLanguages | null>(
+    null
   );
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setTab(newValue);
-  };
-
   return (
-    <div className="h-full flex flex-col items-center mt-20">
+    <div className="h-full bg-gray-100 shadow-md flex flex-col items-center py-20">
       <Tabs
         value={tab}
-        onChange={handleChange}
+        onChange={(_event, newValue) => setTab(newValue)}
         aria-label="Select translation type"
         className="mb-10"
       >
-        <Tab label="Oversett tekst" {...a11yProps(0)} />
-        <Tab label="Oversett fil" disabled {...a11yProps(1)} />
-        <Tab label="Oversett nettside" disabled {...a11yProps(2)} />
+        <Tab label="Oversett tekst" />
+        <Tab label="Oversett fil" disabled />
       </Tabs>
 
       <div className="flex justify-between w-2/3 mb-4">

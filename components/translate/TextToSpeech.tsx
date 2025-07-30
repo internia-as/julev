@@ -1,52 +1,7 @@
-import { IconButton } from "@mui/material";
+import { CircularProgress, IconButton } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { SupportedTTSLanguages } from "@/types/divvun";
-
-const SupportedLanguages = [
-  {
-    lang: "sme",
-    voices: [
-      {
-        id: "biret",
-        name: "Biret",
-      },
-      {
-        id: "mahtte",
-        name: "Máhtte",
-      },
-      {
-        id: "sunna",
-        name: "Sunná",
-      },
-    ],
-  },
-  {
-    lang: "sma",
-    voices: [
-      {
-        id: "aanna",
-        name: "Aanna",
-      },
-    ],
-  },
-  {
-    lang: "smj",
-    voices: [
-      {
-        id: "abmut",
-        name: "Abmut",
-      },
-      {
-        id: "nihkol",
-        name: "Nihkol",
-      },
-      {
-        id: "sigga",
-        name: "Siggá",
-      },
-    ],
-  },
-];
+import React from "react";
 
 interface Props {
   text: string;
@@ -56,8 +11,12 @@ interface Props {
 }
 
 const TextToSpeech = (props: Props) => {
+  const [loading, setLoading] = React.useState(false);
+  const langDisabled = props.lang === SupportedTTSLanguages.NOB;
+
   const fetchTextToSpeech = async (text: string, lang: string) => {
     try {
+      setLoading(true);
       const response = await fetch("/api/speech", {
         method: "POST",
         headers: {
@@ -78,13 +37,19 @@ const TextToSpeech = (props: Props) => {
       console.error("Error fetching text-to-speech:", error);
       props.setErrorMessage("Kunne ikke hente tale for teksten.");
     }
+    setLoading(false);
   };
 
   return (
     <IconButton
+      disabled={props.text.length === 0 || loading || langDisabled}
       onClick={() => fetchTextToSpeech(props.text, props.lang as string)}
     >
-      <VolumeUpIcon fontSize={props.size} />
+      {loading ? (
+        <CircularProgress size={20} />
+      ) : (
+        <VolumeUpIcon fontSize={props.size} />
+      )}
     </IconButton>
   );
 };
