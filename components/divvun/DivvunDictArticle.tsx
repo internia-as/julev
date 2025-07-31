@@ -73,7 +73,7 @@ const DivvunDictArticle = (props: Props) => {
       <div className="flex items-center">
         <p className="text-gray-600">({getPos(pos)})</p>
         <ParadigmDialog lang={lang} word={term} pos={pos} />
-        <Sikor />
+        <Sikor language={lang} lemma={term} />
       </div>
     );
   };
