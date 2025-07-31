@@ -1,9 +1,11 @@
 "use client";
 import { LangPair, TranslationRequest } from "@/types/requests";
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import TextToSpeech from "./TextToSpeech";
 import { SupportedTTSLanguages } from "@/types/divvun";
+import speechAvailable from "@/lib/speechAvailable";
+import InfoDialog from "./InfoDialog";
 
 interface Props {
   langFrom: SupportedTTSLanguages;
@@ -19,6 +21,7 @@ const TextTranslate = (props: Props) => {
   React.useEffect(() => {
     if (props.langFrom && props.langTo) {
       setErrorMessage("");
+      setTranslatedText("");
     }
   }, [props.langFrom, props.langTo]);
 
@@ -65,6 +68,7 @@ const TextTranslate = (props: Props) => {
         "Noe gikk galt under oversettelsen. Vennligst prøv igjen."
       );
     }
+    setLoading(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -89,22 +93,26 @@ const TextTranslate = (props: Props) => {
           placeholder="Skriv inn teksten du vil oversette..."
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment
-                  sx={{ position: "absolute", top: 5, right: 0 }}
-                  position="start"
-                >
-                  <TextToSpeech
-                    lang={props.langFrom}
-                    text={textInput}
-                    setErrorMessage={setErrorMessage}
-                  />
-                </InputAdornment>
-              ),
-            },
-          }}
+          slotProps={
+            speechAvailable(props.langFrom)
+              ? {
+                  input: {
+                    endAdornment: (
+                      <InputAdornment
+                        sx={{ position: "absolute", top: 5, right: 0 }}
+                        position="start"
+                      >
+                        <TextToSpeech
+                          lang={props.langFrom}
+                          text={textInput}
+                          setErrorMessage={setErrorMessage}
+                        />
+                      </InputAdornment>
+                    ),
+                  },
+                }
+              : undefined
+          }
         />
         <TextField
           disabled
@@ -112,35 +120,42 @@ const TextTranslate = (props: Props) => {
           className="w-full"
           multiline
           value={translatedText}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment
-                  sx={{ position: "absolute", top: 5, right: 0 }}
-                  position="start"
-                >
-                  <TextToSpeech
-                    lang={props.langTo as SupportedTTSLanguages}
-                    text={translatedText}
-                    setErrorMessage={setErrorMessage}
-                  />
-                </InputAdornment>
-              ),
-            },
-          }}
+          slotProps={
+            speechAvailable(props.langTo)
+              ? {
+                  input: {
+                    endAdornment: (
+                      <InputAdornment
+                        sx={{ position: "absolute", top: 5, right: 0 }}
+                        position="start"
+                      >
+                        <TextToSpeech
+                          lang={props.langTo as SupportedTTSLanguages}
+                          text={translatedText}
+                          setErrorMessage={setErrorMessage}
+                        />
+                      </InputAdornment>
+                    ),
+                  },
+                }
+              : undefined
+          }
         />
       </div>
       {errorMessage && (
         <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
       )}
-      <div className="flex w-full justify-center mt-4">
+      <div className="flex w-full justify-between mt-4">
+        <div className="w-4"></div>
         <Button
-          className="bg-blue-500  text-white px-4 py-2 w-1/3 rounded hover:bg-blue-600"
+          className="w-1/3"
           onClick={submit}
           variant="contained"
+          loading={loading}
         >
           {loading ? "Oversetter..." : "Oversett"}
         </Button>
+        <InfoDialog />
       </div>
     </>
   );

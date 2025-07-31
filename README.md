@@ -36,3 +36,9 @@ npx prisma generate
 docker build -t julev .
 docker run --env-file .env -p 3000:3000 julev
 ```
+
+# External docs
+
+[Divvun API](https://divvun.github.io/divvun-api/)
+[Borealium](https://borealium.org/nb/about/)
+[Giellatekno](https://giellatekno.uit.no/smilang.nob.html)
