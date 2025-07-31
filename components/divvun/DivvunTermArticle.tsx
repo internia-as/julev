@@ -11,7 +11,7 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
 import getPos from "@/lib/getPos";
 import TextToSpeech from "../translate/TextToSpeech";
-import speachAvailable from "@/lib/speachAvailable";
+import speechAvailable from "@/lib/speechAvailable";
 import Sikor from "./Sikor";
 import ParadigmDialog from "./ParadigmDialog";
 
@@ -66,7 +66,7 @@ const DivvunTermArticle = (props: Props) => {
     const termLemmas = item.terms.map((term: any, termIndex: number) => (
       <div key={termIndex} className="flex space-x-1 items-center">
         <p>{term.expression.lemma}</p>
-        {speachAvailable(term.expression.language) && (
+        {speechAvailable(term.expression.language) && (
           <TextToSpeech
             text={term.expression.lemma}
             lang={term.expression.language}

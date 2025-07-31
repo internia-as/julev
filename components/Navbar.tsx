@@ -8,19 +8,21 @@ const Navbar = () => {
     <>
       <div className="flex h-14 fixed justify-between items-center p-4 bg-slate-800 text-white w-full z-20">
         <div className="w-32"></div>
-        <ul className="font-semibold space-x-10">
+        <ul className="font-semibold space-x-20">
           <Link href="/">{t("search")}</Link>
           <Link href="/divvun">Divvun</Link>
-          <Link className="opacity-50" href="/statistics">
-            {t("statistics")}
-          </Link>
           <Link href="/translate">{t("translate")}</Link>
-          <Link className="opacity-50" href="/app">
-            {t("app")}
-          </Link>
-          <Link className="opacity-50" href="/about">
-            {t("about")}
-          </Link>
+          <div className="hidden">
+            <Link className="opacity-50" href="/statistics">
+              {t("statistics")}
+            </Link>
+            <Link className="opacity-50" href="/app">
+              {t("app")}
+            </Link>
+            <Link className="opacity-50" href="/about">
+              {t("about")}
+            </Link>
+          </div>
         </ul>
         <LanguageDropdown />
       </div>

@@ -1,13 +1,15 @@
 "use client";
 import { LangPair, TranslationRequest } from "@/types/requests";
-import { TextField } from "@mui/material";
+import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import TextToSpeech from "./TextToSpeech";
 import { SupportedTTSLanguages } from "@/types/divvun";
+import speechAvailable from "@/lib/speechAvailable";
+import InfoDialog from "./InfoDialog";
 
 interface Props {
   langFrom: SupportedTTSLanguages;
-  langTo: SupportedTTSLanguages;
+  langTo: SupportedTTSLanguages | null;
 }
 
 const TextTranslate = (props: Props) => {
@@ -19,6 +21,7 @@ const TextTranslate = (props: Props) => {
   React.useEffect(() => {
     if (props.langFrom && props.langTo) {
       setErrorMessage("");
+      setTranslatedText("");
     }
   }, [props.langFrom, props.langTo]);
 
@@ -65,6 +68,7 @@ const TextTranslate = (props: Props) => {
         "Noe gikk galt under oversettelsen. Vennligst prøv igjen."
       );
     }
+    setLoading(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -89,6 +93,26 @@ const TextTranslate = (props: Props) => {
           placeholder="Skriv inn teksten du vil oversette..."
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          slotProps={
+            speechAvailable(props.langFrom)
+              ? {
+                  input: {
+                    endAdornment: (
+                      <InputAdornment
+                        sx={{ position: "absolute", top: 5, right: 0 }}
+                        position="start"
+                      >
+                        <TextToSpeech
+                          lang={props.langFrom}
+                          text={textInput}
+                          setErrorMessage={setErrorMessage}
+                        />
+                      </InputAdornment>
+                    ),
+                  },
+                }
+              : undefined
+          }
         />
         <TextField
           disabled
@@ -96,26 +120,42 @@ const TextTranslate = (props: Props) => {
           className="w-full"
           multiline
           value={translatedText}
+          slotProps={
+            speechAvailable(props.langTo)
+              ? {
+                  input: {
+                    endAdornment: (
+                      <InputAdornment
+                        sx={{ position: "absolute", top: 5, right: 0 }}
+                        position="start"
+                      >
+                        <TextToSpeech
+                          lang={props.langTo as SupportedTTSLanguages}
+                          text={translatedText}
+                          setErrorMessage={setErrorMessage}
+                        />
+                      </InputAdornment>
+                    ),
+                  },
+                }
+              : undefined
+          }
         />
       </div>
       {errorMessage && (
         <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
       )}
-      <div className="flex w-full justify-between">
-        {props.langFrom && (
-          <TextToSpeech
-            lang={props.langFrom}
-            text={textInput}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
-        {props.langTo && (
-          <TextToSpeech
-            lang={props.langTo}
-            text={translatedText}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
+      <div className="flex w-full justify-between mt-4">
+        <div className="w-4"></div>
+        <Button
+          className="w-1/3"
+          onClick={submit}
+          variant="contained"
+          loading={loading}
+        >
+          {loading ? "Oversetter..." : "Oversett"}
+        </Button>
+        <InfoDialog />
       </div>
     </>
   );

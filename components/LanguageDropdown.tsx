@@ -54,13 +54,18 @@ const LanguageDropdown = () => {
           .filter((l: Language) => l.translated)
           .map((language) => (
             <MenuItem
+              disabled={
+                language.short === "sme" ||
+                language.short === "smj" ||
+                language.short === "sma"
+              }
               key={language.short}
               onClick={() => handleLanguageChange(language.short)}
               className="flex justify-between items-center space-x-8"
             >
               <div className="flex">
                 <Avatar
-                  src={`/images/flags/${language.short}.png`}
+                  src={language.flag}
                   alt={language.name}
                   sx={{ width: 24, height: 24, marginRight: 2 }}
                 />
