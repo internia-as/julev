@@ -6,6 +6,7 @@ import {
   MenuItem,
   ListItemText,
   Avatar,
+  Tooltip,
 } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import CheckIcon from "@mui/icons-material/Check";
@@ -46,19 +47,17 @@ const LanguageDropdown = () => {
 
   return (
     <div>
-      <IconButton onClick={handleClick}>
-        <LanguageIcon className="text-white" />
-      </IconButton>
+      <Tooltip title={t("select")} placement="bottom">
+        <IconButton onClick={handleClick}>
+          <LanguageIcon className="text-white" />
+        </IconButton>
+      </Tooltip>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {languages
           .filter((l: Language) => l.translated)
           .map((language) => (
             <MenuItem
-              disabled={
-                language.short === "sme" ||
-                language.short === "smj" ||
-                language.short === "sma"
-              }
+              disabled={language.short === "sme" || language.short === "sma"}
               key={language.short}
               onClick={() => handleLanguageChange(language.short)}
               className="flex justify-between items-center space-x-8"

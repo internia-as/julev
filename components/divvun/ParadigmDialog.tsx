@@ -13,6 +13,7 @@ import {
 import InfoIcon from "@mui/icons-material/InfoOutline";
 import React, { useEffect } from "react";
 import { getColumn } from "@/lib/getColumn";
+import { useTranslations } from "next-intl";
 
 interface Body {
   lang: string;
@@ -31,6 +32,7 @@ const ParadigmDialog = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const [paradigms, setParadigms] = React.useState<string[]>([]);
+  const t = useTranslations("divvun");
 
   let body: Body = {
     lang: props.lang,
@@ -112,7 +114,9 @@ const ParadigmDialog = (props: Props) => {
 
   return (
     <div>
-      <Tooltip title={disabled ? "Paradigm not available" : "Show paradigm"}>
+      <Tooltip
+        title={disabled ? t("paradigm_not_available") : t("show_paradigms")}
+      >
         <span>
           <IconButton
             onClick={handleOpen}
@@ -126,7 +130,7 @@ const ParadigmDialog = (props: Props) => {
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Bøyningsmønster
+          {t("paradigm")}
         </DialogTitle>
         <DialogContent>
           <Table>

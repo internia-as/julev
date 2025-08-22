@@ -11,13 +11,106 @@
       "sme": "Nordsamisk",
       "smj": "Lulesamisk",
       "sma": "Sørsamisk",
-      "smn": "Enaresamisk"
+      "smn": "Enaresamisk",
+      "select": "Velg språk"
     }
   },
   "search": {
     "julev_title": "Julevbágo",
     "julev_subtitle": "Julevbágo samler digitale samiske språkressurser på ett sted",
     "divvun_title": "Divvun",
-    "divvun_subtitle": "Divvun tilbyr verktøy for samiske språk"
+    "divvun_subtitle": "Divvun tilbyr verktøy for samiske språk",
+    "search_field_placeholder": "Søk i ",
+    "select_dicts": "Velg ordbøker",
+    "select_langs": "Velg språk",
+    "available_dicts": "Tilgjengelige ordbøker",
+    "available_langs": "Tilgjengelige språk",
+    "start_search": "Start søk",
+    "found": "Funnet",
+    "hits_in_sikor": "treff i SIKOR",
+    "no_results": "Ingen resultater funnet"
+  },
+  "divvun": {
+    "source": "Kilde",
+    "category": "Kategori",
+    "paradigm": "Bøyingsmønser",
+    "show_paradigms": "Vis bøyingsmønster",
+    "paradigm_not_available": "Bøyingsmønster ikke tilgjengelig"
+  },
+  "translate": {
+    "play_tts": "Spill av uttale",
+    "tts_not_available": "uttale ikke tilgjengelig",
+    "choose_language": "Velg språk",
+    "placeholder": "Skriv et ord eller en frase for å oversette",
+    "translate": "Oversett",
+    "choose_language_error": "Velg et språk å oversette til",
+    "textfield_error": "Vennligst skriv inn et ord eller en frase for å oversette",
+    "error": "Det oppstod en feil under oversettelsen. Vennligst prøv igjen.",
+    "info": {
+      "title": "Maskinoversetting fra Giellatekno",
+      "p1": "Giellatekno ved UiT Norges arktiske universitet arbeider med maskinoversetting basert på deres grammatiske analysatorer for samiske språk, kombinert med tospråklige ordbøker, overføringsregler for grammatikk, og en generator for målspråket. Giellatekno samarbeider med Apertium, som har en maskinoversettingsplattform med åpen kildekode.",
+      "about_translator": "Om oversetteren",
+      "p2": "Samisk–norsk-oversettelsessystemet er i stadig utvikling. I den fasen det er i nå kan det brukes til å forstå nordsamisk bedre, men den klarer ikke å produsere feilfri norsk. Hvis den norske oversettelsen inneholder noe du slett ikke hadde ventet deg er det grunn til å se kritisk på resultatet. Vær spesielt oppmerksom på følgende mulige feiltyper:",
+      "p3": "Samisk skiller ikke mellom «han» og «hun». For å unngå forvirring på grunn av feil oversetting, bruker vi «h_n» i de tilfellene programmet ikke er i stand til å bestemme rett kjønn. Samisk skiller heller ikke mellom bestemt og ubestemt form, f.eks. 'skole' vs. 'skolen', så programmet gir ikke alltid riktig bestemthet på norsk. Når man oversetter sammensatte ord som ikke finnes i programmets ordbok, oversettes delene hver for seg, og man kan få oversettinger som 'fjellordfører' istedenfor 'varaordfører' ('várri' betyr både vara og fjell). I alle språk er det mange ord som har flere enn en betydning. Programmet klarer ikke alltid å finne korrekt betydning ut i fra sammenhengen. Brukeren kan, når hun er i tvil om betydninga, slå opp slike ord i ei ordbok, f.eks. i",
+      "more_info": "Mer info finner dere på",
+      "pages": "sine sider"
+    }
+  },
+  "languages": {
+    "sma": "Sørsamisk",
+    "sme": "Nordsamisk",
+    "smj": "Lulesamisk",
+    "smn": "Enaresamisk",
+    "sms": "Skolt samisk",
+    "fin": "Finsk",
+    "nob": "Norsk bokmål",
+    "swe": "Svensk",
+    "lat": "Latin",
+    "eng": "Engelsk",
+    "nno": "Nynorsk",
+    "rus": "Russisk",
+    "sma_Mid": "Sørsamisk (Kortformer)",
+    "sma_North": "Sørsamisk (Langformer)"
+  },
+  "dictionaries": {
+    "termwiki": "Giellagáldus Flerspråklige Termer",
+    "gtfinsme": "Giellateknos Finsk – Nordsamisk Ordbok",
+    "gtfinsmn": "Giellateknos Finsk – Enaresamisk Ordbok",
+    "gtsmanob": "Giellateknos Sørsamisk – Bokmål Ordbok",
+    "gtnobsme": "Giellateknos Bokmål – Nordsamisk Ordbok",
+    "gtnobsma": "Giellateknos Bokmål – Sørsamisk Ordbok",
+    "gtsmefin": "Giellateknos Nordsamisk – Finsk Ordbok",
+    "gtsmenob": "Giellateknos Nordsamisk – Bokmål Ordbok",
+    "gtsmesmn": "Giellateknos Nordsamisk – Enaresamisk Ordbok",
+    "gtsmnfin": "Giellateknos Enaresamisk – Finsk Ordbok",
+    "gtsmnsme": "Giellateknos Enaresamisk – Nordsamisk Ordbok",
+    "gtfinsms": "Giellateknos finsk – Skoltesamisk ordbok",
+    "gtnobsms": "Giellateknos Bokmål – Skoltesamisk ordbok",
+    "gtrussms": "Giellateknos Russisk – Skoltesamisk ordbok",
+    "gtsmsfin": "Giellateknos Skoltesamisk – Finsk Ordbok",
+    "gtsmsnob": "Giellateknos Skoltesamisk – Bokmål Ordbok",
+    "gtsmsrus": "Giellateknos Skoltesamisk – Russisk Ordbok",
+    "habmernobsmj": "Hamarøy Kommunes Norsk-Lulesamiske Medisinordbok",
+    "habmersmjnob": "Hamarøy Kommunes Lulesamisk-Norske Medisinordbok",
+    "sammallahtismefin": "Pekka Sammalahtis Nordsamisk - Finsk Ordbok",
+    "gtfinnob": "Trond Trosteruds Finsk – Norske ordbok"
+  },
+  "pos": {
+    "v": "Verb",
+    "n": "Substantiv",
+    "a": "Adjektiv",
+    "adv": "Adverb",
+    "pron": "Pronomen",
+    "prep": "Preposisjon",
+    "conj": "Konjunksjon",
+    "intj": "Interjeksjon",
+    "num": "Numeral",
+    "art": "Artikkel",
+    "part": "Partikkel",
+    "aux": "Hjelpeverb",
+    "interj": "Interjeksjon",
+    "excl": "Utropsord",
+    "det": "Determinativ",
+    "punc": "Tegnsetting"
   }
 }
