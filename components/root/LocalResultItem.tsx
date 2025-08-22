@@ -5,6 +5,7 @@ import TextToSpeech from "../translate/TextToSpeech";
 import { IconButton } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { SupportedTTSLanguages } from "@/types/divvun";
+import Sikor from "../divvun/Sikor";
 
 const SIKOR_ULR = process.env.NEXT_PUBLIC_SIKOR_URL;
 
@@ -30,24 +31,13 @@ const LocalResultItem = (props: Props) => {
 
   const redirectToSikor = () => {
     // TODO: redirect to SIKOR
-    let url = SIKOR_ULR + "/smj/#";
+    let url = SIKOR_ULR + "smj/#";
     let word = fra.trim().split(", ")[0];
     const params = new URLSearchParams({
-      corpus: [
-        "smj_bible_20211118",
-        "smj_ficti_20211118",
-        "smj_news_20211118",
-        "smj_laws_20211118",
-        "smj_admin_20211118",
-        "smj_science_20211118",
-        "smj_facta_20211118",
-      ].join(","),
       cqp: "[]", // Empty brackets for the CQP query
       search: `word|${word}`, // Represents "search by word"
     });
-
     url = `${url}?${params.toString()}`;
-
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -80,15 +70,7 @@ const LocalResultItem = (props: Props) => {
         <div className="flex justify-between sm:px-6 pb-4">
           <p dangerouslySetInnerHTML={{ __html: til }} />
           {wordIsSami && (
-            <IconButton>
-              <FormatAlignJustifyIcon
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => {
-                  // Handle click event to show more details or perform an action
-                  redirectToSikor();
-                }}
-              />
-            </IconButton>
+            <Sikor language="smj" lemma={fra.trim().split(", ")[0]} />
           )}
         </div>
       </li>

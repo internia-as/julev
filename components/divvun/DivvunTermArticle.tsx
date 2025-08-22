@@ -90,7 +90,10 @@ const DivvunTermArticle = (props: Props) => {
             word={term.expression.lemma}
             pos={term.expression.pos}
           />
-          <Sikor />
+          <Sikor
+            language={term.expression.language}
+            lemma={term.expression.lemma}
+          />
         </div>
       ));
 

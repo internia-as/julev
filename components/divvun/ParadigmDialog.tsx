@@ -112,15 +112,17 @@ const ParadigmDialog = (props: Props) => {
 
   return (
     <div>
-      <Tooltip title="Vis bøyningsmønster">
-        <IconButton
-          onClick={handleOpen}
-          disabled={disabled}
-          color="primary"
-          size="small"
-        >
-          <InfoIcon />
-        </IconButton>
+      <Tooltip title={disabled ? "Paradigm not available" : "Show paradigm"}>
+        <span>
+          <IconButton
+            onClick={handleOpen}
+            disabled={disabled}
+            color="primary"
+            size="small"
+          >
+            <InfoIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
