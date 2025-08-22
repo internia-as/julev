@@ -1,7 +1,8 @@
-import { CircularProgress, IconButton } from "@mui/material";
+import { CircularProgress, IconButton, Tooltip } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
   text: string;
@@ -13,6 +14,7 @@ interface Props {
 const TextToSpeech = (props: Props) => {
   const [loading, setLoading] = React.useState(false);
   const langDisabled = props.lang === SupportedTTSLanguages.NOB;
+  const t = useTranslations("translate");
 
   const fetchTextToSpeech = async (text: string, lang: string) => {
     try {
@@ -41,16 +43,18 @@ const TextToSpeech = (props: Props) => {
   };
 
   return (
-    <IconButton
-      disabled={props.text.length === 0 || loading || langDisabled}
-      onClick={() => fetchTextToSpeech(props.text, props.lang as string)}
-    >
-      {loading ? (
-        <CircularProgress size={20} />
-      ) : (
-        <VolumeUpIcon fontSize={props.size} />
-      )}
-    </IconButton>
+    <Tooltip title={langDisabled ? t("tts_not_available") : t("play_tts")}>
+      <IconButton
+        disabled={props.text.length === 0 || loading || langDisabled}
+        onClick={() => fetchTextToSpeech(props.text, props.lang as string)}
+      >
+        {loading ? (
+          <CircularProgress size={20} />
+        ) : (
+          <VolumeUpIcon fontSize={props.size} />
+        )}
+      </IconButton>
+    </Tooltip>
   );
 };
 

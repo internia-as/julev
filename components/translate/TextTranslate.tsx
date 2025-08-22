@@ -6,6 +6,7 @@ import TextToSpeech from "./TextToSpeech";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import speechAvailable from "@/lib/speechAvailable";
 import InfoDialog from "./InfoDialog";
+import { useTranslations } from "next-intl";
 
 interface Props {
   langFrom: SupportedTTSLanguages;
@@ -17,6 +18,7 @@ const TextTranslate = (props: Props) => {
   const [translatedText, setTranslatedText] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
+  const t = useTranslations();
 
   React.useEffect(() => {
     if (props.langFrom && props.langTo) {
@@ -27,12 +29,12 @@ const TextTranslate = (props: Props) => {
 
   const validate = () => {
     if (!props.langTo) {
-      setErrorMessage("Velg hvilket språk du ønsker å oversette til");
+      setErrorMessage(t("translate.choose_language_error"));
       return false;
     }
     // Fetch API call to translate the text
     if (!textInput.trim()) {
-      setErrorMessage("Tekstfeltet kan ikke være tomt");
+      setErrorMessage(t("translate.textfield_error"));
       return false;
     }
     return true;
@@ -64,9 +66,7 @@ const TextTranslate = (props: Props) => {
       }
     } catch (error) {
       console.error("Error during translation:", error);
-      setErrorMessage(
-        "Noe gikk galt under oversettelsen. Vennligst prøv igjen."
-      );
+      setErrorMessage(t("translate.error"));
     }
     setLoading(false);
   };
@@ -90,7 +90,7 @@ const TextTranslate = (props: Props) => {
           rows={8}
           className="w-full"
           multiline
-          placeholder="Skriv inn teksten du vil oversette..."
+          placeholder={t("translate.placeholder")}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           slotProps={
@@ -153,7 +153,7 @@ const TextTranslate = (props: Props) => {
           variant="contained"
           loading={loading}
         >
-          {loading ? "Oversetter..." : "Oversett"}
+          {t("translate.translate")}
         </Button>
         <InfoDialog />
       </div>

@@ -2,12 +2,8 @@ import { splitText, highlightText, linkifyJf } from "@/lib/textFormating";
 import { LocalTranslations } from "@/types/localTranslations";
 import React from "react";
 import TextToSpeech from "../translate/TextToSpeech";
-import { IconButton } from "@mui/material";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import Sikor from "../divvun/Sikor";
-
-const SIKOR_ULR = process.env.NEXT_PUBLIC_SIKOR_URL;
 
 interface Props {
   result: LocalTranslations;
@@ -28,18 +24,6 @@ const LocalResultItem = (props: Props) => {
   // Link the text after "jf."
   fra = linkifyJf(fra);
   til = linkifyJf(til);
-
-  const redirectToSikor = () => {
-    // TODO: redirect to SIKOR
-    let url = SIKOR_ULR + "smj/#";
-    let word = fra.trim().split(", ")[0];
-    const params = new URLSearchParams({
-      cqp: "[]", // Empty brackets for the CQP query
-      search: `word|${word}`, // Represents "search by word"
-    });
-    url = `${url}?${params.toString()}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
 
   const wordIsSami = result.oversatt_fra.toLocaleLowerCase() == "samisk";
 

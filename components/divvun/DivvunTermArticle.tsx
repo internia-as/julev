@@ -1,4 +1,3 @@
-import getLang from "@/lib/getLang";
 import getLangImg from "@/lib/getLangImg";
 import {
   CircularProgress,
@@ -9,11 +8,11 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
-import getPos from "@/lib/getPos";
 import TextToSpeech from "../translate/TextToSpeech";
 import speechAvailable from "@/lib/speechAvailable";
 import Sikor from "./Sikor";
 import ParadigmDialog from "./ParadigmDialog";
+import { useTranslations } from "next-intl";
 
 interface Props {
   item: string;
@@ -25,6 +24,7 @@ const DivvunTermArticle = (props: Props) => {
   const state = useGlobalState();
   const [data, setData] = React.useState([] as any);
   const [searching, setSearching] = React.useState(false);
+  const t = useTranslations();
   const dict = state.dictionaries.filter(
     (d) => d.short === "termwiki" && d.selected
   );
@@ -84,7 +84,9 @@ const DivvunTermArticle = (props: Props) => {
           key={`${term.expression.lemma}-${term.expression.pos}`}
           className="flex items-center"
         >
-          <p className="text-gray-600">({getPos(term.expression.pos)})</p>
+          <p className="text-gray-600">
+            ({t(`pos.${term.expression.pos.toLowerCase()}`)})
+          </p>
           <ParadigmDialog
             lang={term.expression.language}
             word={term.expression.lemma}
@@ -125,8 +127,12 @@ const DivvunTermArticle = (props: Props) => {
   return (
     <div className="px-4 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
       <div className="w-full text-xs font-semibold flex justify-between border-b border-gray-400 py-4">
-        <p>Kilde: Giellagáldus flerspråklige termer</p>
-        <p>Kategori: {data[0]?.name}</p>
+        <p>
+          {t("divvun.source")}: {t("dictionaries.termwiki")}
+        </p>
+        <p>
+          {t("divvun.category")}: {data[0]?.name}
+        </p>
       </div>
       <Table>
         <TableBody>
@@ -138,7 +144,7 @@ const DivvunTermArticle = (props: Props) => {
                     className="w-5 h-5 rounded-full"
                     src={getLangImg(item.terms[0].expression.language)}
                   />
-                  <p>{getLang(item.terms[0].expression.language)}</p>
+                  <p>{t(`languages.${item.terms[0].expression.language}`)}</p>
                 </div>
               </TableCell>
 

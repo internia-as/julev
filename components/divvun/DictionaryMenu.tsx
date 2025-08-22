@@ -1,9 +1,17 @@
 "use client";
 import React from "react";
 import DictionaryList from "./DictionaryList";
-import { Button, DialogTitle, Dialog, Slide, IconButton } from "@mui/material";
+import {
+  Button,
+  DialogTitle,
+  Dialog,
+  Slide,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { useTranslations } from "next-intl";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -15,13 +23,16 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const DictionaryMenu = () => {
+  const t = useTranslations("search");
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
-      <IconButton onClick={() => setOpen(true)}>
-        <MenuBookIcon color="primary" />
-      </IconButton>
+      <Tooltip title={t("select_dicts")} placement="top">
+        <IconButton onClick={() => setOpen(true)}>
+          <MenuBookIcon color="primary" />
+        </IconButton>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -29,14 +40,14 @@ const DictionaryMenu = () => {
         TransitionComponent={Transition}
       >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Tilgjengelige ordbøker
+          {t("available_dicts")}
         </DialogTitle>
         <DictionaryList />
         <Button
           className="justify-center w-full"
           onClick={() => setOpen(false)}
         >
-          Begynn å søk!
+          {t("start_search")}!
         </Button>
       </Dialog>
     </React.Fragment>

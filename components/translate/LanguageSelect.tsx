@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import { Language } from "@/types/language";
 import { SupportedTTSLanguages } from "@/types/divvun";
+import { useTranslations } from "next-intl";
 
 const Languages: Language[] = [
   {
@@ -35,7 +36,7 @@ const Languages: Language[] = [
     flag: "/images/flags/sm.jpeg",
   },
   {
-    name: "Norsk",
+    name: "Norsk Bokmål",
     short: "nob",
     translated: true,
     flag: "/images/flags/nob.png",
@@ -54,6 +55,7 @@ const LanguageSelect = (props: Props) => {
   const [langTo, setLangTo] = React.useState<Language[]>(Languages);
   const [selectedFrom, setSelectedFrom] = React.useState<Language | null>(null);
   const [selectedTo, setSelectedTo] = React.useState<Language | null>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     setSelectedFrom(Languages[0]);
@@ -110,7 +112,7 @@ const LanguageSelect = (props: Props) => {
                 alt="Nordsamisk"
                 className="w-6 h-6 mr-2"
               />
-              <span>{language.name}</span>
+              <span>{t(`languages.${language.short}`)}</span>
             </div>
           </MenuItem>
         ))}
@@ -123,7 +125,7 @@ const LanguageSelect = (props: Props) => {
         displayEmpty
       >
         <MenuItem value="" disabled hidden>
-          Velg språk
+          {t("translate.choose_language")}
         </MenuItem>
         {langTo.map((language) => (
           <MenuItem
@@ -137,7 +139,7 @@ const LanguageSelect = (props: Props) => {
                 alt="Nordsamisk"
                 className="w-6 h-6 mr-2"
               />
-              <span>{language.name}</span>
+              <span>{t(`languages.${language.short}`)}</span>
             </div>
           </MenuItem>
         ))}

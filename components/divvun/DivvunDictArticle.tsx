@@ -1,15 +1,9 @@
 import { useGlobalState } from "@/hooks/useGlobalState";
-import {
-  CircularProgress,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import ParadigmDialog from "./ParadigmDialog";
-import getPos from "@/lib/getPos";
 import Sikor from "./Sikor";
+import { useTranslations } from "next-intl";
 interface Props {
   expanded: string | false;
   name: string;
@@ -20,6 +14,7 @@ const DivvunDictArticle = (props: Props) => {
   const state = useGlobalState();
   const [results, setResults] = React.useState([] as any);
   const [searching, setSearching] = React.useState(false);
+  const t = useTranslations();
   const dicts = state.dictionaries
     .filter((d) => d.selected)
     .map((d) => d.short);
@@ -71,7 +66,7 @@ const DivvunDictArticle = (props: Props) => {
     }
     return (
       <div className="flex items-center">
-        <p className="text-gray-600">({getPos(pos)})</p>
+        <p className="text-gray-600">({t(`pos.${pos.toLowerCase()}`)})</p>
         <ParadigmDialog lang={lang} word={term} pos={pos} />
         <Sikor language={lang} lemma={term} />
       </div>
@@ -86,7 +81,9 @@ const DivvunDictArticle = (props: Props) => {
           className="p-4 mb-4 bg-blue-50 rounded-xl border border-blue-200 shadow-md"
         >
           <div className="w-full text-xs font-semibold  border-b border-gray-400 py-4">
-            <p>Kilde: {getDictFullname(result.dictName)}</p>
+            <p>
+              {t("divvun.source")}: {t(`dictionaries.${result.dictName}`)}
+            </p>
           </div>
           {result.lookupLemmas.edges.map((edge: any, index: number) => (
             <div
