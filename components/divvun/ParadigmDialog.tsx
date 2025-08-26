@@ -4,12 +4,14 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  MenuItem,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/InfoOutline";
 import React, { useEffect } from "react";
@@ -27,6 +29,7 @@ interface Props {
   lang: string;
   word: string;
   pos: string;
+  label?: string;
 }
 
 const ParadigmDialog = (props: Props) => {
@@ -122,17 +125,31 @@ const ParadigmDialog = (props: Props) => {
         title={disabled ? t("paradigm_not_available") : t("show_paradigms")}
       >
         <span>
-          <IconButton
-            onClick={handleOpen}
-            disabled={disabled}
-            color="primary"
-            size="small"
-          >
-            <InfoIcon />
-          </IconButton>
+          {props.label ? (
+            <MenuItem onClick={handleOpen} disabled={disabled} dense>
+              <InfoIcon fontSize="small" />
+              <Typography variant="subtitle2" className="px-4">
+                {props.label}
+              </Typography>
+            </MenuItem>
+          ) : (
+            <IconButton
+              onClick={handleOpen}
+              disabled={disabled}
+              color="primary"
+              size="small"
+            >
+              <InfoIcon />
+            </IconButton>
+          )}
         </span>
       </Tooltip>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
           {t("paradigm")}
         </DialogTitle>

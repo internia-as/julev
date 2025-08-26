@@ -90,17 +90,14 @@ const SearchField = (props: Props) => {
             {t(props.subtitle)}
           </h2>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="flex px-4 sm:px-0  justify-center w-full"
-        >
-          <div className="w-full flex justify-center relative">
+        <form onSubmit={handleSubmit} className="flex justify-center w-full">
+          <div className="w-full flex justify-center px-1 relative">
             <Input
               id="searchfield"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={getPlaceholder()}
-              className="bg-white h-12 text-md px-4 w-full md:w-2/3 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
+              className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={getAdornment()}
             />
           </div>

@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, MenuItem, Tooltip, Typography } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
@@ -6,6 +6,9 @@ import { useTranslations } from "next-intl";
 interface Props {
   language: string;
   lemma: string;
+  enable?: () => void;
+  redirect?: boolean;
+  label?: string;
 }
 
 const SUPPORTED_LANGUAGES = ["sme", "sma", "smj", "smn", "sms"];
@@ -53,9 +56,22 @@ const Sikor = (props: Props) => {
   return (
     <Tooltip title={getTooltipText()}>
       <span>
-        <IconButton disabled={hits === 0} onClick={() => redirectToSikor()}>
-          <FormatAlignJustifyIcon />
-        </IconButton>
+        {props.label ? (
+          <MenuItem
+            disabled={hits === 0}
+            dense
+            onClick={() => redirectToSikor()}
+          >
+            <FormatAlignJustifyIcon fontSize="small" />
+            <Typography variant="subtitle2" className="px-4">
+              {props.label}
+            </Typography>
+          </MenuItem>
+        ) : (
+          <IconButton disabled={hits === 0} onClick={() => redirectToSikor()}>
+            <FormatAlignJustifyIcon />
+          </IconButton>
+        )}
       </span>
     </Tooltip>
   );
