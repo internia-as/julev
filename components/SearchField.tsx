@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Input, InputAdornment } from "@mui/material";
+import { Input, InputAdornment, Tab, Tabs } from "@mui/material";
 import DictionaryMenu from "./divvun/DictionaryMenu";
 import LanguageMenu from "./root/LanguageMenu";
 import { useGlobalState } from "../hooks/useGlobalState";
@@ -69,6 +69,13 @@ const SearchField = (props: Props) => {
     state.setQuery("");
   }, []);
 
+  useEffect(() => {
+    if (state.query) {
+      setQuery(state.query);
+      setIsSearching(true);
+    }
+  }, [state.query]);
+
   return (
     <div>
       <motion.div
@@ -91,7 +98,7 @@ const SearchField = (props: Props) => {
           </h2>
         </div>
         <form onSubmit={handleSubmit} className="flex justify-center w-full">
-          <div className="w-full flex justify-center px-1 relative">
+          <div className="w-full flex flex-col justify-center items-center px-1 relative">
             <Input
               id="searchfield"
               value={query}

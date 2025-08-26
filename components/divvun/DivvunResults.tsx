@@ -9,6 +9,14 @@ const DivvunResults = () => {
   const [searching, setSearching] = React.useState(false);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) {
+      state.setQuery(q);
+    }
+  }, []);
+
+  useEffect(() => {
     if (!validate()) return;
     if (state.query) {
       setSearching(true);

@@ -172,7 +172,19 @@ const TextTranslate = (props: Props) => {
         >
           {t("translate.translate")}
         </Button>
-        <InfoDialog />
+        <div className="flex space-x-2 items-center">
+          <p className="text-xs text-gray-500">
+            Oversettelser leveres av{" "}
+            <a
+              href="https://giellatekno.uit.no/"
+              target="_blank"
+              className="font-semibold underline"
+            >
+              Giellatekno
+            </a>
+          </p>
+          <InfoDialog />
+        </div>
       </div>
     </>
   );
