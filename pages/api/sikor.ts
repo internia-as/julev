@@ -23,6 +23,5 @@ export default async function handler(
   }
 
   const data = await response.json();
-  console.log(data.hits);
   res.status(200).json(data);
 }

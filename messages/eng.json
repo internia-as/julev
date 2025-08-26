@@ -42,6 +42,7 @@
     "tts_not_available": "Pronunciation not available",
     "choose_language": "Choose language",
     "placeholder": "Type a word or phrase to translate",
+    "placeholder_2": "Translation appears here",
     "translate": "Translate",
     "choose_language_error": "Choose a language to translate to",
     "textfield_error": "Please enter a word or phrase to translate",

@@ -42,6 +42,7 @@
     "tts_not_available": "uttale ikke tilgjengelig",
     "choose_language": "Velg språk",
     "placeholder": "Skriv et ord eller en frase for å oversette",
+    "placeholder_2": "Oversettelse vises her",
     "translate": "Oversett",
     "choose_language_error": "Velg et språk å oversette til",
     "textfield_error": "Vennligst skriv inn et ord eller en frase for å oversette",
