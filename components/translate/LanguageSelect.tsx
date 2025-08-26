@@ -98,10 +98,10 @@ const LanguageSelect = (props: Props) => {
   };
 
   return (
-    <>
+    <div className="flex justify-between w-full space-x-4">
       <Select
         value={selectedFrom?.short || ""}
-        className="w-48"
+        className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedFrom)}
       >
         {langFrom.map((language) => (
@@ -120,7 +120,7 @@ const LanguageSelect = (props: Props) => {
 
       <Select
         value={selectedTo?.short || ""}
-        className="w-48"
+        className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedTo)}
         displayEmpty
       >
@@ -144,7 +144,7 @@ const LanguageSelect = (props: Props) => {
           </MenuItem>
         ))}
       </Select>
-    </>
+    </div>
   );
 };
 

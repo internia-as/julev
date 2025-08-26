@@ -21,7 +21,7 @@ const DivvunResultItem = (props: Props) => {
     <Accordion
       expanded={props.expanded === props.name}
       onChange={handleChange}
-      className="w-full border border-gray-300"
+      className="w-full border border-gray-300 overflow-x-hidden"
       sx={{ backgroundColor: "#f0f0f0" }}
     >
       <AccordionSummary

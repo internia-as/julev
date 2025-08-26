@@ -4,6 +4,9 @@ import React from "react";
 import ParadigmDialog from "./ParadigmDialog";
 import Sikor from "./Sikor";
 import { useTranslations } from "next-intl";
+import TextToSpeech from "../translate/TextToSpeech";
+import { SupportedTTSLanguages } from "@/types/divvun";
+import speechAvailable from "@/lib/speechAvailable";
 interface Props {
   expanded: string | false;
   name: string;
@@ -55,20 +58,26 @@ const DivvunDictArticle = (props: Props) => {
     );
   }
 
-  const getDictFullname = (short: string) => {
-    const dict = state.dictionaries.find((d) => d.short === short);
-    return dict ? dict.title : short;
-  };
-
   const getPosDetails = (pos: string, lang: string, term: string) => {
     if (pos !== "N" && pos !== "V" && pos !== "A") {
       return <></>;
     }
     return (
       <div className="flex items-center">
-        <p className="text-gray-600">({t(`pos.${pos.toLowerCase()}`)})</p>
+        <p className="text-gray-600 text-xs md:hidden">({`${pos}`})</p>
+        <p className="text-gray-600 hidden md:inline-block">
+          ({t(`pos.${pos.toLowerCase()}`)})
+        </p>
         <ParadigmDialog lang={lang} word={term} pos={pos} />
         <Sikor language={lang} lemma={term} />
+        {speechAvailable(lang) && (
+          <TextToSpeech
+            text={term}
+            lang={lang as SupportedTTSLanguages}
+            setErrorMessage={() => {}}
+            size="small"
+          />
+        )}
       </div>
     );
   };
@@ -90,16 +99,9 @@ const DivvunDictArticle = (props: Props) => {
               className="w-full text-sm items-center flex justify-between"
               key={index}
             >
-              <p className="inline mr-1 text-gray-600 font-semibold">
+              <p className="inline mt-2 mr-1 text-gray-600 font-semibold">
                 {edge.node.lemma}
               </p>
-              <div>
-                {getPosDetails(
-                  edge.node.pos,
-                  edge.node.language,
-                  edge.node.lemma
-                )}
-              </div>
             </div>
           ))}
           {result.translationGroups.map((group: any, index: number) => (

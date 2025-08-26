@@ -6,6 +6,7 @@ import { GlobalStateProvider } from "@/hooks/useGlobalState";
 import { NextIntlClientProvider } from "next-intl";
 import { NotificationProvider } from "@/hooks/useNotification";
 import Notification from "@/components/Notification";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <div className="h-screen relative flex flex-col">
+        <div className="flex flex-col flex-grow">
           <GlobalStateProvider>
             <NotificationProvider>
               <NextIntlClientProvider>
                 <Navbar />
                 <Notification />
                 <div className="mt-14">{children}</div>
+                <Footer />
               </NextIntlClientProvider>
             </NotificationProvider>
           </GlobalStateProvider>

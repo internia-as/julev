@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -32,6 +33,7 @@ const ParadigmDialog = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const [paradigms, setParadigms] = React.useState<string[]>([]);
+  const [loading, setLoading] = React.useState(true);
   const t = useTranslations("divvun");
 
   let body: Body = {
@@ -64,8 +66,10 @@ const ParadigmDialog = (props: Props) => {
 
   const handleOpen = async () => {
     setOpen(true);
+    setLoading(true);
     const generated = await fetchData(false);
     setParadigms(generated.map((item: any) => item.analyses));
+    setLoading(false);
   };
 
   const getTableHead = () => {
@@ -133,6 +137,11 @@ const ParadigmDialog = (props: Props) => {
           {t("paradigm")}
         </DialogTitle>
         <DialogContent>
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+              <CircularProgress size={24} />
+            </div>
+          )}
           <Table>
             <TableHead>
               <TableRow>

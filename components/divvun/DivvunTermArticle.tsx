@@ -13,6 +13,8 @@ import speechAvailable from "@/lib/speechAvailable";
 import Sikor from "./Sikor";
 import ParadigmDialog from "./ParadigmDialog";
 import { useTranslations } from "next-intl";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMarkRounded";
+import MobileTooltip from "../MobileTooltip";
 
 interface Props {
   item: string;
@@ -82,9 +84,9 @@ const DivvunTermArticle = (props: Props) => {
       .map((term: any) => (
         <div
           key={`${term.expression.lemma}-${term.expression.pos}`}
-          className="flex items-center"
+          className="flex flex-col md:flex-row space-y-1 items-center"
         >
-          <p className="text-gray-600">
+          <p className="text-gray-600 hidden md:inline-block">
             ({t(`pos.${term.expression.pos.toLowerCase()}`)})
           </p>
           <ParadigmDialog
@@ -96,6 +98,11 @@ const DivvunTermArticle = (props: Props) => {
             language={term.expression.language}
             lemma={term.expression.lemma}
           />
+          {item.definition && (
+            <MobileTooltip title={item.definition}>
+              <QuestionMarkIcon className="text-gray-600" fontSize="inherit" />
+            </MobileTooltip>
+          )}
         </div>
       ));
 
@@ -149,7 +156,7 @@ const DivvunTermArticle = (props: Props) => {
               </TableCell>
 
               {getLoopCells(item)}
-              <TableCell>
+              <TableCell className="hidden md:inline-block">
                 <p>{item.definition}</p>
               </TableCell>
             </TableRow>

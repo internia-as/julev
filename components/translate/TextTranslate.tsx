@@ -85,7 +85,7 @@ const TextTranslate = (props: Props) => {
 
   return (
     <>
-      <div className="flex space-x-2 items-center justify-center">
+      <div className="flex flex-col space-y-1 md:flex-row md:space-x-2 items-center justify-center">
         <TextField
           rows={8}
           className="w-full"
@@ -115,11 +115,28 @@ const TextTranslate = (props: Props) => {
           }
         />
         <TextField
-          disabled
           rows={8}
           className="w-full"
           multiline
+          placeholder={t("translate.placeholder_2")}
           value={translatedText}
+          sx={{
+            "& .MuiInputBase-root": {
+              backgroundColor: "#f5f5f5", // Light gray, similar to a disabled field
+              "&:hover fieldset": {
+                borderColor: "#e5e7eb", // Disable blue border on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#e5e7eb", // Disable blue border on focus
+              },
+              "& fieldset": {
+                borderColor: "rgba(0, 0, 0, 0.23)", // Optional: Customize the default border for readability
+              },
+            },
+            "& .MuiInputBase-input": {
+              color: "rgba(0, 0, 0, 1.0)", // Normal text appearance
+            },
+          }}
           slotProps={
             speechAvailable(props.langTo)
               ? {

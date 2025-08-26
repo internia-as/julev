@@ -36,7 +36,7 @@ const DivvunResultList = (props: Props) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
       style={{ marginTop: "15.5rem" }}
-      className="flex flex-col items-center w-full md:w-2/3 2xl:w-1/2"
+      className="flex flex-col items-center px-1 w-full md:w-2/3 2xl:w-1/2"
     >
       {props.results.stems.map((result, index) => (
         <DivvunResultItem
