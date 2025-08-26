@@ -28,7 +28,7 @@ const LocalResultItem = (props: Props) => {
   const wordIsSami = result.oversatt_fra.toLocaleLowerCase() == "samisk";
 
   return (
-    <div className="w-full">
+    <div className="w-full px-1">
       <li
         className=" border border-gray-200 rounded-lg bg-white shadow mb-1"
         style={{
@@ -51,7 +51,7 @@ const LocalResultItem = (props: Props) => {
             {props.result.kredittering}
           </p>
         </div>
-        <div className="flex justify-between sm:px-6 pb-4">
+        <div className="flex justify-between sm:px-6 pb-4 px-2">
           <p dangerouslySetInnerHTML={{ __html: til }} />
           {wordIsSami && (
             <Sikor language="smj" lemma={fra.trim().split(", ")[0]} />
