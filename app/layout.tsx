@@ -40,6 +40,7 @@ export default function RootLayout({
                 <Navbar />
                 <Notification />
                 <div className="mt-14">{children}</div>
+                <Footer />
               </NextIntlClientProvider>
             </NotificationProvider>
           </GlobalStateProvider>

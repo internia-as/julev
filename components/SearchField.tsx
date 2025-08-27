@@ -7,6 +7,7 @@ import LanguageMenu from "./root/LanguageMenu";
 import { useGlobalState } from "../hooks/useGlobalState";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -76,13 +77,21 @@ const SearchField = (props: Props) => {
     }
   }, [state.query]);
 
+  const getStyle = (tab: string) => {
+    // current path
+    const path = pathname === "/divvun" ? "divvun" : "julev";
+    return tab === path
+      ? "bg-slate-700 text-white py-2 flex-1 text-center"
+      : "text-gray-300 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
+  };
+
   return (
     <div>
       <motion.div
         initial={false}
         animate={{
           position: "absolute",
-          top: isSearching ? "12rem" : "50%",
+          top: isSearching ? "13rem" : "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
         }}
@@ -99,12 +108,20 @@ const SearchField = (props: Props) => {
         </div>
         <form onSubmit={handleSubmit} className="flex justify-center w-full">
           <div className="w-full flex flex-col justify-center items-center px-1 relative">
+            <div className="flex justify-between w-full md:w-3/4 2xl:w-1/2 bg-slate-600 text-white font-bold h-11 items-center">
+              <Link className={getStyle("julev")} href={"/"}>
+                Søk i Julev
+              </Link>
+              <Link className={getStyle("divvun")} href={"/divvun"}>
+                Søk i Divvun
+              </Link>
+            </div>
             <Input
               id="searchfield"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={getPlaceholder()}
-              className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 py-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
+              className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 p-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={getAdornment()}
             />
           </div>
