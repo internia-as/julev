@@ -8,10 +8,16 @@ datasource db {
 }
 
 model smj_translations {
-  id            Int  @unique(map: "smj_translations_id_idx") @default(autoincrement()) @db.UnsignedInt
+  id            BigInt  @unique(map: "smj_translations_id_idx") @default(autoincrement()) @db.UnsignedBigInt
   fra           String? @db.Text
   til           String? @db.Text
   oversatt_fra  String? @db.Text
   oversatt_til  String? @db.Text
   kredittering  String? @db.Text
+  publisert     Int?
+  kildeId       Int?
+  brukerforslag Int?
+  brukerepost   String? @db.Text
+  behandlingId  Int?
+  sikor_hits    Int?
 }

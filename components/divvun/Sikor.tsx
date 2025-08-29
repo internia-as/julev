@@ -9,6 +9,7 @@ interface Props {
   enable?: () => void;
   redirect?: boolean;
   label?: string;
+  hits?: string | null;
 }
 
 const SUPPORTED_LANGUAGES = ["sme", "sma", "smj", "smn", "sms"];
@@ -31,11 +32,18 @@ const Sikor = (props: Props) => {
         setHits(data.hits);
       }
     };
-    fetchData();
+    if (props.hits === undefined) {
+      fetchData();
+    } else {
+      setHits(Number(props.hits) || 0);
+    }
   }, [props.language, props.lemma]);
 
   const redirectToSikor = () => {
-    const cqp = `[lemma = "${props.lemma}"]`;
+    let lemma = props.lemma;
+    lemma = lemma.split(" ")[0];
+    lemma = lemma.split(",")[0];
+    const cqp = `[lemma = "${lemma}"]`;
     let query = new URLSearchParams({
       cqp: cqp, // Will be URL-encoded automatically
       search_tab: "1",
