@@ -25,9 +25,17 @@ const DivvunResultList = (props: Props) => {
     }
   }, [props.results]);
 
-  if (!props.results) return <></>;
+  if (props.results && props.results.totalItems === 0)
+    return (
+      <div
+        className="flex flex-col items-center w-full md:w-3/4 2xl:w-1/2"
+        style={{ marginTop: "20.5rem" }}
+      >
+        Ingen resultat
+      </div>
+    );
   if (props.isSearching) {
-    return <CircularProgress style={{ marginTop: "15.5rem" }} />;
+    return <CircularProgress style={{ marginTop: "20.5rem" }} />;
   }
 
   return (
@@ -35,10 +43,10 @@ const DivvunResultList = (props: Props) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
-      style={{ marginTop: "15.5rem" }}
-      className="flex flex-col items-center px-1 w-full md:w-2/3 2xl:w-1/2"
+      style={{ marginTop: "16.75rem" }}
+      className="flex flex-col items-center px-1 w-full md:w-3/4 2xl:w-1/2"
     >
-      {props.results.stems.map((result, index) => (
+      {props.results?.stems.map((result, index) => (
         <DivvunResultItem
           key={index}
           name={"panel" + index}

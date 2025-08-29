@@ -10,7 +10,6 @@ const Navbar = () => {
         <div className="w-32"></div>
         <ul className="font-semibold space-x-20">
           <Link href="/">{t("search")}</Link>
-          <Link href="/divvun">Divvun</Link>
           <Link href="/translate">{t("translate")}</Link>
           <div className="hidden">
             <Link className="opacity-50" href="/statistics">

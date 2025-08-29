@@ -6,7 +6,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "smd-nob",
     short: "termwiki",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -14,7 +14,7 @@ const dictionaries: Dictionary[] = [
     lang: "fin",
     value: "fin-sme",
     short: "gtfinsme",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -22,7 +22,7 @@ const dictionaries: Dictionary[] = [
     lang: "smn",
     value: "fin-smn",
     short: "gtfinsmn",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -30,7 +30,7 @@ const dictionaries: Dictionary[] = [
     lang: "sma",
     value: "sma-nob",
     short: "gtsmanob",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -38,7 +38,7 @@ const dictionaries: Dictionary[] = [
     lang: "sme",
     value: "nob-sme",
     short: "gtnobsme",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -46,7 +46,7 @@ const dictionaries: Dictionary[] = [
     lang: "sma",
     value: "nob-sma",
     short: "gtnobsma",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -54,7 +54,7 @@ const dictionaries: Dictionary[] = [
     lang: "sme",
     value: "sme-fin",
     short: "gtsmefin",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -62,7 +62,7 @@ const dictionaries: Dictionary[] = [
     lang: "sme",
     value: "sme-nob",
     short: "gtsmenob",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -70,7 +70,7 @@ const dictionaries: Dictionary[] = [
     lang: "sme",
     value: "sme-smn",
     short: "gtsmesmn",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -78,7 +78,7 @@ const dictionaries: Dictionary[] = [
     lang: "smn",
     value: "smn-fin",
     short: "gtsmnfin",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -86,7 +86,7 @@ const dictionaries: Dictionary[] = [
     lang: "smn",
     value: "smn-sme",
     short: "gtsmnsme",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -94,7 +94,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "fin-sms",
     short: "gtfinsms",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -102,7 +102,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "smd-nob",
     short: "gtnobsms",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -110,7 +110,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "rus-sms",
     short: "gtrussms",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -118,7 +118,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "sms-fin",
     short: "gtsmsfin",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -126,7 +126,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "sms-nob",
     short: "gtsmsnob",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -134,7 +134,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "sms-rus",
     short: "gtsmsrus",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -142,7 +142,7 @@ const dictionaries: Dictionary[] = [
     lang: "smj",
     value: "nob-smj",
     short: "habmernobsmj",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -150,7 +150,7 @@ const dictionaries: Dictionary[] = [
     lang: "smj",
     value: "smj-nob",
     short: "habmersmjnob",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -158,7 +158,7 @@ const dictionaries: Dictionary[] = [
     lang: "sme",
     value: "sme-fin",
     short: "sammallahtismefin",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
   {
@@ -166,7 +166,7 @@ const dictionaries: Dictionary[] = [
     lang: "smd",
     value: "fin-nob",
     short: "gtfinnob",
-    selected: false,
+    selected: true,
     type: "divvun",
   },
 ];

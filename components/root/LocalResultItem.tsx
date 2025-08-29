@@ -51,7 +51,7 @@ const LocalResultItem = (props: Props) => {
             {props.result.kredittering}
           </p>
         </div>
-        <div className="flex justify-between sm:px-6 pb-4 px-2">
+        <div className="flex justify-between sm:px-6 pb-4 px-4">
           <p dangerouslySetInnerHTML={{ __html: til }} />
           {wordIsSami && (
             <Sikor language="smj" lemma={fra.trim().split(", ")[0]} />

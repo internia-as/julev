@@ -9,6 +9,13 @@ const LocalResults = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) {
+      state.setQuery(q);
+    }
+  }, []);
   // Fetch results from the API
   const fetchResults = async () => {
     setLoading(true);

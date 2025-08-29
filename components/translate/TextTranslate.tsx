@@ -163,7 +163,7 @@ const TextTranslate = (props: Props) => {
         <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
       )}
       <div className="flex w-full justify-between mt-4">
-        <div className="w-4"></div>
+        <div className="w-1/3"></div>
         <Button
           className="w-1/3"
           onClick={submit}
@@ -172,7 +172,19 @@ const TextTranslate = (props: Props) => {
         >
           {t("translate.translate")}
         </Button>
-        <InfoDialog />
+        <div className="flex w-1/3 justify-end space-x-2 items-center">
+          <p className="text-xs text-gray-500">
+            Oversettelser leveres av{" "}
+            <a
+              href="https://giellatekno.uit.no/"
+              target="_blank"
+              className="font-semibold underline"
+            >
+              Giellatekno
+            </a>
+          </p>
+          <InfoDialog />
+        </div>
       </div>
     </>
   );
