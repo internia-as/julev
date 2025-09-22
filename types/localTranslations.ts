@@ -5,4 +5,5 @@ export interface LocalTranslations {
   oversatt_fra: string;
   oversatt_til: string;
   kredittering: string;
+  sikor_hits: string | null;
 }
