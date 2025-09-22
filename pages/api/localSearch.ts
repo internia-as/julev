@@ -10,6 +10,13 @@ export default async function handler(
     res.status(400).json({ error: "Missing query parameter" });
     return;
   }
+
   const results = await getLocalResults(q);
-  res.status(200).json(results);
+  const resultsWithoutBigInt = JSON.parse(
+    JSON.stringify(results, (_key, value) =>
+      typeof value === "bigint" ? value.toString() : value
+    )
+  );
+
+  res.status(200).json(resultsWithoutBigInt);
 }
