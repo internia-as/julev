@@ -9,6 +9,13 @@ const LocalResults = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) {
+      state.setQuery(q);
+    }
+  }, []);
   // Fetch results from the API
   const fetchResults = async () => {
     setLoading(true);
@@ -31,7 +38,6 @@ const LocalResults = () => {
     return (
       <>
         <CircularProgress className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        <CircularProgress />
       </>
     );
   return <LocalResultList results={results} query={state.query} />;

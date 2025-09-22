@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import { Language } from "@/types/language";
 import { SupportedTTSLanguages } from "@/types/divvun";
+import { useTranslations } from "next-intl";
 
 const Languages: Language[] = [
   {
@@ -35,7 +36,7 @@ const Languages: Language[] = [
     flag: "/images/flags/sm.jpeg",
   },
   {
-    name: "Norsk",
+    name: "Norsk Bokmål",
     short: "nob",
     translated: true,
     flag: "/images/flags/nob.png",
@@ -54,6 +55,7 @@ const LanguageSelect = (props: Props) => {
   const [langTo, setLangTo] = React.useState<Language[]>(Languages);
   const [selectedFrom, setSelectedFrom] = React.useState<Language | null>(null);
   const [selectedTo, setSelectedTo] = React.useState<Language | null>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     setSelectedFrom(Languages[0]);
@@ -96,10 +98,10 @@ const LanguageSelect = (props: Props) => {
   };
 
   return (
-    <>
+    <div className="flex justify-between w-full space-x-4">
       <Select
         value={selectedFrom?.short || ""}
-        className="w-48"
+        className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedFrom)}
       >
         {langFrom.map((language) => (
@@ -110,7 +112,7 @@ const LanguageSelect = (props: Props) => {
                 alt="Nordsamisk"
                 className="w-6 h-6 mr-2"
               />
-              <span>{language.name}</span>
+              <span>{t(`languages.${language.short}`)}</span>
             </div>
           </MenuItem>
         ))}
@@ -118,12 +120,12 @@ const LanguageSelect = (props: Props) => {
 
       <Select
         value={selectedTo?.short || ""}
-        className="w-48"
+        className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedTo)}
         displayEmpty
       >
         <MenuItem value="" disabled hidden>
-          Velg språk
+          {t("translate.choose_language")}
         </MenuItem>
         {langTo.map((language) => (
           <MenuItem
@@ -137,12 +139,12 @@ const LanguageSelect = (props: Props) => {
                 alt="Nordsamisk"
                 className="w-6 h-6 mr-2"
               />
-              <span>{language.name}</span>
+              <span>{t(`languages.${language.short}`)}</span>
             </div>
           </MenuItem>
         ))}
       </Select>
-    </>
+    </div>
   );
 };
 

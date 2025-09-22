@@ -1,10 +1,17 @@
 "use client";
 import React from "react";
-import { Button, Dialog, DialogTitle, IconButton, Slide } from "@mui/material";
-import { useGlobalState } from "../../hooks/useGlobalState";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  IconButton,
+  Slide,
+  Tooltip,
+} from "@mui/material";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { TransitionProps } from "@mui/material/transitions";
 import LanguageList from "./LanguageList";
+import { useTranslations } from "next-intl";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -16,14 +23,16 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const LanguageMenu = () => {
-  const state = useGlobalState();
+  const t = useTranslations("search");
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
-      <IconButton onClick={() => setOpen(true)}>
-        <TranslateIcon color="primary" />
-      </IconButton>
+      <Tooltip title={t("select_langs")} placement="top">
+        <IconButton onClick={() => setOpen(true)}>
+          <TranslateIcon color="primary" />
+        </IconButton>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -31,14 +40,14 @@ const LanguageMenu = () => {
         TransitionComponent={Transition}
       >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Tilgjengelige Språk
+          {t("available_langs")}
         </DialogTitle>
         <LanguageList />
         <Button
           className="justify-center w-full"
           onClick={() => setOpen(false)}
         >
-          Begynn å søk!
+          {t("start_search")}!
         </Button>
       </Dialog>
     </React.Fragment>

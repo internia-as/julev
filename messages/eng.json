@@ -11,13 +11,112 @@
       "sme": "Northern Sámi",
       "smj": "Lule Sámi",
       "sma": "Southern Sámi",
-      "smn": "Enaresamisk"
+      "smn": "Enaresamisk",
+      "select": "Select language"
     }
   },
   "search": {
     "julev_title": "Julevbágo",
     "julev_subtitle": "Julevbágo collects digital Sámi language resources in one place",
     "divvun_title": "Divvun",
-    "divvun_subtitle": "Divvun provides tools for Sámi languages"
+    "divvun_subtitle": "Divvun provides tools for Sámi languages",
+    "search_field_placeholder": "Search in ",
+    "select_dicts": "Select dictionaries",
+    "select_langs": "Select languages",
+    "available_dicts": "Available dictionaries",
+    "available_langs": "Available languages",
+    "start_search": "Start searching",
+    "found": "Found",
+    "hits_in_sikor": "hits in SIKOR",
+    "no_results": "No results found"
+  },
+  "divvun": {
+    "source": "Source",
+    "category": "Category",
+    "paradigm": "Paradigms",
+    "show_paradigms": "Show paradigms",
+    "paradigm_not_available": "Paradigm not available"
+  },
+  "translate": {
+    "play_tts": "Play pronunciation",
+    "tts_not_available": "Pronunciation not available",
+    "choose_language": "Choose language",
+    "placeholder": "Type a word or phrase to translate",
+    "placeholder_2": "Translation appears here",
+    "translate": "Translate",
+    "choose_language_error": "Choose a language to translate to",
+    "textfield_error": "Please enter a word or phrase to translate",
+    "error": "An error occurred during translation. Please try again.",
+    "info": {
+      "title": "Machinetranslation at Giellatekno",
+      "p1": "Giellatekno at UiT The Arctic University of Norway is working with machine translation based on their grammatical analysers for Saami languages, combined with bilingual dictionaries, grammatical transfer rules and a generation component. Giellatekno cooperates on machine translation with Apertium, a free/open-source machine translation platform.",
+      "about_translator": "About the translator",
+      "p2": "The North Saami-Norwegian translation system is under constant development. In its present phase it may be used to understand North Saami better, but it is not able to produce flawless Norwegian. If the Norwegian translation contains something you simply do not expect, you should look critically at result. Please keep in mind the following possible types of errors:",
+      "p3": "Saami does not distinguish between 'he' and 'she'. If the text says 'heä it is then still possible that the text refers to a woman. Sami does not distinguish between definite and indefinite form, if a choice of definiteness would have given another meaning, you may not be sure that the translation is correct. When the program translates unknown compound words it translates the parts separately and put them together. Usually this gives the intended result, but Norwegian may also use a completely different word. You should in other words be cautious when interpreting compounds. All languages have words with more than one meaning. In such cases we try to find the correct meaning from from context, but we do not always succeed. If a particular translation is unexpected, it may thus be that we may have missed. For alternative translations, look up in a dictionary, for example in ",
+      "more_info": "More information can be found on",
+      "pages": "pages"
+    }
+  },
+  "languages": {
+    "sma": "South Sami",
+    "sme": "North Sami",
+    "smj": "Lule Sami",
+    "smn": "Inari Sami",
+    "sms": "Skolt Sami",
+    "fin": "Finnish",
+    "nob": "Norwegian Bokmål",
+    "swe": "Swedish",
+    "lat": "Latin",
+    "eng": "English",
+    "nno": "nno",
+    "rus": "Russian",
+    "sma_Mid": "Southern Sámi (Short)",
+    "sma_North": "Southern Sámi (Long)"
+  },
+  "dictionaries": {
+    "termwiki": "Giellagáldu's multilingual terms",
+    "gtfinsme": "Giellatekno's Finnish – North Sami dictionary",
+    "gtfinsmn": "Giellatekno's Finnish – Inari Sami dictionary",
+    "gtsmanob": "Giellatekno's South Sami – Bokmål dictionary",
+    "gtnobsme": "Giellatekno's Bokmål – North Sami dictionary",
+    "gtnobsma": "Giellatekno's Bokmål – South Sami dictionary",
+    "gtsmefin": "Giellatekno's North Sami – Finnish dictionary",
+    "gtsmenob": "Giellatekno's North Sami – Bokmål dictionary",
+    "gtsmesmn": "Giellatekno's North Sami – Inari Sami dictionary",
+    "gtsmnfin": "Giellatekno's Inari Sami – Finnish dictionary",
+    "gtsmnsme": "Giellatekno's Inari Sami – North Sami dictionary",
+    "gtfinsms": "Giellatekno's Finnish – Skolt Sami dictionary",
+    "gtnobsms": "Giellatekno's Bokmål – Skolt Sami dictionary",
+    "gtrussms": "Giellatekno's Russian – Skolt Sami dictionary",
+    "gtsmsfin": "Giellatekno's Skolt Sami - Finnish dictionary",
+    "gtsmsnob": "Giellatekno's Skolt Sami - Norwegian Bokmål dictionary",
+    "gtsmsrus": "Giellatekno's Skolt Sami - Russian dictionary",
+    "habmernobsmj": "Hábmer municipality's Norwegian Bokmål - Lule Sami dictionary",
+    "habmersmjnob": "Hábmer municipality's Lule Sami - Norwegian Bokmål dictionary",
+    "sammallahtismefin": "Pekka Sammalahti's North Sami – Finnish dictionary",
+    "gtfinnob": "Trond Trosterud's Finnish – Norwegian dictionary"
+  },
+  "pos": {
+    "v": "Verb",
+    "n": "Noun",
+    "a": "Adjective",
+    "adv": "Adverb",
+    "pron": "Pronoun",
+    "prep": "Preposition",
+    "conj": "Conjunction",
+    "intj": "Interjection",
+    "num": "Numeral",
+    "art": "Article",
+    "part": "Particle",
+    "aux": "Auxiliary verb",
+    "interj": "Interjection",
+    "excl": "Exclamation",
+    "det": "Determiner",
+    "punc": "Punctuation"
+  },
+  "meta": {
+    "title": "Julev - Sámi language resources",
+    "description": "Julev is a collection of digital Sámi language resources, including dictionaries, machine translation, and more.",
+    "keywords": "Sámi, South Sámi, North Sámi, Lule Sámi, Inari Sámi, Skolt Sámi, dictionaries, machine translation"
   }
 }

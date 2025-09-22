@@ -13,11 +13,11 @@ const Translate = () => {
   );
 
   return (
-    <div className="h-full bg-gray-100 shadow-md flex flex-col items-center py-20">
-      <div className="flex justify-between w-2/3 mb-4">
+    <div className="h-full flex flex-col items-center px-2 md:px-0 py-6 md:py-20">
+      <div className="flex justify-between w-full md:w-2/3 mb-4">
         <LanguageSelect setLangFrom={setLangFrom} setLangTo={setLangTo} />
       </div>
-      <div className="w-2/3">
+      <div className="w-full md:w-2/3">
         <TextTranslate langFrom={langFrom} langTo={langTo} />
       </div>
     </div>

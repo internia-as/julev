@@ -21,7 +21,7 @@ const DivvunResultItem = (props: Props) => {
     <Accordion
       expanded={props.expanded === props.name}
       onChange={handleChange}
-      className="w-full border border-gray-300"
+      className="w-full border border-gray-300 overflow-x-hidden"
       sx={{ backgroundColor: "#f0f0f0" }}
     >
       <AccordionSummary
@@ -31,7 +31,7 @@ const DivvunResultItem = (props: Props) => {
       >
         <p className="font-bold text-gray-700">{props.item}</p>
       </AccordionSummary>
-      <AccordionDetails className="flex flex-col space-y-4">
+      <AccordionDetails className="flex flex-col space-y-4" sx={{ padding: 0 }}>
         <DivvunTermArticle
           expanded={props.expanded}
           name={props.name}

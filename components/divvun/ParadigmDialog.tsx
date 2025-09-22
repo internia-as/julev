@@ -1,18 +1,22 @@
 import {
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
   IconButton,
+  MenuItem,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/InfoOutline";
 import React, { useEffect } from "react";
 import { getColumn } from "@/lib/getColumn";
+import { useTranslations } from "next-intl";
 
 interface Body {
   lang: string;
@@ -25,12 +29,15 @@ interface Props {
   lang: string;
   word: string;
   pos: string;
+  label?: string;
 }
 
 const ParadigmDialog = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const [paradigms, setParadigms] = React.useState<string[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const t = useTranslations("divvun");
 
   let body: Body = {
     lang: props.lang,
@@ -62,8 +69,10 @@ const ParadigmDialog = (props: Props) => {
 
   const handleOpen = async () => {
     setOpen(true);
+    setLoading(true);
     const generated = await fetchData(false);
     setParadigms(generated.map((item: any) => item.analyses));
+    setLoading(false);
   };
 
   const getTableHead = () => {
@@ -112,21 +121,44 @@ const ParadigmDialog = (props: Props) => {
 
   return (
     <div>
-      <Tooltip title="Vis bøyningsmønster">
-        <IconButton
-          onClick={handleOpen}
-          disabled={disabled}
-          color="primary"
-          size="small"
-        >
-          <InfoIcon />
-        </IconButton>
+      <Tooltip
+        title={disabled ? t("paradigm_not_available") : t("show_paradigms")}
+      >
+        <span>
+          {props.label ? (
+            <MenuItem onClick={handleOpen} disabled={disabled} dense>
+              <InfoIcon fontSize="small" />
+              <Typography variant="subtitle2" className="px-4">
+                {props.label}
+              </Typography>
+            </MenuItem>
+          ) : (
+            <IconButton
+              onClick={handleOpen}
+              disabled={disabled}
+              color="primary"
+              size="small"
+            >
+              <InfoIcon />
+            </IconButton>
+          )}
+        </span>
       </Tooltip>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
-          Bøyningsmønster
+          {t("paradigm")}
         </DialogTitle>
         <DialogContent>
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+              <CircularProgress size={24} />
+            </div>
+          )}
           <Table>
             <TableHead>
               <TableRow>

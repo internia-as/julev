@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 export default function NotFound() {
   const router = useRouter();
 
-  console.log("HELLO");
-
   useEffect(() => {
     router.replace("/");
   }, [router]);

@@ -2,13 +2,19 @@
 import React, { useEffect } from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
 import DivvunResultList from "./DivvunResultList";
-import { useNotification } from "@/hooks/useNotification";
 
 const DivvunResults = () => {
   const state = useGlobalState();
-  const notification = useNotification();
   const [results, setResults] = React.useState();
   const [searching, setSearching] = React.useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) {
+      state.setQuery(q);
+    }
+  }, []);
 
   useEffect(() => {
     if (!validate()) return;

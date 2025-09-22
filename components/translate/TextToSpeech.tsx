@@ -1,20 +1,29 @@
-import { CircularProgress, IconButton } from "@mui/material";
+import {
+  CircularProgress,
+  IconButton,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
   text: string;
   lang: SupportedTTSLanguages;
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
   size?: "small" | "medium" | "large";
+  label?: string;
 }
 
 const TextToSpeech = (props: Props) => {
   const [loading, setLoading] = React.useState(false);
   const langDisabled = props.lang === SupportedTTSLanguages.NOB;
+  const t = useTranslations("translate");
 
-  const fetchTextToSpeech = async (text: string, lang: string) => {
+  const fetchTextToSpeech = async () => {
     try {
       setLoading(true);
       const response = await fetch("/api/speech", {
@@ -23,8 +32,8 @@ const TextToSpeech = (props: Props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          text: text,
-          lang: lang,
+          text: props.text,
+          lang: props.lang,
         }),
       });
       if (response.ok) {
@@ -40,17 +49,38 @@ const TextToSpeech = (props: Props) => {
     setLoading(false);
   };
 
+  const getIcons = () => {
+    return (
+      <>
+        {loading ? (
+          <CircularProgress size={20} />
+        ) : (
+          <VolumeUpIcon fontSize={props.size} />
+        )}
+      </>
+    );
+  };
+
   return (
-    <IconButton
-      disabled={props.text.length === 0 || loading || langDisabled}
-      onClick={() => fetchTextToSpeech(props.text, props.lang as string)}
-    >
-      {loading ? (
-        <CircularProgress size={20} />
-      ) : (
-        <VolumeUpIcon fontSize={props.size} />
-      )}
-    </IconButton>
+    <Tooltip title={langDisabled ? t("tts_not_available") : t("play_tts")}>
+      <span>
+        {props.label ? (
+          <MenuItem disabled={langDisabled} dense onClick={fetchTextToSpeech}>
+            {getIcons()}
+            <Typography variant="subtitle2" className="px-4">
+              {props.label}
+            </Typography>
+          </MenuItem>
+        ) : (
+          <IconButton
+            disabled={props.text.length === 0 || loading || langDisabled}
+            onClick={fetchTextToSpeech}
+          >
+            {getIcons()}
+          </IconButton>
+        )}
+      </span>
+    </Tooltip>
   );
 };
 
