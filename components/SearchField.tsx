@@ -110,10 +110,10 @@ const SearchField = (props: Props) => {
           <div className="w-full flex flex-col justify-center items-center px-1 relative">
             <div className="flex justify-between w-full md:w-3/4 2xl:w-1/2 bg-slate-600 text-white font-bold h-11 items-center">
               <Link className={getStyle("julev")} href={"/"}>
-                Søk i Julev
+                Lulesamisk søk
               </Link>
               <Link className={getStyle("divvun")} href={"/divvun"}>
-                Søk i Divvun
+                Samisk søk
               </Link>
             </div>
             <Input
