@@ -3,6 +3,7 @@
     "search": "Search",
     "statistics": "Statistics",
     "translate": "Translate",
+    "grammar_checker": "Grammatikkontroll",
     "app": "App",
     "about": "About",
     "languages": {
@@ -50,6 +51,7 @@
   "languages": {
     "sma": "Oarjjelsámegiella",
     "sme": "Nuorttasámegiella",
+    "se": "Nuorttasámegiella",
     "smj": "Julevsámegiella",
     "smn": "Anársámegiella",
     "sms": "Gålldåsámegiella",

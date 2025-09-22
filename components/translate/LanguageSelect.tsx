@@ -109,7 +109,7 @@ const LanguageSelect = (props: Props) => {
             <div className="flex">
               <img
                 src={language.flag}
-                alt="Nordsamisk"
+                alt={language.name}
                 className="w-6 h-6 mr-2"
               />
               <span>{t(`languages.${language.short}`)}</span>
@@ -136,7 +136,7 @@ const LanguageSelect = (props: Props) => {
             <div className="flex">
               <img
                 src={language.flag}
-                alt="Nordsamisk"
+                alt={language.name}
                 className="w-6 h-6 mr-2"
               />
               <span>{t(`languages.${language.short}`)}</span>
