@@ -1,0 +1,16 @@
+# Use the official Redis image from Docker Hub
+FROM redis:latest
+
+# Expose the default Redis port (6379) to allow external connections
+EXPOSE 6379
+
+# Optionally add a custom Redis configuration
+# Uncomment these lines if you have a redis.conf file
+# COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Command to start the Redis server
+# Use the default configuration if you don't have a custom configuration
+CMD ["redis-server"]
+
+# Alternatively, if you have a custom redis.conf, use this command:
+# CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]

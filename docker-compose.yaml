@@ -1,0 +1,21 @@
+services:
+  redis:
+    image: redis-server:latest
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 20GB
+          cpus: "14.0"
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
