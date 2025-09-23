@@ -61,7 +61,8 @@
   "grammar_checker": {
     "placeholder": "Skriv eller lim inn tekst for å sjekke grammatikk",
     "check_grammar": "Sjekk grammatikk",
-    "results": "Resultater"
+    "results": "Resultater",
+    "play_audio": "Spill av lyd"
   },
   "languages": {
     "sma": "Sørsamisk",

@@ -61,7 +61,8 @@
   "grammar_checker": {
     "placeholder": "Type or paste text to check grammar",
     "check_grammar": "Check grammar",
-    "results": "Results"
+    "results": "Results",
+    "play_audio": "Play audio"
   },
   "languages": {
     "sma": "South Sami",

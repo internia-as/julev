@@ -27,8 +27,6 @@ const LocalResultItem = (props: Props) => {
 
   const wordIsSami = result.oversatt_fra.toLocaleLowerCase() == "samisk";
 
-  console.log(result);
-
   return (
     <div className="w-full px-1">
       <li

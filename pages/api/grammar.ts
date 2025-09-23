@@ -7,9 +7,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { lang, text, encoding } = req.body;
-
-  console.log(BASE_URL);
-
   const response = await fetch(`${BASE_URL}${lang}?encoding=${encoding}`, {
     method: "POST",
     headers: {

@@ -60,7 +60,7 @@ const GrammarCheckerPage = () => {
         </Button>
       </FormControl>
 
-      <Results results={results} />
+      <Results results={results} lang={lang?.short || null} />
     </div>
   );
 };
