@@ -3,6 +3,7 @@
     "search": "Search",
     "statistics": "Statistics",
     "translate": "Translate",
+    "grammar_checker": "Grammar Checker",
     "app": "App",
     "about": "About",
     "languages": {
@@ -57,9 +58,16 @@
       "pages": "pages"
     }
   },
+  "grammar_checker": {
+    "placeholder": "Type or paste text to check grammar",
+    "check_grammar": "Check grammar",
+    "results": "Results",
+    "play_audio": "Play audio"
+  },
   "languages": {
     "sma": "South Sami",
     "sme": "North Sami",
+    "se": "North Sami",
     "smj": "Lule Sami",
     "smn": "Inari Sami",
     "sms": "Skolt Sami",

@@ -3,6 +3,7 @@
     "search": "Søk",
     "statistics": "Statistikk",
     "translate": "Oversett",
+    "grammar_checker": "Grammatikkontroll",
     "app": "App",
     "about": "Om oss",
     "languages": {
@@ -57,9 +58,16 @@
       "pages": "sine sider"
     }
   },
+  "grammar_checker": {
+    "placeholder": "Skriv eller lim inn tekst for å sjekke grammatikk",
+    "check_grammar": "Sjekk grammatikk",
+    "results": "Resultater",
+    "play_audio": "Spill av lyd"
+  },
   "languages": {
     "sma": "Sørsamisk",
     "sme": "Nordsamisk",
+    "se": "Nordsamisk",
     "smj": "Lulesamisk",
     "smn": "Enaresamisk",
     "sms": "Skolt samisk",

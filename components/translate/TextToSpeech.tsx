@@ -9,6 +9,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import React from "react";
 import { useTranslations } from "next-intl";
+import fetchTextToSpeech from "@/lib/fetchTextToSpeech";
 
 interface Props {
   text: string;
@@ -23,27 +24,10 @@ const TextToSpeech = (props: Props) => {
   const langDisabled = props.lang === SupportedTTSLanguages.NOB;
   const t = useTranslations("translate");
 
-  const fetchTextToSpeech = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/speech", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: props.text,
-          lang: props.lang,
-        }),
-      });
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.play();
-      }
-    } catch (error) {
-      console.error("Error fetching text-to-speech:", error);
+  const handleClick = async () => {
+    setLoading(true);
+    const res = await fetchTextToSpeech(props.text, props.lang);
+    if (!res) {
       props.setErrorMessage("Kunne ikke hente tale for teksten.");
     }
     setLoading(false);
@@ -65,7 +49,7 @@ const TextToSpeech = (props: Props) => {
     <Tooltip title={langDisabled ? t("tts_not_available") : t("play_tts")}>
       <span>
         {props.label ? (
-          <MenuItem disabled={langDisabled} dense onClick={fetchTextToSpeech}>
+          <MenuItem disabled={langDisabled} dense onClick={handleClick}>
             {getIcons()}
             <Typography variant="subtitle2" className="px-4">
               {props.label}
@@ -74,7 +58,7 @@ const TextToSpeech = (props: Props) => {
         ) : (
           <IconButton
             disabled={props.text.length === 0 || loading || langDisabled}
-            onClick={fetchTextToSpeech}
+            onClick={handleClick}
           >
             {getIcons()}
           </IconButton>
