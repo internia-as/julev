@@ -2,7 +2,7 @@
 import { Language } from "@/types/language";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect } from "react";
 
 const Languages: Language[] = [
   {
@@ -43,23 +43,42 @@ const Languages: Language[] = [
   },
 ];
 
-const LanguageSelect = () => {
-  const t = useTranslations();
-  const [selectedTo, setSelectedTo] = useState<Language | null>(null);
+interface Props {
+  lang: Language | null;
+  setLang: (lang: Language | null) => void;
+}
 
-  const handleChange = (
-    event: SelectChangeEvent,
-    setState: React.Dispatch<React.SetStateAction<Language | null>>
-  ) => {
+const LanguageSelect = (props: Props) => {
+  const t = useTranslations();
+
+  useEffect(() => {
+    // Check local storage for saved language preference
+    const savedLang = localStorage.getItem("grammarCheckerLang");
+    if (savedLang) {
+      const lang = Languages.find((l) => l.short === savedLang);
+      if (lang) {
+        props.setLang(lang);
+        return;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (props.lang) {
+      localStorage.setItem("grammarCheckerLang", props.lang.short);
+    }
+  }, [props.lang]);
+
+  const handleChange = (event: SelectChangeEvent) => {
     const lang = Languages.find((l) => l.short === event.target.value);
-    setState(lang || null);
+    props.setLang(lang || null);
   };
 
   return (
     <Select
-      value={selectedTo?.short || ""}
-      className="w-full"
-      onChange={(e) => handleChange(e, setSelectedTo)}
+      value={props.lang ? props.lang.short : ""}
+      fullWidth={true}
+      onChange={(e) => handleChange(e)}
       displayEmpty
     >
       <MenuItem value="" disabled hidden>
