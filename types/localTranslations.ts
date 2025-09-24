@@ -1,9 +1,9 @@
 export interface LocalTranslations {
-  id: number;
-  fra: string;
-  til: string;
-  oversatt_fra: string;
-  oversatt_til: string;
-  kredittering: string;
-  sikor_hits: string | null;
+  id: BigInt;
+  fra: String | null;
+  til: String | null;
+  oversatt_fra: String | null;
+  oversatt_til: String | null;
+  kredittering: String | null;
+  sikor_hits: Number | null;
 }
