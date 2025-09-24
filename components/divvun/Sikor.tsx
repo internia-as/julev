@@ -9,7 +9,7 @@ interface Props {
   enable?: () => void;
   redirect?: boolean;
   label?: string;
-  hits?: string | null;
+  hits?: number;
 }
 
 const SUPPORTED_LANGUAGES = ["sme", "sma", "smj", "smn", "sms"];

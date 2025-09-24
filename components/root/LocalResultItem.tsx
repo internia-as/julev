@@ -16,6 +16,8 @@ const LocalResultItem = (props: Props) => {
 
   // Formating the text
   // Splitting the text on ";<br />"
+  if (!fra) fra = "";
+  if (!til) til = "";
   fra = splitText(fra, ";");
   til = splitText(til, ";");
   // Highlighting the text
@@ -25,7 +27,7 @@ const LocalResultItem = (props: Props) => {
   fra = linkifyJf(fra);
   til = linkifyJf(til);
 
-  const wordIsSami = result.oversatt_fra.toLocaleLowerCase() == "samisk";
+  const wordIsSami = result.oversatt_fra?.toLocaleLowerCase() == "samisk";
 
   return (
     <div className="w-full px-1">
@@ -57,7 +59,7 @@ const LocalResultItem = (props: Props) => {
             <Sikor
               language="smj"
               lemma={fra.trim().split(", ")[0]}
-              hits={result.sikor_hits}
+              hits={result.sikor_hits ? result.sikor_hits : 0}
             />
           )}
         </div>

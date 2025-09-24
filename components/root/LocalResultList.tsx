@@ -27,7 +27,11 @@ const LocalResultList = (props: Props) => {
       className="flex flex-col items-center w-full md:w-3/4 2xl:w-1/2"
     >
       {props.results.map((result) => (
-        <LocalResultItem key={result.id} result={result} query={props.query} />
+        <LocalResultItem
+          key={result.id as number}
+          result={result}
+          query={props.query}
+        />
       ))}
     </motion.ul>
   );
