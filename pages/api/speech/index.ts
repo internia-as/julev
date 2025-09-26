@@ -38,7 +38,7 @@ export default async function handler(
     default:
   }
 
-  const url = SPEECH_API_URL + `${lang}/${voice}`;
+  const url = SPEECH_API_URL + `/${lang}/${voice}`;
   const response = await fetch(url as string, {
     method: "POST",
     headers: {
