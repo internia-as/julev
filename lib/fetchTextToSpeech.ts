@@ -18,7 +18,7 @@ const fetchTextToSpeech = async (text: string, lang: SupportedTTSLanguages) => {
       const audio = new Audio(audioUrl);
       audio.play();
     }
-    return null;
+    return true;
   } catch (error) {
     console.error("Error fetching text-to-speech:", error);
     return false;

@@ -25,6 +25,7 @@ const TextToSpeech = (props: Props) => {
   const t = useTranslations("translate");
 
   const handleClick = async () => {
+    props.setErrorMessage("");
     setLoading(true);
     const res = await fetchTextToSpeech(props.text, props.lang);
     if (!res) {
