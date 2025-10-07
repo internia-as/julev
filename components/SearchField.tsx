@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Input, InputAdornment, Tab, Tabs } from "@mui/material";
+import { IconButton, Input, InputAdornment, Tooltip } from "@mui/material";
 import DictionaryMenu from "./divvun/DictionaryMenu";
 import LanguageMenu from "./root/LanguageMenu";
 import { useGlobalState } from "../hooks/useGlobalState";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 
 interface Props {
   title: string;
@@ -32,6 +33,11 @@ const SearchField = (props: Props) => {
     }
     return (
       <InputAdornment position="end">
+        <Tooltip title={state.direction}>
+          <IconButton onClick={swapDirection}>
+            <SwapVertIcon />
+          </IconButton>
+        </Tooltip>
         <button
           type="button"
           onClick={() => appendSpecialChars("á")}
@@ -70,13 +76,6 @@ const SearchField = (props: Props) => {
     state.setQuery("");
   }, []);
 
-  useEffect(() => {
-    if (state.query) {
-      setQuery(state.query);
-      setIsSearching(true);
-    }
-  }, [state.query]);
-
   const getStyle = (tab: string) => {
     // current path
     const path = pathname === "/divvun" ? "divvun" : "julev";
@@ -84,6 +83,18 @@ const SearchField = (props: Props) => {
       ? "bg-slate-700 text-white py-2 flex-1 text-center"
       : "text-gray-300 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
   };
+
+  const swapDirection = () => {
+    const newDirection = state.direction === "sm" ? "nob" : "sm";
+    state.setDirection(newDirection);
+  };
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (query === "") return;
+    state.setQuery(query);
+    setIsSearching(true);
+  }
 
   return (
     <div>
@@ -129,13 +140,6 @@ const SearchField = (props: Props) => {
       </motion.div>
     </div>
   );
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (query === "") return;
-    state.setQuery(query);
-    setIsSearching(true);
-  }
 };
 
 export default SearchField;

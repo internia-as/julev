@@ -22,6 +22,7 @@ interface GlobalStateProviderProps {
 export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
     query: "",
+    direction: "nob",
     dictionaries: [],
     languages: [],
   });
@@ -59,7 +60,18 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
         languages: languages,
       }));
     }
+
+    // get direction from local storage
+    const direction = localStorage.getItem("direction");
+    if (direction === "sm" || direction === "nob") {
+      setState((prevState) => ({ ...prevState, direction }));
+    }
   }, []);
+
+  useEffect(() => {
+    // Cache direction in local storage
+    localStorage.setItem("direction", state.direction);
+  }, [state.direction]);
 
   useEffect(() => {
     // Cache dictionaries in local storage
@@ -73,6 +85,8 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
 
   const setQuery = (query: string) =>
     setState((prevState) => ({ ...prevState, query }));
+  const setDirection = (direction: "sm" | "nob") =>
+    setState((prevState) => ({ ...prevState, direction }));
   const setDictionaries = (dictionaries: Dictionary[]) =>
     setState((prevState) => ({ ...prevState, dictionaries }));
   const setLanguages = (languages: any[]) =>
@@ -83,6 +97,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
       value={{
         ...state,
         setQuery,
+        setDirection,
         setDictionaries,
         setLanguages,
       }}
