@@ -19,7 +19,9 @@ const LocalResults = () => {
   // Fetch results from the API
   const fetchResults = async () => {
     setLoading(true);
-    const res = await fetch(`/api/localSearch?q=${state.query}`);
+    const res = await fetch(
+      `/api/localSearch?q=${state.query}&direction=${state.direction}`
+    );
     const data = await res.json();
     setResults(data);
     setLoading(false);
@@ -31,7 +33,7 @@ const LocalResults = () => {
     } else {
       setResults([]);
     }
-  }, [state.query]);
+  }, [state.query, state.direction]);
 
   if (state.query === "") return <></>;
   if (loading)
