@@ -24,6 +24,13 @@ const Languages: Language[] = [
     flag: "/images/flags/sm.jpeg",
   },
   {
+    name: "Sørsamisk",
+    short: "sma",
+    translated: true,
+    flag: "/images/flags/sm.jpeg",
+  },
+
+  {
     name: "Lulesamisk",
     short: "smj",
     translated: true,
@@ -50,9 +57,12 @@ interface Props {
 
 const LanguageSelect = (props: Props) => {
   const [langFrom] = React.useState<Language[]>(
-    Languages.filter((l) => l.short !== "nob")
+    Languages.filter(
+      (l) =>
+        l.short !== "nob" && l.short !== "sma_Mid" && l.short !== "sma_North"
+    )
   );
-  const [langTo, setLangTo] = React.useState<Language[]>(Languages);
+  const [langTo, setLangTo] = React.useState<Language[]>([]);
   const [selectedFrom, setSelectedFrom] = React.useState<Language | null>(null);
   const [selectedTo, setSelectedTo] = React.useState<Language | null>(null);
   const t = useTranslations();
@@ -67,20 +77,26 @@ const LanguageSelect = (props: Props) => {
     }
     // Current logic is that north sami is translatable to all languages,
     // and all other languages are translatable to ONLY north sami.
+    const langs = Languages.filter((l) => l.short !== "sma");
     switch (selectedFrom?.short) {
       case "sme":
         setLangTo(
-          Languages.map((lang) =>
+          langs.map((lang) =>
             lang.short === "sme" ? { ...lang, translated: false } : lang
           )
         );
         break;
       default:
         setLangTo(
-          Languages.map((lang) =>
+          langs.map((lang) =>
             lang.short !== "sme" ? { ...lang, translated: false } : lang
           )
         );
+    }
+
+    if (selectedFrom?.short === "sme" && selectedTo?.short === "sme") {
+      setSelectedTo(null);
+      props.setLangTo(null);
     }
   }, [selectedFrom]);
 
