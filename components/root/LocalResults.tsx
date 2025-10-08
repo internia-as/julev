@@ -19,12 +19,9 @@ const LocalResults = () => {
       state.setQuery(q);
     }
   }, []);
-  // Fetch results from the API
+
   const fetchResults = async () => {
     setLoading(true);
-    //  const res = await fetch(`/api/localSearch?q=${state.query}`);
-    //  const data = await res.json();
-    //  setResults(data);
     const res = await fetch(
       `/api/localSearch?q=${state.query}&direction=${state.direction}`
     );
@@ -34,7 +31,6 @@ const LocalResults = () => {
     const mapResponse = await fetch(`/api/kartverket?q=${state.query}`);
     const mapData = await mapResponse.json();
     setMapResults(mapData.navn);
-    console.log(mapData);
   };
 
   useEffect(() => {
@@ -43,6 +39,7 @@ const LocalResults = () => {
     } else {
       setResults([]);
     }
+    setMapResults([]);
   }, [state.query, state.direction]);
 
   if (state.query === "") return <></>;

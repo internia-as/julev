@@ -121,5 +121,13 @@
     "excl": "Utropsord",
     "det": "Determinativ",
     "punc": "Tegnsetting"
+  },
+  "meta": {
+    "title": "Julev - Samiske språkressurser",
+    "description": "Julev er en samling av digitale samiske språkressurser, inkludert ordbøker, maskinoversetting, og mer.",
+    "keywords": "Samisk, Sørsamisk, Nordsamisk, Lulesamisk, Enaresamisk, Skoltesamisk, ordbøker, maskinoversetting"
+  },
+  "map": {
+    "alert": "Fant resultater fra kartverket"
   }
 }
