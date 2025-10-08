@@ -126,5 +126,8 @@
     "title": "Julev - Sámi language resources",
     "description": "Julev is a collection of digital Sámi language resources, including dictionaries, machine translation, and more.",
     "keywords": "Sámi, South Sámi, North Sámi, Lule Sámi, Inari Sámi, Skolt Sámi, dictionaries, machine translation"
+  },
+  "map": {
+    "alert": "Found results from kartverket"
   }
 }
