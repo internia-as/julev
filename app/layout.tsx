@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Julevbágo - Samisk språkverktøy",
   description: "Utviklet av Internia AS med støtte fra Sametinget",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
