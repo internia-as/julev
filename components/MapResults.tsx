@@ -115,7 +115,7 @@ const MapResults = (props: Props) => {
 
   return (
     <div>
-      <div className="absolute bottom-5 right-5">
+      <div className="fixed bottom-5 right-5">
         <div className="hidden md:flex items-center justify-center">
           <Alert className="items-center" severity="info" action={<MapIcon />}>
             {t("alert")}

@@ -18,9 +18,9 @@
   },
   "search": {
     "julev_title": "Julevbágo",
-    "julev_subtitle": "Julevbágo collects digital Sámi language resources in one place",
+    "julev_subtitle": "Search in Lule Sámi dictionaries",
     "divvun_title": "Divvun",
-    "divvun_subtitle": "Divvun provides tools for Sámi languages",
+    "divvun_subtitle": "Search in multiple Sámi dictionaries",
     "search_field_placeholder": "Search in ",
     "select_dicts": "Select dictionaries",
     "select_langs": "Select languages",

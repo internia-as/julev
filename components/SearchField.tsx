@@ -21,6 +21,30 @@ const SearchField = (props: Props) => {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const t = useTranslations("search");
+  const debounceTimer = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setQuery(newValue);
+
+    // Clear existing timer
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    // Set new timer to trigger search after 1000ms of no changes
+    debounceTimer.current = setTimeout(() => {
+      if (newValue.trim() !== "") {
+        handleSubmitDebounced(newValue);
+      }
+    }, 1000);
+  };
+
+  const handleSubmitDebounced = (searchQuery: string) => {
+    if (searchQuery === "" || searchQuery.length < 2) return;
+    state.setQuery(searchQuery);
+    setIsSearching(true);
+  };
 
   const getAdornment = () => {
     if (pathname === "/divvun") {
@@ -76,11 +100,20 @@ const SearchField = (props: Props) => {
     state.setQuery("");
   }, []);
 
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+    };
+  }, []);
+
   const getStyle = (tab: string) => {
     // current path
     const path = pathname === "/divvun" ? "divvun" : "julev";
     return tab === path
-      ? "bg-slate-700 text-white py-2 flex-1 text-center"
+      ? "bg-slate-900 text-white py-2 flex-1 text-center underline"
       : "text-gray-300 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
   };
 
@@ -113,7 +146,7 @@ const SearchField = (props: Props) => {
           <h1 className="text-5xl text-center font-bold uppercase">
             {t(props.title)}
           </h1>
-          <h2 className="text-md  text-center font-semibold">
+          <h2 className="text-md  italic text-center font-semibold">
             {t(props.subtitle)}
           </h2>
         </div>
@@ -130,7 +163,7 @@ const SearchField = (props: Props) => {
             <Input
               id="searchfield"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleChange}
               placeholder={getPlaceholder()}
               className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 p-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
               endAdornment={getAdornment()}
