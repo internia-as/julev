@@ -27,12 +27,10 @@ const SearchField = (props: Props) => {
     const newValue = e.target.value;
     setQuery(newValue);
 
-    // Clear existing timer
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
     }
 
-    // Set new timer to trigger search after 1000ms of no changes
     debounceTimer.current = setTimeout(() => {
       if (newValue.trim() !== "") {
         handleSubmitDebounced(newValue);
