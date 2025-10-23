@@ -1,3 +1,4 @@
+import addStatistics from "@/lib/addStatistics";
 import { getLocalResults } from "@/lib/localSearch";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -22,4 +23,5 @@ export default async function handler(
   );
 
   res.status(200).json(resultsWithoutBigInt);
+  addStatistics("LocalSearch", q);
 }

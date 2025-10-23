@@ -2,6 +2,7 @@ import fetchSatni from "@/lib/divvun/fetchSatni";
 import getPayload from "@/lib/divvun/getPayload";
 import { NextApiRequest, NextApiResponse } from "next";
 import redisClient from "@/lib/redisClient";
+import addStatistics from "@/lib/addStatistics";
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,6 +40,7 @@ export default async function handler(
           expiration: { type: "EX", value: 86400 },
         });
       }
+      addStatistics("DivvunSearch", query);
     } else if (operationName === "TermArticles") {
       const cacheKey = `TermArticles:${query}:${langs.join(",")}`;
       const cachedData = await redisClient.get(cacheKey);
