@@ -11,7 +11,10 @@ export default async function handler(
     return;
   }
 
-  const results = await getLocalResults(q, direction as "nob" | "sm");
+  const results = await getLocalResults(
+    q,
+    direction as "nob" | "sm" | "relevance"
+  );
   const resultsWithoutBigInt = JSON.parse(
     JSON.stringify(results, (_key, value) =>
       typeof value === "bigint" ? value.toString() : value

@@ -4,7 +4,7 @@ import fetchLocalTranslations from "./cache";
 
 export const getLocalResults = async (
   query: string,
-  direction: "nob" | "sm"
+  direction: "nob" | "sm" | "relevance"
 ): Promise<LocalTranslations[]> => {
   const data = await fetchLocalTranslations();
 
@@ -20,9 +20,9 @@ export const getLocalResults = async (
 const filterData = (
   data: LocalTranslations[],
   q: string,
-  direction: "nob" | "sm"
+  direction: "nob" | "sm" | "relevance"
 ) => {
-  return data
+  let filteredData = data
     .filter((item: LocalTranslations) => item.fra || item.til) // Ensure valid data
     .sort((a: LocalTranslations, b: LocalTranslations) => {
       const fraA = a.fra?.toLowerCase() || "";
@@ -56,16 +56,24 @@ const filterData = (
         til.startsWith(q) ||
         til.includes(q)
       );
-    })
-    .sort((a: LocalTranslations, b: LocalTranslations) => {
-      // Sort by "oversatt_fra" based on direction
-      const oversattFraA = a.oversatt_fra?.toLowerCase() || "";
-      const oversattFraB = b.oversatt_fra?.toLowerCase() || "";
-
-      if (direction === "nob") {
-        return oversattFraA.localeCompare(oversattFraB); // Ascending order
-      } else {
-        return oversattFraB.localeCompare(oversattFraA); // Descending order
-      }
     });
+
+  // Apply additional sorting only if direction is not "relevance"
+  if (direction !== "relevance") {
+    filteredData = filteredData.sort(
+      (a: LocalTranslations, b: LocalTranslations) => {
+        // Sort by "oversatt_fra" based on direction
+        const oversattFraA = a.oversatt_fra?.toLowerCase() || "";
+        const oversattFraB = b.oversatt_fra?.toLowerCase() || "";
+
+        if (direction === "nob") {
+          return oversattFraA.localeCompare(oversattFraB); // Ascending order
+        } else {
+          return oversattFraB.localeCompare(oversattFraA); // Descending order
+        }
+      }
+    );
+  }
+
+  return filteredData;
 };

@@ -22,7 +22,7 @@ interface GlobalStateProviderProps {
 export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
     query: "",
-    direction: "nob",
+    direction: "relevance",
     dictionaries: [],
     languages: [],
   });
@@ -63,7 +63,11 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
 
     // get direction from local storage
     const direction = localStorage.getItem("direction");
-    if (direction === "sm" || direction === "nob") {
+    if (
+      direction === "sm" ||
+      direction === "nob" ||
+      direction === "relevance"
+    ) {
       setState((prevState) => ({ ...prevState, direction }));
     }
   }, []);
@@ -85,7 +89,7 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
 
   const setQuery = (query: string) =>
     setState((prevState) => ({ ...prevState, query }));
-  const setDirection = (direction: "sm" | "nob") =>
+  const setDirection = (direction: "sm" | "nob" | "relevance") =>
     setState((prevState) => ({ ...prevState, direction }));
   const setDictionaries = (dictionaries: Dictionary[]) =>
     setState((prevState) => ({ ...prevState, dictionaries }));
