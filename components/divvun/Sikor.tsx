@@ -50,7 +50,7 @@ const Sikor = (props: Props) => {
       within: "sentence",
       search: "cqp",
     });
-    const url = `${BASE_URL}/${props.language}/#?${query.toString()}`;
+    const url = `${BASE_URL}${props.language}/#?${query.toString()}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
