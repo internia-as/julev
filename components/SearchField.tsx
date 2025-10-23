@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { IconButton, Input, InputAdornment, Tooltip } from "@mui/material";
+import { Input, InputAdornment, Tooltip } from "@mui/material";
 import DictionaryMenu from "./divvun/DictionaryMenu";
 import LanguageMenu from "./root/LanguageMenu";
 import { useGlobalState } from "../hooks/useGlobalState";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
+import DirectionDropdown from "./root/DirectionDropdown";
 
 interface Props {
   title: string;
@@ -55,10 +55,16 @@ const SearchField = (props: Props) => {
     }
     return (
       <InputAdornment position="end">
-        <Tooltip title={state.direction}>
-          <IconButton onClick={swapDirection}>
-            <SwapVertIcon />
-          </IconButton>
+        <Tooltip
+          title={
+            state.direction === "sm"
+              ? "Lulesamisk → Norsk"
+              : state.direction === "nob"
+              ? "Norsk → Lulesamisk"
+              : "Relevans"
+          }
+        >
+          <DirectionDropdown />
         </Tooltip>
         <button
           type="button"
@@ -91,7 +97,13 @@ const SearchField = (props: Props) => {
     if (pathname === "/divvun") {
       return t("search_field_placeholder") + "Divvun";
     }
-    return t("search_field_placeholder") + "Julev";
+    const directionText =
+      state.direction === "sm"
+        ? t("direction_sm")
+        : state.direction === "nob"
+        ? t("direction_nob")
+        : t("direction_relevance");
+    return t("search_from") + directionText;
   };
 
   useEffect(() => {
@@ -113,11 +125,6 @@ const SearchField = (props: Props) => {
     return tab === path
       ? "bg-slate-900 text-white py-2 flex-1 text-center underline"
       : "text-gray-300 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
-  };
-
-  const swapDirection = () => {
-    const newDirection = state.direction === "sm" ? "nob" : "sm";
-    state.setDirection(newDirection);
   };
 
   function handleSubmit(e: React.FormEvent) {
