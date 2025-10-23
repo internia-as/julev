@@ -43,7 +43,7 @@ const LocalResultItem = (props: Props) => {
             <h3 className="" dangerouslySetInnerHTML={{ __html: fra }} />
             {wordIsSami && (
               <TextToSpeech
-                text={fra.split(" ")[0]}
+                text={props.result?.fra?.split(" ")[0] || ""}
                 lang={SupportedTTSLanguages.SMJ}
                 setErrorMessage={() => {}}
               />
