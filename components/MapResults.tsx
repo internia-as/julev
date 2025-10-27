@@ -154,11 +154,17 @@ const MapResults = (props: Props) => {
                   <div className="text-xs md:text-sm text-gray-600">
                     <div className="flex justify-between">
                       <div>{result.navneobjekttype}</div>
-                      <div>{result.kommuner[0]?.kommunenavn}</div>
+                      <div>
+                        {result.kommuner
+                          ? result.kommuner[0]?.kommunenavn
+                          : null}
+                      </div>
                     </div>
                     <div className="flex justify-between">
                       <div>{result.språk}</div>
-                      <div>{result.fylker[0]?.fylkesnavn}</div>
+                      <div>
+                        {result.fylker ? result.fylker[0]?.fylkesnavn : null}
+                      </div>
                     </div>
                     <div>
                       <div>{result.skrivemåtestatus}</div>
@@ -197,7 +203,9 @@ const MapResults = (props: Props) => {
                   >
                     <Popup>
                       {selected.skrivemåte} -{" "}
-                      {selected.kommuner[0]?.kommunenavn}
+                      {selected.kommuner
+                        ? selected.kommuner[0]?.kommunenavn
+                        : null}
                     </Popup>
                   </Marker>
                 )}
@@ -251,7 +259,10 @@ const MapResults = (props: Props) => {
                   ]}
                 >
                   <Popup>
-                    {selected.skrivemåte} - {selected.kommuner[0]?.kommunenavn}
+                    {selected.skrivemåte} -{" "}
+                    {selected.kommuner
+                      ? selected.kommuner[0]?.kommunenavn
+                      : null}
                   </Popup>
                 </Marker>
               )}

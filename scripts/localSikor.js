@@ -38,13 +38,10 @@ for (const w of filtered) {
     } else {
       const data = await res.json();
       if (data.hits && data.hits > 0) {
-        console.log("Storing", w.word);
         await prisma.smj_translations.update({
           where: { id: w.id },
           data: { sikor_hits: data.hits },
         });
-      } else {
-        console.log(w.word, "NOT FOUND");
       }
     }
   } catch (err) {

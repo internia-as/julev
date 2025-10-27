@@ -18,8 +18,6 @@ export default async function handler(
       status: response.status,
     });
   }
-  console.log("Fetched translation data successfully");
-  console.log(response);
 
   const data = await response.json();
   res.status(200).json(data);
