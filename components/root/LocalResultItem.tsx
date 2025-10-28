@@ -63,11 +63,6 @@ const LocalResultItem = (props: Props) => {
                 lemma={fra.trim().split(", ")[0]}
                 hits={result.sikor_hits ? result.sikor_hits : 0}
               />
-              <ParadigmDialog
-                word={props.result?.fra?.split(", ")[0] || ""}
-                lang="smj"
-                pos="a"
-              />
             </div>
           )}
         </div>
