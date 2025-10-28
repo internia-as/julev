@@ -154,11 +154,7 @@ const TextTranslate = (props: Props) => {
             }
           />
           <div className="absolute bottom-2 right-2">
-            <SamiKeyboard
-              onCharacterSelect={handleCharacterSelect}
-              size="small"
-              placement="top"
-            />
+            <SamiKeyboard onCharacterSelect={handleCharacterSelect} />
           </div>
         </div>
         <div className="w-full relative">

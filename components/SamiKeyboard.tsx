@@ -6,8 +6,6 @@ import { useTranslations } from "next-intl";
 
 interface Props {
   onCharacterSelect?: (character: string) => void;
-  size?: "small" | "medium" | "large";
-  placement?: "top" | "bottom" | "left" | "right";
 }
 
 const SamiKeyboard: React.FC<Props> = ({ onCharacterSelect }) => {
@@ -51,12 +49,6 @@ const SamiKeyboard: React.FC<Props> = ({ onCharacterSelect }) => {
     if (onCharacterSelect) {
       onCharacterSelect(character);
     }
-
-    // Also copy to clipboard for convenience
-    navigator.clipboard.writeText(character).catch(() => {
-      // Fallback if clipboard API is not available
-      console.warn("Could not copy character to clipboard");
-    });
     handleClose();
   };
 

@@ -51,11 +51,7 @@ const SearchField = (props: Props) => {
         <InputAdornment position="end">
           <DictionaryMenu />
           <LanguageMenu />
-          <SamiKeyboard
-            onCharacterSelect={appendSpecialChars}
-            size="medium"
-            placement="top"
-          />
+          <SamiKeyboard onCharacterSelect={appendSpecialChars} />
         </InputAdornment>
       );
     }
@@ -72,11 +68,7 @@ const SearchField = (props: Props) => {
         >
           <DirectionDropdown />
         </Tooltip>
-        <SamiKeyboard
-          onCharacterSelect={appendSpecialChars}
-          size="medium"
-          placement="top"
-        />
+        <SamiKeyboard onCharacterSelect={appendSpecialChars} />
       </InputAdornment>
     );
   };
