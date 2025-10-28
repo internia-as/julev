@@ -9,8 +9,13 @@ interface Props {
 }
 const ErrorCard = (props: Props) => {
   const t = useTranslations("grammar_checker");
+
   const handleClick = (text: string) => {
-    fetchTextToSpeech(text, props.lang as any);
+    let lang = props.lang;
+    if (lang === "se") {
+      lang = "sme";
+    }
+    fetchTextToSpeech(text, lang as any);
   };
   return (
     <div className="bg-white border border-gray-300 rounded-sm p-4 shadow-sm">
@@ -18,18 +23,27 @@ const ErrorCard = (props: Props) => {
       <h4>{props.error.title}</h4>
       <p className="text-gray-500 text-sm">{props.error.description}</p>
       <div className="mt-2 flex flex-wrap gap-2">
-        {props.error.suggestions.map((suggestion, index) => (
-          <Tooltip key={index} title={t("play_audio")}>
+        {props.error.suggestions.map((suggestion, index) =>
+          ["se", "smj", "sma"].includes(props.lang || "") ? (
+            <Tooltip key={index} title={t("play_audio")}>
+              <Chip
+                color="primary"
+                label={suggestion}
+                variant="outlined"
+                className="cursor-pointer"
+                onClick={() => handleClick(suggestion)}
+              />
+            </Tooltip>
+          ) : (
             <Chip
               key={index}
               color="primary"
               label={suggestion}
               variant="outlined"
               className="cursor-pointer"
-              onClick={() => handleClick(suggestion)}
             />
-          </Tooltip>
-        ))}
+          )
+        )}
       </div>
     </div>
   );

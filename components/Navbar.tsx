@@ -17,9 +17,6 @@ const Navbar = () => {
           <Link href="/translate">{t("translate")}</Link>
           <Link href="/grammar-checker">{t("grammar_checker")}</Link>
           <div className="hidden">
-            <Link className="opacity-50" href="/statistics">
-              {t("statistics")}
-            </Link>
             <Link className="opacity-50" href="/app">
               {t("app")}
             </Link>

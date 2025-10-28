@@ -106,8 +106,28 @@ const SearchField = (props: Props) => {
   };
 
   useEffect(() => {
-    state.setQuery("");
+    // Check for URL parameters on component mount
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) {
+      setQuery(q);
+      state.setQuery(q);
+      setIsSearching(true);
+    } else {
+      state.setQuery("");
+    }
   }, []);
+
+  // Watch for changes in global state query to sync the animation state
+  useEffect(() => {
+    if (state.query !== "" && !isSearching) {
+      setIsSearching(true);
+      setQuery(state.query);
+    } else if (state.query === "" && isSearching) {
+      setIsSearching(false);
+      setQuery("");
+    }
+  }, [state.query]);
 
   // Cleanup timer on unmount
   useEffect(() => {

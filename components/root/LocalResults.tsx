@@ -25,14 +25,6 @@ const LocalResults = () => {
     limit: 30,
   });
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    if (q) {
-      state.setQuery(q);
-    }
-  }, []);
-
   const fetchMapResults = async (query: string) => {
     try {
       const mapResponse = await fetch(`/api/kartverket?q=${query}`);

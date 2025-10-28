@@ -21,3 +21,10 @@ model smj_translations {
   behandlingId  Int?
   sikor_hits    Int?
 }
+
+model statistics {
+  id            BigInt  @unique(map: "smj_translations_id_idx") @default(autoincrement()) @db.UnsignedBigInt
+  type          String  @db.Text
+  query         String  @db.Text
+  createdAt DateTime @default(now())
+}
