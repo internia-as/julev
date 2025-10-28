@@ -8,7 +8,6 @@ export default async function fetchSatni(payload: any) {
     },
     body: JSON.stringify(payload),
   });
-  console.log(URL);
   const data = await res.json();
   return data;
 }

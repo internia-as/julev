@@ -1,8 +1,10 @@
 export interface MapData {
-  fylker: {
-    fylkesnavn: string;
-    fylkesnummer: string;
-  }[];
+  fylker:
+    | {
+        fylkesnavn: string;
+        fylkesnummer: string;
+      }[]
+    | null;
   kommuner: {
     kommunenavn: string;
     kommunenummer: string;

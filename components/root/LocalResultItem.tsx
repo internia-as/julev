@@ -4,6 +4,7 @@ import React from "react";
 import TextToSpeech from "../translate/TextToSpeech";
 import { SupportedTTSLanguages } from "@/types/divvun";
 import Sikor from "../divvun/Sikor";
+import ParadigmDialog from "../divvun/ParadigmDialog";
 
 interface Props {
   result: LocalTranslations;
@@ -56,11 +57,13 @@ const LocalResultItem = (props: Props) => {
         <div className="flex justify-between sm:px-6 pb-4 px-4">
           <p dangerouslySetInnerHTML={{ __html: til }} />
           {wordIsSami && (
-            <Sikor
-              language="smj"
-              lemma={fra.trim().split(", ")[0]}
-              hits={result.sikor_hits ? result.sikor_hits : 0}
-            />
+            <div>
+              <Sikor
+                language="smj"
+                lemma={fra.trim().split(", ")[0]}
+                hits={result.sikor_hits ? result.sikor_hits : 0}
+              />
+            </div>
           )}
         </div>
       </li>
