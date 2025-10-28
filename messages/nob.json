@@ -35,7 +35,8 @@
     "start_search": "Start søk",
     "found": "Funnet",
     "hits_in_sikor": "treff i SIKOR",
-    "no_results": "Ingen resultater funnet"
+    "no_results": "Ingen resultater funnet",
+    "keyboard": "Vis samisk tastatur"
   },
   "divvun": {
     "source": "Kilde",

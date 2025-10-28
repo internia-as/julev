@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import DirectionDropdown from "./root/DirectionDropdown";
+import SamiKeyboard from "./SamiKeyboard";
 
 interface Props {
   title: string;
@@ -50,6 +51,7 @@ const SearchField = (props: Props) => {
         <InputAdornment position="end">
           <DictionaryMenu />
           <LanguageMenu />
+          <SamiKeyboard onCharacterSelect={appendSpecialChars} />
         </InputAdornment>
       );
     }
@@ -66,31 +68,28 @@ const SearchField = (props: Props) => {
         >
           <DirectionDropdown />
         </Tooltip>
-        <button
-          type="button"
-          onClick={() => appendSpecialChars("á")}
-          className="hidden px-4 py-2 mx-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-full md:block hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
-        >
-          á
-        </button>
-        <button
-          type="button"
-          onClick={() => appendSpecialChars("ŋ")}
-          className="px-4 py-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
-        >
-          ŋ
-        </button>
+        <SamiKeyboard onCharacterSelect={appendSpecialChars} />
       </InputAdornment>
     );
   };
 
   const appendSpecialChars = (char: string) => {
-    const position =
-      (document.getElementById("searchfield") as HTMLInputElement | null)
-        ?.selectionStart ?? 0;
+    const searchField = document.getElementById(
+      "searchfield"
+    ) as HTMLInputElement | null;
+    const position = searchField?.selectionStart ?? query.length;
     const textBeforeCursorPosition = query.substring(0, position);
     const textAfterCursorPosition = query.substring(position, query.length);
-    setQuery(textBeforeCursorPosition + char + textAfterCursorPosition);
+    const newQuery = textBeforeCursorPosition + char + textAfterCursorPosition;
+    setQuery(newQuery);
+
+    // Set focus back to the search field and position cursor after the inserted character
+    setTimeout(() => {
+      if (searchField) {
+        searchField.focus();
+        searchField.setSelectionRange(position + 1, position + 1);
+      }
+    }, 0);
   };
 
   const getPlaceholder = () => {
