@@ -52,7 +52,7 @@ const DirectionDropdown: React.FC = () => {
   return (
     <div>
       <Tooltip title={getDirectionLabel(state.direction)} placement="bottom">
-        <IconButton onClick={handleClick}>
+        <IconButton color="primary" onClick={handleClick}>
           <MenuBookIcon />
         </IconButton>
       </Tooltip>

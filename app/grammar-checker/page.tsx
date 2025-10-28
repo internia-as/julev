@@ -6,6 +6,7 @@ import React from "react";
 import Results from "@/components/grammar/Results";
 import { Language } from "@/types/language";
 import { GrammarResult } from "@/types/grammarResult";
+import SamiKeyboard from "@/components/SamiKeyboard";
 
 const GrammarCheckerPage = () => {
   const t = useTranslations("grammar_checker");
@@ -13,6 +14,31 @@ const GrammarCheckerPage = () => {
   const [lang, setLang] = React.useState<Language | null>(null);
   const [results, setResults] = React.useState<GrammarResult | null>(null);
   const [submitted, setSubmitted] = React.useState(false);
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
+
+  const handleCharacterSelect = (character: string) => {
+    const textarea = textAreaRef.current;
+    if (textarea) {
+      const selectionStart = textarea.selectionStart || inputText.length;
+      const selectionEnd = textarea.selectionEnd || inputText.length;
+
+      const newText =
+        inputText.substring(0, selectionStart) +
+        character +
+        inputText.substring(selectionEnd);
+
+      setInputText(newText);
+
+      // Focus back to the textarea and position cursor after the inserted character
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(selectionStart + 1, selectionStart + 1);
+      }, 0);
+    } else {
+      // Fallback: append to end
+      setInputText((prev) => prev + character);
+    }
+  };
 
   const handleSubmit = async () => {
     setSubmitted(true);
@@ -41,15 +67,25 @@ const GrammarCheckerPage = () => {
         fullWidth={true}
         className="flex justify-center items-center space-y-2"
       >
-        <TextField
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          multiline
-          minRows={10}
-          className="w-full md:w-1/2"
-          placeholder={t("placeholder")}
-          aria-label="Grammar input text"
-        />
+        <div className="w-full md:w-1/2 relative">
+          <TextField
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            multiline
+            minRows={10}
+            className="w-full"
+            placeholder={t("placeholder")}
+            aria-label="Grammar input text"
+            inputRef={textAreaRef}
+          />
+          <div className="absolute bottom-2 right-2">
+            <SamiKeyboard
+              onCharacterSelect={handleCharacterSelect}
+              size="small"
+              placement="top"
+            />
+          </div>
+        </div>
         <Button
           onClick={handleSubmit}
           variant="contained"
