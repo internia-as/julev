@@ -2,19 +2,41 @@
 import { LocalTranslations } from "@/types/localTranslations";
 import fetchLocalTranslations from "./cache";
 
+interface PaginatedResults {
+  results: LocalTranslations[];
+  totalCount: number;
+  hasMore: boolean;
+}
+
 export const getLocalResults = async (
   query: string,
-  direction: "nob" | "sm" | "relevance"
-): Promise<LocalTranslations[]> => {
+  direction: "nob" | "sm" | "relevance",
+  page: number = 1,
+  limit: number = 30
+): Promise<PaginatedResults> => {
   const data = await fetchLocalTranslations();
 
-  if (!query.trim()) return [];
+  if (!query.trim()) {
+    return {
+      results: [],
+      totalCount: 0,
+      hasMore: false,
+    };
+  }
 
   const q = query.toLowerCase();
+  const filteredData = filterData(data, q, direction);
 
-  const filteredData = filterData(data, q, direction); // Pass direction here
+  const totalCount = filteredData.length;
+  const offset = (page - 1) * limit;
+  const results = filteredData.slice(offset, offset + limit);
+  const hasMore = offset + limit < totalCount;
 
-  return filteredData;
+  return {
+    results,
+    totalCount,
+    hasMore,
+  };
 };
 
 const filterData = (
