@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import addStatistics from "@/lib/addStatistics";
 
 const BASE_URL = process.env.TRANSLATE_URL as string;
 
@@ -20,5 +21,9 @@ export default async function handler(
   }
 
   const data = await response.json();
+
+  // Track translation statistics
+  addStatistics("Translation", q);
+
   res.status(200).json(data);
 }
