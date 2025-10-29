@@ -53,7 +53,9 @@ const Sikor = (props: Props) => {
     });
     const url = `${BASE_URL}${props.language}/#?${query.toString()}`;
     window.open(url, "_blank", "noopener,noreferrer");
-    trackEvent("Open sikor link");
+    trackEvent("Open sikor link", {
+      language: props.language,
+    });
   };
 
   const getTooltipText = () => {

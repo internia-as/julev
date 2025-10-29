@@ -1,14 +1,14 @@
 declare global {
   interface Window {
     umami?: {
-      track: (event: string) => void;
+      track: (event: string, data: any) => void;
     };
   }
 }
 
-const trackEvent = (event: string) => {
+const trackEvent = async (event: string, data?: any) => {
   if (window.umami) {
-    window.umami.track(event);
+    window.umami.track(event, data);
   }
 };
 

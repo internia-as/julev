@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { LocalTranslations } from "@/types/localTranslations";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface UseInfiniteScrollProps {
   query: string;
@@ -84,6 +85,7 @@ export const useInfiniteScroll = ({
       } finally {
         setLoading(false);
         setInitialLoading(false);
+        trackEvent("Local Search");
       }
     },
     [query, direction, limit, loading, hasMore]

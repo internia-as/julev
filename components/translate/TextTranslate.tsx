@@ -8,6 +8,7 @@ import speechAvailable from "@/lib/speechAvailable";
 import InfoDialog from "./InfoDialog";
 import { useTranslations } from "next-intl";
 import SamiKeyboard from "../SamiKeyboard";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface Props {
   langFrom: SupportedTTSLanguages;
@@ -34,7 +35,6 @@ const TextTranslate = (props: Props) => {
       setErrorMessage(t("translate.choose_language_error"));
       return false;
     }
-    // Fetch API call to translate the text
     if (!textInput.trim()) {
       setErrorMessage(t("translate.textfield_error"));
       return false;
@@ -69,8 +69,13 @@ const TextTranslate = (props: Props) => {
     } catch (error) {
       console.error("Error during translation:", error);
       setErrorMessage(t("translate.error"));
+    } finally {
+      setLoading(false);
+      trackEvent("Text Translation", {
+        languageFrom: props.langFrom,
+        languageTo: props.langTo,
+      });
     }
-    setLoading(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

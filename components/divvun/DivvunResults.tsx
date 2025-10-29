@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
 import DivvunResultList from "./DivvunResultList";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 const DivvunResults = () => {
   const state = useGlobalState();
@@ -42,6 +43,10 @@ const DivvunResults = () => {
     const data = await res.json();
     setResults(data);
     setSearching(false);
+    trackEvent("Divvun Search", {
+      language: state.languages,
+      dictionaries: state.dictionaries,
+    });
   };
 
   if (state.query === "") return <></>;

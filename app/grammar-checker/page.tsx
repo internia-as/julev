@@ -7,6 +7,7 @@ import Results from "@/components/grammar/Results";
 import { Language } from "@/types/language";
 import { GrammarResult } from "@/types/grammarResult";
 import SamiKeyboard from "@/components/SamiKeyboard";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 const GrammarCheckerPage = () => {
   const t = useTranslations("grammar_checker");
@@ -42,20 +43,28 @@ const GrammarCheckerPage = () => {
 
   const handleSubmit = async () => {
     setSubmitted(true);
-    const res = await fetch("/api/grammar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        lang: lang?.short,
-        text: inputText,
-        encoding: "utf-16",
-      }),
-    });
-    const data = await res.json();
-    setResults(data || []);
-    setSubmitted(false);
+    try {
+      const res = await fetch("/api/grammar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          lang: lang?.short,
+          text: inputText,
+          encoding: "utf-16",
+        }),
+      });
+      const data = await res.json();
+      setResults(data);
+    } catch (error) {
+      console.error("Error during grammar check:", error);
+    } finally {
+      setSubmitted(false);
+      trackEvent("Grammar Check", {
+        language: lang?.short,
+      });
+    }
   };
 
   return (

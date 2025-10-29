@@ -74,7 +74,9 @@ const ParadigmDialog = (props: Props) => {
     const generated = await fetchData(false);
     setParadigms(generated.map((item: any) => item.analyses));
     setLoading(false);
-    trackEvent("Open paradigm dialog");
+    trackEvent("Open paradigm dialog", {
+      language: props.lang,
+    });
   };
 
   const getTableHead = () => {
