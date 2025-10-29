@@ -17,6 +17,7 @@ import InfoIcon from "@mui/icons-material/InfoOutline";
 import React, { useEffect } from "react";
 import { getColumn } from "@/lib/getColumn";
 import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface Body {
   lang: string;
@@ -73,6 +74,7 @@ const ParadigmDialog = (props: Props) => {
     const generated = await fetchData(false);
     setParadigms(generated.map((item: any) => item.analyses));
     setLoading(false);
+    trackEvent("Open paradigm dialog");
   };
 
   const getTableHead = () => {

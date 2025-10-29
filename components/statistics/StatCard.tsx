@@ -15,22 +15,17 @@ const StatCard: React.FC<StatCardProps> = ({
   color = "bg-blue-500",
 }) => {
   return (
-    <div className="w-60 bg-white rounded-lg shadow-md p-4 border border-gray-200">
+    <div className="w-60 bg-white rounded-lg shadow-md border border-gray-200">
       <div className="flex items-center">
         <div
-          className={`min-w-12 min-h-12 ${color} rounded-lg flex items-center justify-center`}
+          className={`${color} w-full p-4 rounded-t-lg text-white flex flex-col justify-center items-center`}
         >
-          <span className="text-white font-bold text-lg">
-            {value.toString().charAt(0)}
-          </span>
-        </div>
-        <div className="ml-4">
-          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-          <p className="text-sm text-gray-600">{description}</p>
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <p className="text-sm ">{description}</p>
         </div>
       </div>
       <div className="mt-4">
-        <span className="text-3xl font-bold text-gray-900">
+        <span className="text-3xl font-bold w-full flex justify-center pb-4 text-gray-900">
           {value.toLocaleString()}
         </span>
       </div>

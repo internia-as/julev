@@ -10,6 +10,7 @@ import { SupportedTTSLanguages } from "@/types/divvun";
 import React from "react";
 import { useTranslations } from "next-intl";
 import fetchTextToSpeech from "@/lib/fetchTextToSpeech";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface Props {
   text: string;
@@ -32,6 +33,7 @@ const TextToSpeech = (props: Props) => {
       props.setErrorMessage("Kunne ikke hente tale for teksten.");
     }
     setLoading(false);
+    trackEvent(`Play TTS - ${props.lang}`);
   };
 
   const getIcons = () => {

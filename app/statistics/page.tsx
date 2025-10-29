@@ -95,9 +95,6 @@ const StatisticsPage = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Bruksstatistikk</h1>
-          <p className="mt-2 text-gray-600">
-            Oversikt over aktivitet på Julev-plattformen
-          </p>
         </div>
 
         {/* Overview Cards */}
@@ -106,7 +103,7 @@ const StatisticsPage = () => {
             title="Total aktivitet"
             value={data.totalCount}
             description="Alle handlinger siden oppstart"
-            color="bg-blue-500"
+            color="bg-pink-500"
           />
           <StatCard
             title="Lulesamisk søk"

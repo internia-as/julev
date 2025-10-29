@@ -3,6 +3,7 @@ import React from "react";
 import { IconButton, Menu, Tooltip, Paper } from "@mui/material";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface Props {
   onCharacterSelect?: (character: string) => void;
@@ -39,6 +40,7 @@ const SamiKeyboard: React.FC<Props> = ({ onCharacterSelect }) => {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    trackEvent("Open Sami keyboard");
   };
 
   const handleClose = () => {

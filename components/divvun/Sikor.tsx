@@ -2,6 +2,7 @@ import { IconButton, MenuItem, Tooltip, Typography } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/umamiTrackEvents";
 
 interface Props {
   language: string;
@@ -52,6 +53,7 @@ const Sikor = (props: Props) => {
     });
     const url = `${BASE_URL}${props.language}/#?${query.toString()}`;
     window.open(url, "_blank", "noopener,noreferrer");
+    trackEvent("Open sikor link");
   };
 
   const getTooltipText = () => {
