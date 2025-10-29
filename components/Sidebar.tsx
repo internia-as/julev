@@ -11,13 +11,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import TranslateIcon from "@mui/icons-material/Translate";
 import GrammarIcon from "@mui/icons-material/Grading";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import { IconButton } from "@mui/material";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const t = useTranslations("navbar");
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
 
   const items = [
@@ -28,15 +28,15 @@ const Sidebar = () => {
       icon: <GrammarIcon />,
       url: "/grammar-checker",
     },
-    {
-      text: t("statistics"),
-      icon: <BarChartIcon />,
-      url: "/statistics",
-    },
   ];
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleClick = (page: string) => {
+    setOpen(false);
+    router.push(page);
   };
 
   const DrawerList = (
@@ -44,11 +44,9 @@ const Sidebar = () => {
       <List>
         {items.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => handleClick(item.url)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <Link href={item.url}>
-                <ListItemText primary={item.text} />
-              </Link>
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}

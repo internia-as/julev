@@ -42,10 +42,10 @@ const DivvunResults = () => {
     });
     const data = await res.json();
     setResults(data);
+    console.log(state.languages);
     setSearching(false);
     trackEvent("Divvun Search", {
-      language: state.languages,
-      dictionaries: state.dictionaries,
+      languages: state.languages.map((t) => t.short).join(","),
     });
   };
 
