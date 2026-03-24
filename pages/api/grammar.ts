@@ -5,9 +5,10 @@ const BASE_URL = process.env.GRAMMAR_CHECKER_URL as string;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
+    res.status(403).json({ error: "Forbidden" });
     const { lang, text, encoding } = req.body;
     const response = await fetch(`${BASE_URL}/${lang}?encoding=${encoding}`, {
       method: "POST",

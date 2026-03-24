@@ -5,12 +5,13 @@ const BASE_URL = process.env.TRANSLATE_URL as string;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
+  res.status(403).json({ error: "Forbidden" });
   const { langpair, q, markUnknown, callBack } = req.body;
 
   const response = await fetch(
-    `${BASE_URL}?langpair=${langpair}&q=${q}&markUnknown=${markUnknown}&callBack=${callBack}`
+    `${BASE_URL}?langpair=${langpair}&q=${q}&markUnknown=${markUnknown}&callBack=${callBack}`,
   );
 
   if (!response.ok) {
