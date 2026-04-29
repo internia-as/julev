@@ -44,7 +44,9 @@ const LocalResults = () => {
     }
   }, [state.query]);
 
-  if (state.query === "") return <></>;
+  if (state.query === "") return (
+    <h2 className="text-red-600 absolute bottom-28 px-2 text-center md:bottom-80 underline">På grunn av eksamen er oversetting og gramatikkontroll midlertidig utilgjengelig</h2>
+  )
 
   if (error) {
     return (
