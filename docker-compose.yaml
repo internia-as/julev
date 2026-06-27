@@ -1,21 +1,58 @@
 services:
   redis:
-    image: redis-server:latest
-    restart: always
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     deploy:
       resources:
         limits:
-          memory: 20GB
-          cpus: "14.0"
-    ports:
-      - "6379:6379"
-    expose:
-      - "6379"
+          memory: 512M
+          cpus: "0.5"
 
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.0.0.0/24
+  db-migrate:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
+    command: ["npx", "prisma", "migrate", "deploy"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in your shell or .env file}
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in your shell or .env file}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      DIVVUN_API_URL: ${DIVVUN_API_URL:-https://satni.uit.no/newsatni/}
+      NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
+      TRANSLATE_URL: ${TRANSLATE_URL:-https://gtweb-02.uit.no/apertium-api/translate}
+      TEXT_TO_SPEECH_URL: ${TEXT_TO_SPEECH_URL:-https://api-giellalt.uit.no/tts}
+      GRAMMAR_CHECKER_URL: ${GRAMMAR_CHECKER_URL:-https://api-giellalt.uit.no/grammar}
+      KARTVERKET_URL: ${KARTVERKET_URL:-https://ws.geonorge.no/stedsnavn/v1/sted}
+    depends_on:
+      redis:
+        condition: service_healthy
+      db-migrate:
+        condition: service_completed_successfully
+
+volumes:
+  redis-data:
