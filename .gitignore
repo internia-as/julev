@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# .github
+.github/ISSUE_TEMPLATE/*
+.github/PULL_REQUEST_TEMPLATE.md

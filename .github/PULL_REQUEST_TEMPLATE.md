@@ -1,15 +1,24 @@
 ## Changes
 
-<!-- Brief description of what has changed. -->
-
--
+<!-- Brief description of what this PR does. -->
 
 ## Related issue
 
-<!-- Link to relevant issue, if any. -->
+<!-- Link to related issue, if any. Closes #XX -->
 
-## Testing
+## How to test
 
-<!-- Describe how the changes have been tested. -->
+<!-- Steps to verify the changes work correctly. -->
 
-## Screenshots (optional, for UI changes)
+1.
+2.
+3.
+
+## Screenshots / videos (optional)
+
+## Checklist
+
+- [ ] Code follows existing conventions and style
+- [ ] Self-review completed
+- [ ] Tests added or updated (if applicable)
+- [ ] Documentation updated (if applicable)
