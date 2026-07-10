@@ -7,7 +7,9 @@
 - `npm run build` — production build
 - `npm start` — start production server
 - `npm run lint` — lint (next lint / ESLint)
-- `npm test` — run tests (Node's built-in `node --test tests/*.test.js`; currently placeholder only)
+- `npm test` — run all tests (Vitest, ~137 tests across 21 files)
+- `npm run test:watch` — watch mode (rerun on file change)
+- `npm run test:coverage` — run with coverage report
 
 ## Setup
 
