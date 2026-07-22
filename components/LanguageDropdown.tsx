@@ -48,7 +48,7 @@ const LanguageDropdown = () => {
   return (
     <div>
       <Tooltip title={t("select")} placement="bottom">
-        <IconButton onClick={handleClick}>
+        <IconButton onClick={handleClick} aria-label={t("select")}>
           <LanguageIcon className="text-white" />
         </IconButton>
       </Tooltip>

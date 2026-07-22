@@ -49,6 +49,7 @@ const LocalResults = () => {
   if (error) {
     return (
       <div
+        role="alert"
         className="flex flex-col items-center w-full md:w-3/4 2xl:w-1/2 text-red-500"
         style={{ marginTop: "20.5rem" }}
       >
@@ -59,14 +60,14 @@ const LocalResults = () => {
 
   if (initialLoading) {
     return (
-      <>
+      <div role="status" aria-label="Loading search results">
         <CircularProgress className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div aria-live="polite" aria-busy={loading}>
       <LocalResultList
         results={results}
         query={state.query}
@@ -76,7 +77,7 @@ const LocalResults = () => {
         loadingRef={loadingRef}
       />
       {mapResults.length > 0 && <MapResults results={mapResults} />}
-    </>
+    </div>
   );
 };
 

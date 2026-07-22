@@ -125,6 +125,7 @@ const TextTranslate = (props: Props) => {
             multiline
             value={textInput}
             placeholder={t("translate.placeholder")}
+            aria-label={t("translate.placeholder")}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             inputRef={textAreaRef}
@@ -162,12 +163,13 @@ const TextTranslate = (props: Props) => {
             <SamiKeyboard onCharacterSelect={handleCharacterSelect} />
           </div>
         </div>
-        <div className="w-full relative">
+        <div className="w-full relative" aria-live="polite">
           <TextField
             rows={8}
             className="w-full"
             multiline
             placeholder={t("translate.placeholder_2")}
+            aria-label={t("translate.placeholder_2")}
             value={translatedText}
             sx={{
               "& .MuiInputBase-root": {
@@ -211,7 +213,7 @@ const TextTranslate = (props: Props) => {
         </div>
       </div>
       {errorMessage && (
-        <p className="mt-2 text-red-700 italic text-sm">{errorMessage}</p>
+        <p className="mt-2 text-red-700 italic text-sm" role="alert">{errorMessage}</p>
       )}
       <div className="flex flex-col md:flex-row items-center w-full justify-between mt-4">
         <div className="w-1/3"></div>
@@ -229,6 +231,7 @@ const TextTranslate = (props: Props) => {
             <a
               href="https://giellatekno.uit.no/"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold underline"
             >
               Giellatekno

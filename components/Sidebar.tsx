@@ -56,7 +56,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <IconButton onClick={toggleDrawer(true)}>
+      <IconButton onClick={toggleDrawer(true)} aria-label={t("open_menu")}>
         <MenuIcon className="text-white" />
       </IconButton>
       <Drawer open={open} onClose={toggleDrawer(false)}>

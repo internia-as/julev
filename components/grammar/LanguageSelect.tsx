@@ -80,6 +80,7 @@ const LanguageSelect = (props: Props) => {
       fullWidth={true}
       onChange={(e) => handleChange(e)}
       displayEmpty
+      aria-label={t("grammar_checker.select_language")}
     >
       <MenuItem value="" disabled hidden>
         {t("translate.choose_language")}

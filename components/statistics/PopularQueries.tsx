@@ -52,7 +52,7 @@ const PopularQueries: React.FC<PopularQueriesProps> = ({ queries }) => {
             className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
           >
             <div className="flex items-center space-x-3">
-              <span className="text-sm font-bold text-gray-400 w-6">
+              <span className="text-sm font-bold text-gray-600 w-6">
                 #{index + 1}
               </span>
               <span

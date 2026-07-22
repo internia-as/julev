@@ -143,7 +143,7 @@ const SearchField = (props: Props) => {
     const path = pathname === "/divvun" ? "divvun" : "julev";
     return tab === path
       ? "bg-slate-900 text-white py-2 flex-1 text-center underline"
-      : "text-gray-300 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
+      : "text-gray-500 hover:bg-slate-600 hover:text-gray-100 py-2 flex-1 text-center";
   };
 
   function handleSubmit(e: React.FormEvent) {
@@ -189,7 +189,8 @@ const SearchField = (props: Props) => {
               value={query}
               onChange={handleChange}
               placeholder={getPlaceholder()}
-              className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 p-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-slate-600"
+              aria-label={getPlaceholder()}
+              className="bg-white h-12 text-md px-4 w-full md:w-3/4 2xl:w-1/2 p-2.5 outline outline-1 outline-gray-300 placeholder:text-gray-500 focus:outline-slate-600"
               endAdornment={getAdornment()}
             />
           </div>

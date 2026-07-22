@@ -24,10 +24,10 @@ const DivvunResultItem = (props: Props) => {
       className="w-full border border-gray-300 overflow-x-hidden"
       sx={{ backgroundColor: "#f0f0f0" }}
     >
-      <AccordionSummary
+<AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1-content"
-        id="panel1-header"
+        aria-controls={`panel-${props.name}-content`}
+        id={`panel-${props.name}-header`}
       >
         <p className="font-bold text-gray-700">{props.item}</p>
       </AccordionSummary>

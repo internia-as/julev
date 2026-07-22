@@ -6,6 +6,8 @@
     "grammar_checker": "Grammatikkontroll",
     "app": "App",
     "about": "Om oss",
+    "open_menu": "Åpne meny",
+    "main_navigation": "Hovednavigasjon",
     "languages": {
       "eng": "Engelsk",
       "nob": "Norsk",
@@ -28,6 +30,7 @@
     "direction_relevance": "Relevans",
     "direction_samisk_first": "Samisk først",
     "direction_norwegian_first": "Norsk først",
+    "direction": "Søkeretning",
     "select_dicts": "Velg ordbøker",
     "select_langs": "Velg språk",
     "available_dicts": "Tilgjengelige ordbøker",
@@ -36,7 +39,8 @@
     "found": "Funnet",
     "hits_in_sikor": "treff i SIKOR",
     "no_results": "Ingen resultater funnet",
-    "keyboard": "Vis samisk tastatur"
+    "keyboard": "Vis samisk tastatur",
+    "sikor_search": "Søk i SIKOR korpus"
   },
   "divvun": {
     "source": "Kilde",
@@ -45,10 +49,13 @@
     "show_paradigms": "Vis bøyingsmønster",
     "paradigm_not_available": "Bøyingsmønster ikke tilgjengelig"
   },
-  "translate": {
+"translate": {
     "play_tts": "Spill av uttale",
     "tts_not_available": "uttale ikke tilgjengelig",
+    "tts_loading": "Laster tale...",
     "choose_language": "Velg språk",
+    "source_language": "Kildespråk",
+    "target_language": "Målspråk",
     "placeholder": "Skriv et ord eller en frase for å oversette",
     "placeholder_2": "Oversettelse vises her",
     "translate": "Oversett",
@@ -65,11 +72,13 @@
       "pages": "sine sider"
     }
   },
-  "grammar_checker": {
+"grammar_checker": {
     "placeholder": "Skriv eller lim inn tekst for å sjekke grammatikk",
     "check_grammar": "Sjekk grammatikk",
     "results": "Resultater",
-    "play_audio": "Spill av lyd"
+    "play_audio": "Spill av lyd",
+    "select_language": "Velg språk for grammatikkontroll",
+    "suggestions": "Forslag"
   },
   "languages": {
     "sma": "Sørsamisk",
@@ -135,6 +144,8 @@
     "keywords": "Samisk, Sørsamisk, Nordsamisk, Lulesamisk, Enaresamisk, Skoltesamisk, ordbøker, maskinoversetting"
   },
   "map": {
-    "alert": "Fant resultater fra kartverket"
+    "alert": "Fant resultater fra kartverket",
+    "open_map": "Åpne kart",
+    "map_title": "Kartresultater"
   }
 }

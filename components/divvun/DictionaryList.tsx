@@ -19,16 +19,20 @@ const DictionaryList = () => {
   };
 
   return (
-    <List dense className="overflow-y-auto">
+    <List dense className="overflow-y-auto" role="list" aria-label="Dictionary options">
       {state.dictionaries.map((dict) => (
         <ListItem
-          onClick={() => handleToggle(dict)}
           key={dict.short}
           secondaryAction={<Checkbox edge="end" checked={dict.selected} />}
           disablePadding
           className="text-black"
         >
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => handleToggle(dict)}
+            role="checkbox"
+            aria-checked={dict.selected}
+            aria-label={`${dict.title} ${dict.selected ? 'selected' : 'not selected'}`}
+          >
             <ListItemText primary={dict.title} />
           </ListItemButton>
         </ListItem>

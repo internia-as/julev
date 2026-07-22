@@ -80,7 +80,7 @@ const Sikor = (props: Props) => {
             </Typography>
           </MenuItem>
         ) : (
-          <IconButton disabled={hits === 0} onClick={() => redirectToSikor()}>
+          <IconButton disabled={hits === 0} onClick={() => redirectToSikor()} aria-label={t("sikor_search")}>
             <FormatAlignJustifyIcon />
           </IconButton>
         )}

@@ -19,16 +19,20 @@ const LanguageList = () => {
   };
 
   return (
-    <List dense className="overflow-y-auto">
+    <List dense className="overflow-y-auto" role="list" aria-label="Language options">
       {state.languages.map((lang) => (
         <ListItem
-          onClick={() => handleToggle(lang)}
           key={lang.short}
           secondaryAction={<Checkbox edge="end" checked={lang.selected} />}
           disablePadding
           className="text-black"
         >
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => handleToggle(lang)}
+            role="checkbox"
+            aria-checked={lang.selected}
+            aria-label={`${lang.name} ${lang.selected ? 'selected' : 'not selected'}`}
+          >
             <ListItemText primary={lang.name} />
           </ListItemButton>
         </ListItem>

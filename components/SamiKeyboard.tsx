@@ -57,7 +57,7 @@ const SamiKeyboard: React.FC<Props> = ({ onCharacterSelect }) => {
   return (
     <div>
       <Tooltip title={t("keyboard")}>
-        <IconButton color="primary" onClick={handleClick}>
+        <IconButton color="primary" onClick={handleClick} aria-label={t("keyboard")}>
           <KeyboardIcon />
         </IconButton>
       </Tooltip>
@@ -79,6 +79,7 @@ const SamiKeyboard: React.FC<Props> = ({ onCharacterSelect }) => {
               <IconButton
                 key={character}
                 onClick={() => handleCharacterClick(character)}
+                aria-label={`Insert character ${character}`}
                 className="min-w-[40px] h-[40px] border border-gray-300 hover:bg-blue-50 hover:border-blue-400 transition-colors"
                 style={{
                   fontSize: "18px",
