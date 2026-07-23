@@ -2,11 +2,9 @@ import fetchSatni from "@/lib/divvun/fetchSatni";
 import getPayload from "@/lib/divvun/getPayload";
 import { getParadigmTemplates } from "@/lib/divvun/getParadigmTemplates";
 import { NextApiRequest, NextApiResponse } from "next";
+import { withRateLimit } from "@/lib/withRateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { lang, term, pos, type } = req.body;
 
@@ -30,3 +28,5 @@ export default async function handler(
     res.status(405).json({ message: "Method Not Allowed" });
   }
 }
+
+export default withRateLimit(handler, "divvun");

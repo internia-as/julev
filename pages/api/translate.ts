@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import addStatistics from "@/lib/addStatistics";
+import { withRateLimit } from "@/lib/withRateLimit";
 
 const BASE_URL = process.env.TRANSLATE_URL as string;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { langpair, q, markUnknown, callBack } = req.body;
 
   const response = await fetch(
@@ -27,3 +25,5 @@ export default async function handler(
 
   res.status(200).json(data);
 }
+
+export default withRateLimit(handler, "translate");

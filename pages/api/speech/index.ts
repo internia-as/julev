@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { withRateLimit } from "@/lib/withRateLimit";
 
 const SPEECH_API_URL = process.env.TEXT_TO_SPEECH_URL;
 
@@ -8,10 +9,7 @@ type Body = {
   voice: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   let { text, lang, voice } = req.body as Body;
 
   switch (lang) {
@@ -61,3 +59,5 @@ export default async function handler(
   const audioBuffer = await response.arrayBuffer();
   res.status(200).send(Buffer.from(audioBuffer));
 }
+
+export default withRateLimit(handler, "speech");

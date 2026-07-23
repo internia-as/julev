@@ -3,11 +3,9 @@ import getPayload from "@/lib/divvun/getPayload";
 import { NextApiRequest, NextApiResponse } from "next";
 import redisClient from "@/lib/redisClient";
 import addStatistics from "@/lib/addStatistics";
+import { withRateLimit } from "@/lib/withRateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { query, wantedDicts, langs, operationName } = req.body;
     let data;
@@ -77,3 +75,5 @@ export default async function handler(
     res.status(405).json({ message: "Method Not Allowed" });
   }
 }
+
+export default withRateLimit(handler, "divvun");
