@@ -23,7 +23,16 @@ const LanguageList = () => {
       {state.languages.map((lang) => (
         <ListItem
           key={lang.short}
-          secondaryAction={<Checkbox edge="end" checked={lang.selected} />}
+          secondaryAction={
+            <Checkbox
+              edge="end"
+              checked={lang.selected}
+              onChange={() => handleToggle(lang)}
+              onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
+              aria-hidden
+            />
+          }
           disablePadding
           className="text-black"
         >

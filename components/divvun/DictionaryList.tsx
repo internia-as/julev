@@ -1,4 +1,3 @@
-import React from "react";
 import { useGlobalState } from "../../hooks/useGlobalState";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -23,7 +22,16 @@ const DictionaryList = () => {
       {state.dictionaries.map((dict) => (
         <ListItem
           key={dict.short}
-          secondaryAction={<Checkbox edge="end" checked={dict.selected} />}
+          secondaryAction={
+            <Checkbox
+              edge="end"
+              checked={dict.selected}
+              onChange={() => handleToggle(dict)}
+              onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
+              aria-hidden
+            />
+          }
           disablePadding
           className="text-black"
         >
