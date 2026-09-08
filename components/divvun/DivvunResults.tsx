@@ -10,7 +10,11 @@ const DivvunResults = () => {
   const [searching, setSearching] = React.useState(false);
 
   useEffect(() => {
-    if (!validate()) return;
+    // Wait until languages and dictionaries are loaded before searching.
+    // Otherwise the request sends empty srcLangs/wantedDicts, Divvun returns
+    // 0 results, and that empty result gets cached for 24h.
+    if (state.languages.length === 0 || state.dictionaries.length === 0)
+      return;
     if (state.query) {
       setSearching(true);
       fetchResults();
@@ -18,11 +22,6 @@ const DivvunResults = () => {
       setResults(undefined);
     }
   }, [state.query, state.languages, state.dictionaries]);
-
-  const validate = () => {
-    // TODO: Handle validation after cookies are read and dictionaries are loaded
-    return true;
-  };
 
   const fetchResults = async () => {
     const res = await fetch(`/api/divvun/search`, {
@@ -42,7 +41,6 @@ const DivvunResults = () => {
     });
     const data = await res.json();
     setResults(data);
-    console.log(state.languages);
     setSearching(false);
     trackEvent("Divvun Search", {
       languages: state.languages.map((t) => t.short).join(","),

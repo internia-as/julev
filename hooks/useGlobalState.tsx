@@ -1,6 +1,7 @@
 "use client";
 import { GlobalState, GlobalStateContextType } from "@/types/context";
 import { Dictionary } from "@/types/dictionary";
+import { Language } from "@/types/language";
 import {
   createContext,
   useContext,
@@ -23,8 +24,8 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   const [state, setState] = useState<GlobalState>({
     query: "",
     direction: "relevance",
-    dictionaries: [],
-    languages: [],
+    dictionaries: dictionaries,
+    languages: languages,
   });
 
   useEffect(() => {
@@ -35,29 +36,34 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
     }
 
     // get dictionaries from local storage or use default
-    const dicts = localStorage.getItem("dictionaries");
-    if (dicts && dicts.length > 0) {
+    // Read a persisted list, trusting it only if it parses to a non-empty
+    // array. A missing, corrupt, or "[]" value falls back to the defaults
+    // already in state, so the UI is never left with an empty set.
+    const readList = (key: string): unknown[] | null => {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+      } catch {
+        return null;
+      }
+    };
+
+    // get dictionaries from local storage, or keep the defaults in state
+    const savedDicts = readList("dictionaries");
+    if (savedDicts) {
       setState((prevState) => ({
         ...prevState,
-        dictionaries: JSON.parse(dicts),
-      }));
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        dictionaries: dictionaries,
+        dictionaries: savedDicts as Dictionary[],
       }));
     }
 
-    const langs = localStorage.getItem("languages");
-    if (langs) {
+    const savedLangs = readList("languages");
+    if (savedLangs) {
       setState((prevState) => ({
         ...prevState,
-        languages: JSON.parse(langs),
-      }));
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        languages: languages,
+        languages: savedLangs as Language[],
       }));
     }
 
@@ -78,13 +84,18 @@ export const GlobalStateProvider = ({ children }: GlobalStateProviderProps) => {
   }, [state.direction]);
 
   useEffect(() => {
-    // Cache dictionaries in local storage
-    localStorage.setItem("dictionaries", JSON.stringify(state.dictionaries));
+    // Cache dictionaries in local storage (never persist an empty list,
+    // which would poison subsequent loads).
+    if (state.dictionaries.length > 0) {
+      localStorage.setItem("dictionaries", JSON.stringify(state.dictionaries));
+    }
   }, [state.dictionaries]);
 
   useEffect(() => {
-    // Cache languages in local storage
-    localStorage.setItem("languages", JSON.stringify(state.languages));
+    // Cache languages in local storage (never persist an empty list).
+    if (state.languages.length > 0) {
+      localStorage.setItem("languages", JSON.stringify(state.languages));
+    }
   }, [state.languages]);
 
   const setQuery = (query: string) =>
