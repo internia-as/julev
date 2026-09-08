@@ -24,6 +24,7 @@ export default defineConfig({
       "node_modules",
       ".next",
       "dist",
+      "__tests__/live/**",
     ],
     server: {
       deps: {
