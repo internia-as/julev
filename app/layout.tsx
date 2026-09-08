@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { NotificationProvider } from "@/hooks/useNotification";
 import Notification from "@/components/Notification";
 import Footer from "@/components/Footer";
+import { generateSiteMetadata } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,13 +20,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Julevbágo - Samisk språkverktøy",
-  description: "Utviklet av Internia AS med støtte fra Sametinget",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateSiteMetadata();
+}
 
 export default async function RootLayout({
   children,

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import DivvunResults from "@/components/divvun/DivvunResults";
 import SearchField from "@/components/SearchField";
+import { generatePageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return generatePageMetadata("divvun", "/divvun");
+}
 
 const Divvun = () => {
   return (

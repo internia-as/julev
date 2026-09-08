@@ -130,5 +130,36 @@
     "alert": "Found results from kartverket",
     "open_map": "Open map",
     "map_title": "Map results"
+  },
+  "meta": {
+    "title": "Julev - Sámi language resources",
+    "description": "Julev is a collection of digital Sámi language resources, including dictionaries, machine translation, and more.",
+    "keywords": "Sámi, South Sámi, North Sámi, Lule Sámi, Inari Sámi, Skolt Sámi, dictionaries, machine translation",
+    "pages": {
+      "translate": {
+        "title": "Machine Translation",
+        "description": "Translate between Sámi languages and Norwegian with machine translation from Giellatekno and Apertium."
+      },
+      "grammar_checker": {
+        "title": "Grammar Checker",
+        "description": "Check grammar in Sámi languages with Giellatekno's grammar checker."
+      },
+      "divvun": {
+        "title": "Sámi Dictionaries",
+        "description": "Search multiple Sámi dictionaries through Divvun."
+      },
+      "statistics": {
+        "title": "Statistics",
+        "description": "Usage statistics for Julevbágo – Sámi language resources."
+      },
+      "app": {
+        "title": "Place Names",
+        "description": "Search Norwegian and Sámi place names."
+      },
+      "about": {
+        "title": "About",
+        "description": "Learn more about the project and tools behind Julevbágo."
+      }
+    }
   }
 }

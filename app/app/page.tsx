@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+import { generatePageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return generatePageMetadata("app", "/app");
+}
+
 const App = () => {
   return (
     <div>

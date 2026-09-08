@@ -141,7 +141,33 @@
   "meta": {
     "title": "Julev - Samiske språkressurser",
     "description": "Julev er en samling av digitale samiske språkressurser, inkludert ordbøker, maskinoversetting, og mer.",
-    "keywords": "Samisk, Sørsamisk, Nordsamisk, Lulesamisk, Enaresamisk, Skoltesamisk, ordbøker, maskinoversetting"
+    "keywords": "Samisk, Sørsamisk, Nordsamisk, Lulesamisk, Enaresamisk, Skoltesamisk, ordbøker, maskinoversetting",
+    "pages": {
+      "translate": {
+        "title": "Maskinoversetting",
+        "description": "Oversett mellom samiske språk og norsk med maskinoversetting fra Giellatekno og Apertium."
+      },
+      "grammar_checker": {
+        "title": "Grammatikkontroll",
+        "description": "Sjekk grammatikken i samiske språk med Giellateknos grammatikkontroll."
+      },
+      "divvun": {
+        "title": "Samiske ordbøker",
+        "description": "Søk i flere samiske ordbøker gjennom Divvun."
+      },
+      "statistics": {
+        "title": "Statistikk",
+        "description": "Brukstatistikk for Julevbágo – samiske språkressurser."
+      },
+      "app": {
+        "title": "Stedsnavn",
+        "description": "Søk etter norske og samiske stedsnavn."
+      },
+      "about": {
+        "title": "Om oss",
+        "description": "Lær mer om prosjektet og verktøyene bak Julevbágo."
+      }
+    }
   },
   "map": {
     "alert": "Fant resultater fra kartverket",
