@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import redisClient from "@/lib/redisClient";
 import addStatistics from "@/lib/addStatistics";
 
+const CACHE_TTL = { expiration: { type: "EX" as const, value: 86400 } };
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -28,17 +30,20 @@ export default async function handler(
           wantedDicts
         );
         const response = await fetchSatni(payload);
-        const stems = response.data.stemList.edges.map(
+        const stemList = response?.data?.stemList;
+        const stems = (stemList?.edges ?? []).map(
           (edge: any) => edge.node.stem
         );
         data = {
-          totalItems: response.data.stemList.totalCount,
+          totalItems: stemList?.totalCount ?? 0,
           stems,
         };
 
-        redisClient.set(cacheKey, JSON.stringify(data), {
-          expiration: { type: "EX", value: 86400 },
-        });
+        // Only cache non-empty results so a transient empty response (or an
+        // empty srcLangs/wantedDicts request) isn't served for the full TTL.
+        if (data.totalItems > 0) {
+          redisClient.set(cacheKey, JSON.stringify(data), CACHE_TTL);
+        }
       }
       addStatistics("DivvunSearch", query);
     } else if (operationName === "TermArticles") {
@@ -48,10 +53,12 @@ export default async function handler(
         data = JSON.parse(cachedData);
       } else {
         const payload = getPayload(operationName, query, langs, wantedDicts);
-        data = await fetchSatni(payload);
-        redisClient.set(cacheKey, JSON.stringify(data), {
-          expiration: { type: "EX", value: 86400 },
-        });
+        const response = await fetchSatni(payload);
+        data = response;
+        const conceptList = response?.data?.conceptList;
+        if (Array.isArray(conceptList) && conceptList.length > 0) {
+          redisClient.set(cacheKey, JSON.stringify(data), CACHE_TTL);
+        }
       }
     } else if (operationName === "DictArticles") {
       const cacheKey = `DictArticles:${query}:${langs.join(
@@ -62,10 +69,12 @@ export default async function handler(
         data = JSON.parse(cachedData);
       } else {
         const payload = getPayload(operationName, query, langs, wantedDicts);
-        data = await fetchSatni(payload);
-        redisClient.set(cacheKey, JSON.stringify(data), {
-          expiration: { type: "EX", value: 86400 },
-        });
+        const response = await fetchSatni(payload);
+        data = response;
+        const dictEntryList = response?.data?.dictEntryList;
+        if (Array.isArray(dictEntryList) && dictEntryList.length > 0) {
+          redisClient.set(cacheKey, JSON.stringify(data), CACHE_TTL);
+        }
       }
     } else {
       res.status(400).json({ message: "Invalid operation name" });
