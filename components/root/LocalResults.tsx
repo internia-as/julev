@@ -67,7 +67,7 @@ const LocalResults = () => {
   }
 
   return (
-    <div aria-live="polite" aria-busy={loading}>
+    <div aria-live="polite" aria-busy={loading} className="w-full flex justify-center">
       <LocalResultList
         results={results}
         query={state.query}

@@ -33,7 +33,7 @@ const LocalResultItem = (props: Props) => {
   return (
     <div className="w-full px-1">
       <li
-        className=" border border-gray-200 rounded-lg bg-white shadow mb-1"
+        className=" border border-gray-200 rounded-lg bg-white shadow mb-1 w-full"
         style={{
           background:
             "linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(255,255,255,1) 50%, rgba(222,222,222,1) 100%)",

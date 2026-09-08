@@ -32,6 +32,8 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
+    ports:
+      - "3306:3306"
     deploy:
       resources:
         limits:
@@ -63,7 +65,7 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: mysql://root:${DB_ROOT_PASSWORD:-root}@db:3306/${DB_NAME:-ordbok}
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_URL: redis://redis:6379
       DIVVUN_API_URL: ${DIVVUN_API_URL:-https://satni.uit.no/newsatni/}
       NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
       TRANSLATE_URL: ${TRANSLATE_URL:-https://gtweb-02.uit.no/apertium-api/translate}

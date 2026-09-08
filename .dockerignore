@@ -7,3 +7,10 @@ npm-debug.log*
 Dockerfile*
 docker-compose*.yaml
 README.md
+__tests__
+coverage
+tsconfig.tsbuildinfo
+.agents
+.github
+.opencode
+.vscode
