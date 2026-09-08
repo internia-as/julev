@@ -20,6 +20,7 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@prisma/client": "^6.3.1",
+    "@swc/helpers": "0.5.23",
     "chart.js": "^4.4.9",
     "heroicons": "^2.2.0",
     "leaflet": "^1.9.4",

@@ -18,6 +18,26 @@ services:
           memory: 512M
           cpus: "0.5"
 
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-ordbok}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1.0"
+
   db-migrate:
     build:
       context: .
@@ -25,9 +45,11 @@ services:
         NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
     command: ["npx", "prisma", "migrate", "deploy"]
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in your shell or .env file}
+      DATABASE_URL: mysql://root:${DB_ROOT_PASSWORD:-root}@db:3306/${DB_NAME:-ordbok}
     depends_on:
       redis:
+        condition: service_healthy
+      db:
         condition: service_healthy
     restart: "no"
 
@@ -40,7 +62,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in your shell or .env file}
+      DATABASE_URL: mysql://root:${DB_ROOT_PASSWORD:-root}@db:3306/${DB_NAME:-ordbok}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       DIVVUN_API_URL: ${DIVVUN_API_URL:-https://satni.uit.no/newsatni/}
       NEXT_PUBLIC_SIKOR_URL: ${NEXT_PUBLIC_SIKOR_URL:-https://gtweb.uit.no/korp/}
@@ -51,8 +73,11 @@ services:
     depends_on:
       redis:
         condition: service_healthy
+      db:
+        condition: service_healthy
       db-migrate:
         condition: service_completed_successfully
 
 volumes:
   redis-data:
+  db-data:
