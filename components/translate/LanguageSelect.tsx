@@ -119,6 +119,7 @@ const LanguageSelect = (props: Props) => {
         value={selectedFrom?.short || ""}
         className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedFrom)}
+        aria-label={t("translate.source_language")}
       >
         {langFrom.map((language) => (
           <MenuItem value={language.short} key={language.short}>
@@ -139,6 +140,7 @@ const LanguageSelect = (props: Props) => {
         className="w-44 md:w-48"
         onChange={(e) => handleChange(e, setSelectedTo)}
         displayEmpty
+        aria-label={t("translate.target_language")}
       >
         <MenuItem value="" disabled hidden>
           {t("translate.choose_language")}

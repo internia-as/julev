@@ -15,15 +15,15 @@ const InfoDialog = () => {
   return (
     <div>
       <Tooltip title="Info">
-        <IconButton onClick={() => setOpen(true)} color="primary">
+        <IconButton onClick={() => setOpen(true)} color="primary" aria-label={t("title")}>
           <InfoIcon />
         </IconButton>
       </Tooltip>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog open={open} onClose={() => setOpen(false)} aria-describedby="info-dialog-description">
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
           {t("title")}
         </DialogTitle>
-        <DialogContent className="my-4 flex flex-col space-y-4 text-sm">
+        <DialogContent id="info-dialog-description" className="my-4 flex flex-col space-y-4 text-sm">
           <p>{t("p1")}</p>
           <b>{t("about_translator")}</b>
           <p>{t("p2")}</p>
@@ -33,6 +33,7 @@ const InfoDialog = () => {
               className="text-blue-500 underline"
               href="http://sanit.oahpa.no/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Neahttadigisánit.
             </a>
@@ -43,6 +44,7 @@ const InfoDialog = () => {
               className="text-blue-500 underline"
               href="https://giellatekno.uit.no/smilang.nob.html#:~:text=fra%20nordsamisk%20til%20norsk"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Giellatekno
             </a>{" "}

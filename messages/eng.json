@@ -6,6 +6,8 @@
     "grammar_checker": "Grammar Checker",
     "app": "App",
     "about": "About",
+    "open_menu": "Open menu",
+    "main_navigation": "Main navigation",
     "languages": {
       "eng": "English",
       "nob": "Norwegian",
@@ -28,6 +30,7 @@
     "direction_relevance": "Relevance",
     "direction_samisk_first": "Samisk first",
     "direction_norwegian_first": "Norwegian first",
+    "direction": "Search direction",
     "select_dicts": "Select dictionaries",
     "select_langs": "Select languages",
     "available_dicts": "Available dictionaries",
@@ -36,7 +39,8 @@
     "found": "Found",
     "hits_in_sikor": "hits in SIKOR",
     "no_results": "No results found",
-    "keyboard": "Show Sámi keyboard"
+    "keyboard": "Show Sámi keyboard",
+    "sikor_search": "Search in SIKOR corpus"
   },
   "divvun": {
     "source": "Source",
@@ -48,7 +52,10 @@
   "translate": {
     "play_tts": "Play pronunciation",
     "tts_not_available": "Pronunciation not available",
+    "tts_loading": "Loading speech...",
     "choose_language": "Choose language",
+    "source_language": "Source language",
+    "target_language": "Target language",
     "placeholder": "Type a word or phrase to translate",
     "placeholder_2": "Translation appears here",
     "translate": "Translate",
@@ -65,11 +72,13 @@
       "pages": "pages"
     }
   },
-  "grammar_checker": {
+"grammar_checker": {
     "placeholder": "Type or paste text to check grammar",
     "check_grammar": "Check grammar",
     "results": "Results",
-    "play_audio": "Play audio"
+    "play_audio": "Play audio",
+    "select_language": "Select language for grammar check",
+    "suggestions": "Suggestions"
   },
   "languages": {
     "sma": "South Sami",
@@ -135,6 +144,8 @@
     "keywords": "Sámi, South Sámi, North Sámi, Lule Sámi, Inari Sámi, Skolt Sámi, dictionaries, machine translation"
   },
   "map": {
-    "alert": "Found results from kartverket"
+    "alert": "Found results from kartverket",
+    "open_map": "Open map",
+    "map_title": "Map results"
   }
 }

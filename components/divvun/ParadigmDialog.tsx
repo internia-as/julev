@@ -142,6 +142,7 @@ const ParadigmDialog = (props: Props) => {
               disabled={disabled}
               color="primary"
               size="small"
+              aria-label={t("show_paradigms")}
             >
               <InfoIcon />
             </IconButton>
@@ -153,11 +154,12 @@ const ParadigmDialog = (props: Props) => {
         onClose={() => {
           setOpen(false);
         }}
+        aria-describedby="paradigm-dialog-description"
       >
         <DialogTitle className="bg-blue-700 text-center text-white font-medium">
           {t("paradigm")}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent id="paradigm-dialog-description">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
               <CircularProgress size={24} />

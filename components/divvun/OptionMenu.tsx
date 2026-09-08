@@ -36,7 +36,7 @@ const OptionMenu = (props: Props) => {
 
   return (
     <>
-      <IconButton onClick={handleClick}>
+      <IconButton onClick={handleClick} aria-label="More options">
         <MoreIcon fontSize="small" />
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

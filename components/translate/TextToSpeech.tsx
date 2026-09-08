@@ -62,6 +62,7 @@ const TextToSpeech = (props: Props) => {
           <IconButton
             disabled={props.text.length === 0 || loading || langDisabled}
             onClick={handleClick}
+            aria-label={loading ? t("tts_loading") : t("play_tts")}
           >
             {getIcons()}
           </IconButton>

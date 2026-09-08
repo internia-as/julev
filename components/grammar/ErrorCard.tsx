@@ -22,7 +22,7 @@ const ErrorCard = (props: Props) => {
       <h3 className="font-bold mb-2 text-gray-500">{props.error.error_text}</h3>
       <h4>{props.error.title}</h4>
       <p className="text-gray-500 text-sm">{props.error.description}</p>
-      <div className="mt-2 flex flex-wrap gap-2">
+      <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t("suggestions")}>
         {props.error.suggestions.map((suggestion, index) =>
           ["se", "smj", "sma"].includes(props.lang || "") ? (
             <Tooltip key={index} title={t("play_audio")}>
@@ -32,6 +32,15 @@ const ErrorCard = (props: Props) => {
                 variant="outlined"
                 className="cursor-pointer"
                 onClick={() => handleClick(suggestion)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleClick(suggestion);
+                  }
+                }}
+                aria-label={`${t("play_audio")}: ${suggestion}`}
               />
             </Tooltip>
           ) : (
@@ -40,7 +49,6 @@ const ErrorCard = (props: Props) => {
               color="primary"
               label={suggestion}
               variant="outlined"
-              className="cursor-pointer"
             />
           )
         )}

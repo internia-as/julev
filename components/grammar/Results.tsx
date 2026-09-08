@@ -65,7 +65,7 @@ const Results = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col w-full md:w-1/2 space-y-2 bg-gray-100 p-4 rounded-md border border-gray-300">
+    <div className="flex flex-col w-full md:w-1/2 space-y-2 bg-gray-100 p-4 rounded-md border border-gray-300" aria-live="polite">
       <h3 className="text-gray-700 font-semibold    ">{t("results")}:</h3>
       {props.results ? (
         <>

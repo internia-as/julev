@@ -94,7 +94,7 @@ const MapResults = (props: Props) => {
   }, [props.results]);
 
   const MapIcon = () => (
-    <IconButton color="primary" onClick={() => setOpen(true)}>
+    <IconButton color="primary" onClick={() => setOpen(true)} aria-label={t("open_map")}>
       <LocationPinIcon />
     </IconButton>
   );
@@ -123,15 +123,18 @@ const MapResults = (props: Props) => {
         </div>
 
         <div className="md:hidden">
-          <MapIcon />
+<IconButton color="primary" onClick={() => setOpen(true)} aria-label={t("open_map")}>
+        <LocationPinIcon />
+      </IconButton>
         </div>
       </div>
-      <Dialog
+<Dialog
         open={open}
         onClose={() => setOpen(false)}
         fullWidth
         maxWidth="xl"
       >
+        <DialogTitle>{t("map_title")}</DialogTitle>
         <div className="p-4 flex justify-between h-[550px] overflow-auto">
           <List
             sx={{

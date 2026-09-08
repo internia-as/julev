@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -26,13 +27,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get("lang");
+  const locale = langCookie?.value || "nob";
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <script
           defer
@@ -40,16 +45,19 @@ export default function RootLayout({
           data-website-id="085cb262-bbfd-4a62-9c1d-bb7d3f8f8be2"
         ></script>
       </head>
-      <body
+<body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <div className="flex flex-col flex-grow">
           <GlobalStateProvider>
             <NotificationProvider>
               <NextIntlClientProvider>
                 <Navbar />
                 <Notification />
-                <div className="mt-14">{children}</div>
+                <main id="main-content" className="mt-14">{children}</main>
                 <Footer />
               </NextIntlClientProvider>
             </NotificationProvider>
