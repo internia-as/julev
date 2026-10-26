@@ -1,11 +1,9 @@
 import addStatistics from "@/lib/addStatistics";
 import { getLocalResults } from "@/lib/localSearch";
 import { NextApiRequest, NextApiResponse } from "next";
+import { withRateLimit } from "@/lib/withRateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
     q,
     direction,
@@ -49,7 +47,10 @@ export default async function handler(
     )
   );
 
-  addStatistics("LocalSearch", q);
+  // Later pages come from infinite scroll and would count the same search twice
+  if (pageNumber === 1) {
+    addStatistics("LocalSearch", q, totalCount);
+  }
   res.status(200).json({
     results: resultsWithoutBigInt,
     pagination: {
@@ -60,3 +61,5 @@ export default async function handler(
     },
   });
 }
+
+export default withRateLimit(handler, "localSearch");

@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { CircularProgress } from "@mui/material";
 import { RefObject } from "react";
 import LocalResultItem from "./LocalResultItem";
+import SuggestWord from "./SuggestWord";
 import { LocalTranslations } from "@/types/localTranslations";
 
 interface Props {
   results: LocalTranslations[];
   query: string;
+  direction?: string;
   loading?: boolean;
   hasMore?: boolean;
   totalCount?: number;
@@ -17,6 +19,7 @@ interface Props {
 const LocalResultList = ({
   results,
   query,
+  direction = "nob",
   loading = false,
   hasMore = false,
   totalCount = 0,
@@ -29,6 +32,7 @@ const LocalResultList = ({
         style={{ marginTop: "20.5rem" }}
       >
         Ingen resultat
+        <SuggestWord key={query} query={query} direction={direction} />
       </div>
     );
   }

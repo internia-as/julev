@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/lib/prisma";
+import { withRateLimit } from "@/lib/withRateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -64,15 +62,48 @@ export default async function handler(
       take: 10,
     });
 
+    // Words people look for that the dictionary does not have
+    const missingWords = await prisma.statistics.groupBy({
+      by: ["query"],
+      where: {
+        type: "LocalSearch",
+        hits: 0,
+      },
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: "desc",
+        },
+      },
+      take: 20,
+    });
+
+    const suggestions = await prisma.suggestions.findMany({
+      take: 50,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     res.status(200).json({
       totalsByType,
       totalCount,
       searchesByDate,
       recentSearches,
       popularQueries,
+      missingWords,
+      suggestions: JSON.parse(
+        JSON.stringify(suggestions, (_key, value) =>
+          typeof value === "bigint" ? value.toString() : value
+        )
+      ),
     });
   } catch (error) {
     console.error("Error fetching statistics:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
+export default withRateLimit(handler, "statistics");

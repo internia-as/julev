@@ -1,12 +1,10 @@
 import addStatistics from "@/lib/addStatistics";
 import { NextApiRequest, NextApiResponse } from "next";
+import { withRateLimit } from "@/lib/withRateLimit";
 
 const BASE_URL = process.env.GRAMMAR_CHECKER_URL as string;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { lang, text, encoding } = req.body;
     const response = await fetch(`${BASE_URL}/${lang}?encoding=${encoding}`, {
@@ -29,3 +27,5 @@ export default async function handler(
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export default withRateLimit(handler, "grammar");

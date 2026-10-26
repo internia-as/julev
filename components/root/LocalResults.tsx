@@ -71,6 +71,7 @@ const LocalResults = () => {
       <LocalResultList
         results={results}
         query={state.query}
+        direction={state.direction}
         loading={loading}
         hasMore={hasMore}
         totalCount={totalCount}

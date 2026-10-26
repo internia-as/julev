@@ -27,4 +27,15 @@ model statistics {
   type          String  @db.Text
   query         String  @db.Text
   createdAt DateTime @default(now())
+  hits          Int?
+}
+
+model suggestions {
+  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  word        String   @db.VarChar(200)
+  translation String   @db.VarChar(500)
+  direction   String   @db.VarChar(10)
+  comment     String?  @db.Text
+  status      String   @default("ny") @db.VarChar(20)
+  createdAt   DateTime @default(now())
 }

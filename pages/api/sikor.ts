@@ -1,12 +1,10 @@
 import getSikorCollections from "@/lib/getSikorCollections";
 import { NextApiRequest, NextApiResponse } from "next";
+import { withRateLimit } from "@/lib/withRateLimit";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SIKOR_URL as string;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { language, lemma } = req.query;
   const corpus = getSikorCollections(language as string);
   const url = `${BASE_URL}backend-${language}/query?corpus=${corpus.join(
@@ -25,3 +23,5 @@ export default async function handler(
   const data = await response.json();
   res.status(200).json(data);
 }
+
+export default withRateLimit(handler, "sikor");
