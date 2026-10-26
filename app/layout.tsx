@@ -38,7 +38,7 @@ export default async function RootLayout({
       <head>
         <script
           defer
-          src="https://analytics.internia.no/script.js"
+          src="/stats/script.js"
           data-website-id="085cb262-bbfd-4a62-9c1d-bb7d3f8f8be2"
         ></script>
       </head>
