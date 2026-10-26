@@ -105,3 +105,6 @@ docker run --env-file .env -p 3000:3000 julev
 - [Giellatekno](https://giellatekno.uit.no/smilang.nob.html)
 - [Apertium](https://www.apertium.org/)
 - [SIKOR](https://gtweb.uit.no/korp/)
+## License
+
+The source code is licensed under the [MIT License](LICENSE). The license covers the code only, not the dictionary content in the database.
