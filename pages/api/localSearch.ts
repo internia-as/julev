@@ -47,7 +47,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     )
   );
 
-  addStatistics("LocalSearch", q);
+  // Later pages come from infinite scroll and would count the same search twice
+  if (pageNumber === 1) {
+    addStatistics("LocalSearch", q, totalCount);
+  }
   res.status(200).json({
     results: resultsWithoutBigInt,
     pagination: {

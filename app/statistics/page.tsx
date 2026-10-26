@@ -4,6 +4,8 @@ import StatCard from "@/components/statistics/StatCard";
 import SimpleBarChart from "@/components/statistics/SimpleBarChart";
 import RecentSearches from "@/components/statistics/RecentSearches";
 import PopularQueries from "@/components/statistics/PopularQueries";
+import MissingWords from "@/components/statistics/MissingWords";
+import Suggestions from "@/components/statistics/Suggestions";
 
 interface StatisticsData {
   totalsByType: Array<{
@@ -24,6 +26,19 @@ interface StatisticsData {
     query: string;
     type: string;
     _count: { id: number };
+  }>;
+  missingWords: Array<{
+    query: string;
+    _count: { id: number };
+  }>;
+  suggestions: Array<{
+    id: string;
+    word: string;
+    translation: string;
+    direction: string;
+    comment: string | null;
+    status: string;
+    createdAt: string;
   }>;
 }
 
@@ -143,6 +158,12 @@ const StatisticsPage = () => {
         {/* Popular Queries */}
         <div className="grid grid-cols-1 gap-6">
           <PopularQueries queries={data.popularQueries} />
+        </div>
+
+        {/* Missing words and user suggestions */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <MissingWords words={data.missingWords ?? []} />
+          <Suggestions suggestions={data.suggestions ?? []} />
         </div>
       </div>
     </div>

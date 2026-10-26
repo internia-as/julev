@@ -62,12 +62,43 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       take: 10,
     });
 
+    // Words people look for that the dictionary does not have
+    const missingWords = await prisma.statistics.groupBy({
+      by: ["query"],
+      where: {
+        type: "LocalSearch",
+        hits: 0,
+      },
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: "desc",
+        },
+      },
+      take: 20,
+    });
+
+    const suggestions = await prisma.suggestions.findMany({
+      take: 50,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     res.status(200).json({
       totalsByType,
       totalCount,
       searchesByDate,
       recentSearches,
       popularQueries,
+      missingWords,
+      suggestions: JSON.parse(
+        JSON.stringify(suggestions, (_key, value) =>
+          typeof value === "bigint" ? value.toString() : value
+        )
+      ),
     });
   } catch (error) {
     console.error("Error fetching statistics:", error);

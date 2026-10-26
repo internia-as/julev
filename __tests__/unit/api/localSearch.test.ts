@@ -111,4 +111,23 @@ describe("LocalSearch API Route", () => {
     expect(jsonCall.pagination.page).toBe(1);
     expect(jsonCall.pagination.limit).toBe(30);
   });
+
+  it("should log only the first page with the hit count", async () => {
+    handler = await getHandler();
+    const addStatisticsFresh = (await import("@/lib/addStatistics")).default as unknown as ReturnType<typeof vi.fn>;
+    addStatisticsFresh.mockClear();
+
+    await handler(
+      createMockRequest({ query: { q: "zzz", direction: "relevance", page: "1" } }),
+      createMockResponse()
+    );
+    expect(addStatisticsFresh).toHaveBeenCalledWith("LocalSearch", "zzz", 0);
+
+    addStatisticsFresh.mockClear();
+    await handler(
+      createMockRequest({ query: { q: "zzz", direction: "relevance", page: "2" } }),
+      createMockResponse()
+    );
+    expect(addStatisticsFresh).not.toHaveBeenCalled();
+  });
 });

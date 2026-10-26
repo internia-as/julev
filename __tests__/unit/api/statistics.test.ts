@@ -12,6 +12,9 @@ const mockPrismaInstance = {
     groupBy: vi.fn().mockResolvedValue([]),
     aggregate: vi.fn().mockResolvedValue({}),
   },
+  suggestions: {
+    findMany: vi.fn().mockResolvedValue([]),
+  },
 };
 
 vi.mock("@/lib/prisma", () => ({

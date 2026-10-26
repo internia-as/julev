@@ -24,6 +24,7 @@ const routeConfigs: Record<string, RouteConfig> = {
   kartverket: { limit: 30, windowMs: 60_000, prefix: "kartverket" },
   localSearch: { limit: 60, windowMs: 60_000, prefix: "localSearch" },
   statistics: { limit: 120, windowMs: 60_000, prefix: "statistics" },
+  suggestions: { limit: 5, windowMs: 60_000, prefix: "suggestions" },
 };
 
 const limiterCache = new Map<
